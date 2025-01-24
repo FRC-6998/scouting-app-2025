@@ -1,7 +1,154 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
+}
+
+// class TrianglePainter extends CustomPainter {
+//   final double height;
+//   final Color fillColor;
+//   final Color borderColor;
+//   final double borderWidth;
+
+//   TrianglePainter(
+//       {required this.height,
+//       this.fillColor = const Color.fromARGB(40, 48, 62, 155),
+//       this.borderColor = const Color.fromARGB(90, 48, 62, 155),
+//       this.borderWidth = 1.0});
+
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final fillPaint = Paint()
+//       ..color = fillColor
+//       ..style = PaintingStyle.fill; // 填充樣式
+
+//     final borderPaint = Paint()
+//       ..color = borderColor
+//       ..style = PaintingStyle.stroke // 邊框樣式
+//       ..strokeWidth = borderWidth; // 邊框寬度
+
+//     final double adjustedheight = height - borderWidth;
+//     // 繪製正三角形的頂點
+//     final fillPath = Path()
+//       ..moveTo(0, 0) // 頂點（上方中心）
+//       ..lineTo(height / 2, height) // 右下角
+//       ..lineTo(-height / 2, height) // 左下角
+//       ..close(); // 關閉路徑，形成三角形
+
+//     // 繪製正三角形的頂點
+//     final borderPath = Path()
+//       ..moveTo(0, 0 + borderWidth) // 頂點（上方中心）
+//       ..lineTo(height / 2 - (3 / math.sqrt(12)) * borderWidth,
+//           height - 0.5 * borderWidth) // 右下角
+//       ..lineTo(-height / 2 + (3 / math.sqrt(12)) * borderWidth,
+//           height - 0.5 * borderWidth) // 左下角
+//       ..close(); // 關閉路徑，形成三角形
+
+//     // 繪製填充
+//     canvas.drawPath(fillPath, fillPaint);
+
+//     // 繪製邊框
+//     canvas.drawPath(borderPath, borderPaint);
+//   }
+
+//   @override
+//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
+//     return false; // 靜態繪圖時可以設置為 false
+//   }
+// }
+
+class TrianglePainter extends CustomPainter {
+  final double height;
+  final Color fillColor;
+  final Color borderColor;
+  final double borderWidth;
+
+  TrianglePainter(
+      {required this.height,
+      this.fillColor = const Color.fromARGB(40, 48, 62, 155),
+      this.borderColor = const Color.fromARGB(90, 48, 62, 155),
+      this.borderWidth = 1.0});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final fillPaint = Paint()
+      ..color = fillColor
+      ..style = PaintingStyle.fill; // 填充樣式
+
+    final borderPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke // 邊框樣式
+      ..strokeWidth = borderWidth; // 邊框寬度
+
+    final double adjustedheight = height - borderWidth;
+    // 繪製正三角形的頂點
+    final fillPath = Path()
+      ..moveTo(size.width / 2, 0) // 頂點
+      ..lineTo(size.width, size.height) // 右下角
+      ..lineTo(0, size.height) // 左下角
+      ..close();
+
+    // 繪製正三角形的頂點
+    final borderPath = Path()
+      ..moveTo(size.width / 2, 0 + borderWidth) // 頂點
+      ..lineTo(size.width - (3 / math.sqrt(12)) * borderWidth,
+          size.height - 0.5 * borderWidth) // 右下角
+      ..lineTo(0 + (3 / math.sqrt(12)) * borderWidth,
+          size.height - 0.5 * borderWidth) // 左下角
+      ..close();
+
+    // 繪製填充
+    canvas.drawPath(fillPath, fillPaint);
+
+    // 繪製邊框
+    canvas.drawPath(borderPath, borderPaint);
+
+    // 調試：繪製三角形的邊框
+
+    // 調試：標記三角形的左上角
+    final Paint debugPaint = Paint()..color = Colors.red;
+    canvas.drawCircle(Offset(0, 0), 5, debugPaint); // 左上角
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false; // 靜態繪圖時可以設置為 false
+  }
+}
+
+class TriangleWidget extends StatelessWidget {
+  final double height;
+  final Color fillColor;
+  final Color borderColor;
+  final double borderWidth;
+  final GestureTapDownCallback?
+      onTapDown; // Changed from VoidCallback to GestureTapDownCallback
+
+  const TriangleWidget({
+    required this.height,
+    this.fillColor = const Color.fromARGB(40, 48, 62, 155),
+    this.borderColor = const Color.fromARGB(90, 48, 62, 155),
+    this.borderWidth = 1.0,
+    this.onTapDown, // Updated to use onTapDown instead of onTap
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: onTapDown, // Set onTapDown callback
+      child: CustomPaint(
+        size: Size(height, height),
+        painter: TrianglePainter(
+          height: height,
+          fillColor: fillColor,
+          borderColor: borderColor,
+          borderWidth: borderWidth,
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -86,71 +233,300 @@ class _MyHomePageState extends State<MyHomePage> {
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(widget.title),
       // ),
-      body: Row(
-        children: [
-          // 左側的場地地圖
-          // Expanded(
-          //   flex: 0,
-          //   child: AspectRatio(
-          AspectRatio(
-            aspectRatio: 852 / 962, // 保持正方形
-            child: Container(
-              margin: EdgeInsets.all(8.0),
-              child: Stack(
-                children: [
-                  // 場地圖片背景
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/images/2025field1.png', // 圖片檔案路徑
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment(0, -0.65),
-                    ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          double aspectRatio = 852 / 962;
+          double fieldWidth;
+          if (constraints.maxWidth - constraints.maxHeight * aspectRatio >
+              constraints.maxWidth / 2) {
+            fieldWidth = constraints.maxHeight * aspectRatio;
+          } else {
+            fieldWidth = constraints.maxWidth * 1 / 2;
+          }
+          double fieldHeight = fieldWidth / aspectRatio;
+          double fieldFactor = fieldWidth / 852;
+          double areaRadius = 5 * fieldFactor;
+          return Row(
+            children: [
+              SizedBox(
+                width: fieldWidth,
+                height: fieldHeight,
+                child: Container(
+                  // margin: EdgeInsets.all(8),
+                  // color: Colors.red,
+                  child: Stack(
+                    children: [
+                      Image.asset('assets/images/2025field.png'),
+                      Positioned(
+                        left: 95 * fieldFactor,
+                        top: 40 * fieldFactor,
+                        child: InkWell(
+                          onTap: () {
+                            print(fieldFactor);
+                          },
+                          child: Container(
+                            width: 140 * fieldFactor,
+                            height: 165 * fieldFactor,
+                            // color: Colors.green.withAlpha(100),
+                            decoration: BoxDecoration(
+                              color: Color(0x99E2B656),
+                              border: Border.all(
+                                color: Color(0xE6E2B656),
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(areaRadius),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 5 * fieldFactor,
+                        top: 40 * fieldFactor,
+                        child: InkWell(
+                          onTap: () {
+                            print(fieldFactor);
+                          },
+                          child: Container(
+                            width: 140 * fieldFactor,
+                            height: 165 * fieldFactor,
+                            // color: Colors.green.withAlpha(100),
+                            decoration: BoxDecoration(
+                              color: Color(0x99E2B656),
+                              border: Border.all(
+                                color: Color(0xE6E2B656),
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(areaRadius),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 5 * fieldFactor,
+                        top: 531 * fieldFactor,
+                        child: InkWell(
+                          onTap: () {
+                            print(fieldFactor);
+                          },
+                          child: Container(
+                            width: 140 * fieldFactor,
+                            height: 220 * fieldFactor,
+                            // color: Colors.green.withAlpha(100),
+                            decoration: BoxDecoration(
+                              color: Color(0x6663B3A9),
+                              border: Border.all(
+                                color: Color(0xE663B3A9),
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(areaRadius),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 110 * fieldFactor,
+                        top: 755 * fieldFactor,
+                        child: InkWell(
+                          onTap: () {
+                            print(fieldFactor);
+                          },
+                          child: Container(
+                            width: 725 * fieldFactor,
+                            height: 130 * fieldFactor,
+                            // color: Colors.green.withAlpha(100),
+                            decoration: BoxDecoration(
+                              color: Color(0x6663B3A9),
+                              border: Border.all(
+                                color: Color(0xE663B3A9),
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(areaRadius),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Positioned(
+                      //   left: 110 * fieldFactor,
+                      //   top: 600 * fieldFactor,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       print(fieldFactor);
+                      //     },
+                      //     child: Container(
+                      //       width: 725 * fieldFactor,
+                      //       height: 130 * fieldFactor,
+                      //       // color: Colors.green.withAlpha(100),
+                      //       decoration: BoxDecoration(
+                      //         color: Color(0x66E84F47),
+                      //         border: Border.all(
+                      //           color: Color(0xFFE84F47),
+                      //           width: 3,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(areaRadius),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      Positioned(
+                        left: 165 * fieldFactor,
+                        top: 630 * fieldFactor,
+                        child: Container(
+                            width: 630 * fieldFactor,
+                            height: 110 * fieldFactor,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    print(fieldFactor);
+                                  },
+                                  child: Container(
+                                    width: 180 * fieldFactor,
+                                    // color: Colors.green.withAlpha(100),
+                                    decoration: BoxDecoration(
+                                      color: Color(0x99E2B656),
+                                      border: Border.all(
+                                        color: Color(0xE6E2B656),
+                                        width: 3,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(areaRadius),
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    print(fieldFactor);
+                                  },
+                                  child: Container(
+                                    width: 180 * fieldFactor,
+                                    // color: Colors.green.withAlpha(100),
+                                    decoration: BoxDecoration(
+                                      color: Color(0x99E2B656),
+                                      border: Border.all(
+                                        color: Color(0xE6E2B656),
+                                        width: 3,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(areaRadius),
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    print(fieldFactor);
+                                  },
+                                  child: Container(
+                                    width: 180 * fieldFactor,
+                                    // color: Colors.green.withAlpha(100),
+                                    decoration: BoxDecoration(
+                                      color: Color(0x99E2B656),
+                                      border: Border.all(
+                                        color: Color(0xE6E2B656),
+                                        width: 3,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.circular(areaRadius),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ),
+                      Positioned(
+                        left: 310 * fieldFactor,
+                        top: 350 * fieldFactor,
+                        child: Transform.rotate(
+                          angle: 6 / 2 * math.pi,
+                          alignment: Alignment.topCenter,
+                          child: TriangleWidget(
+                            height: 200,
+                            fillColor: Color(0x66303E9B),
+                            borderColor: Color(0xFF3D4AA1),
+                            borderWidth: 3.0,
+                            onTapDown: (details) {
+                              // print(fieldFactor);
+
+                              final RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              print("details.localPosition");
+                              print(details.localPosition.dx);
+                              print(details.localPosition.dy);
+                              print("details");
+                              // 判斷是否在三角形內
+                              bool isInsideTriangle = _isPointInsideTriangle(
+                                details.localPosition,
+                                Offset(100, 0), // 三角形頂點
+                                Offset(0, 200), // 左下角
+                                Offset(200, 200), // 右下角
+                              );
+                              print(isInsideTriangle);
+                            },
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        left: 310 * fieldFactor,
+                        top: 350 * fieldFactor,
+                        child: Transform.rotate(
+                          angle: 0 / 2 * math.pi,
+                          alignment: Alignment.topCenter,
+                          child: TriangleWidget(
+                            height: 200,
+                            fillColor: Color(0x66303E9B),
+                            borderColor: Color(0xFF3D4AA1),
+                            borderWidth: 3.0,
+                            onTapDown: (details) {
+                              // print(fieldFactor);
+
+                              final RenderBox box =
+                                  context.findRenderObject() as RenderBox;
+                              print("details.localPosition");
+                              print(details.localPosition.dx);
+                              print(details.localPosition.dy);
+                              print("details");
+                              // 判斷是否在三角形內
+                              bool isInsideTriangle = _isPointInsideTriangle(
+                                details.localPosition,
+                                Offset(100, 0), // 三角形頂點
+                                Offset(0, 200), // 左下角
+                                Offset(200, 200), // 右下角
+                              );
+                              print(isInsideTriangle);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  // 場地上的按鈕
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    child: ElevatedButton(
-                      onPressed: () => (),
-                      child: Text('A'),
-                    ),
-                  ),
-                  Positioned(
-                    right: 50,
-                    top: 50,
-                    child: ElevatedButton(
-                      onPressed: () => (),
-                      child: Text('B'),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-            // ),
-          ),
-          // 右側的按鈕控制區
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => (),
-                    child: Text('清空軌跡'),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    '軌跡順序：',
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+              Expanded(
+                child: Container(
+                  color: Colors.blue,
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
+  }
+
+  bool _isPointInsideTriangle(Offset p, Offset a, Offset b, Offset c) {
+    // print(p.dx);
+    // print(p.dy);
+    double sign(Offset p1, Offset p2, Offset p3) {
+      return (p1.dx - p3.dx) * (p2.dy - p3.dy) -
+          (p2.dx - p3.dx) * (p1.dy - p3.dy);
+    }
+
+    bool b1 = sign(p, a, b) < 0.0;
+    bool b2 = sign(p, b, c) < 0.0;
+    bool b3 = sign(p, c, a) < 0.0;
+
+    return (b1 == b2) && (b2 == b3);
   }
 }
