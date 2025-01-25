@@ -8,99 +8,6 @@ void main() {
   runApp(const MyApp());
 }
 
-// class TrianglePainter extends CustomPainter {
-//   final double height;
-//   final Color fillColor;
-//   final Color borderColor;
-//   final double borderWidth;
-
-//   TrianglePainter(
-//       {required this.height,
-//       this.fillColor = const Color.fromARGB(40, 48, 62, 155),
-//       this.borderColor = const Color.fromARGB(90, 48, 62, 155),
-//       this.borderWidth = 1.0});
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final fillPaint = Paint()
-//       ..color = fillColor
-//       ..style = PaintingStyle.fill; // 填充樣式
-
-//     final borderPaint = Paint()
-//       ..color = borderColor
-//       ..style = PaintingStyle.stroke // 邊框樣式
-//       ..strokeWidth = borderWidth; // 邊框寬度
-
-//     final double adjustedheight = height - borderWidth;
-//     // 繪製正三角形的頂點
-//     final fillPath = Path()
-//       ..moveTo(size.width / 2, 0) // 頂點
-//       ..lineTo(size.width, size.height) // 右下角
-//       ..lineTo(0, size.height) // 左下角
-//       ..close();
-
-//     // 繪製正三角形的頂點
-//     final borderPath = Path()
-//       ..moveTo(size.width / 2, 0 + borderWidth) // 頂點
-//       ..lineTo(size.width - (3 / math.sqrt(12)) * borderWidth,
-//           size.height - 0.5 * borderWidth) // 右下角
-//       ..lineTo(0 + (3 / math.sqrt(12)) * borderWidth,
-//           size.height - 0.5 * borderWidth) // 左下角
-//       ..close();
-
-//     // 繪製填充
-//     canvas.drawPath(fillPath, fillPaint);
-
-//     // 繪製邊框
-//     canvas.drawPath(borderPath, borderPaint);
-
-//     // 調試：繪製三角形的邊框
-
-//     // 調試：標記三角形的左上角
-//     final Paint debugPaint = Paint()..color = Colors.red;
-//     canvas.drawCircle(Offset(0, 0), 5, debugPaint); // 左上角
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-//     return false; // 靜態繪圖時可以設置為 false
-//   }
-// }
-
-// class TriangleWidgetq extends StatelessWidget {
-//   final double height;
-//   final Color fillColor;
-//   final Color borderColor;
-//   final double borderWidth;
-//   final GestureTapDownCallback?
-//       onTapDown; // Changed from VoidCallback to GestureTapDownCallback
-
-//   const TriangleWidgetq({
-//     required this.height,
-//     this.fillColor = const Color.fromARGB(40, 48, 62, 155),
-//     this.borderColor = const Color.fromARGB(90, 48, 62, 155),
-//     this.borderWidth = 1.0,
-//     this.onTapDown, // Updated to use onTapDown instead of onTap
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTapDown: onTapDown, // Set onTapDown callback
-//       child: CustomPaint(
-//         size: Size(height, height),
-//         painter: TrianglePainter(
-//           height: height,
-//           fillColor: fillColor,
-//           borderColor: borderColor,
-//           borderWidth: borderWidth,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -297,70 +204,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             )),
                       ),
-                      // Positioned(
-                      //   left: 310 * fieldFactor,
-                      //   top: 350 * fieldFactor,
-                      //   child: Transform.rotate(
-                      //     angle: 6 / 2 * math.pi,
-                      //     alignment: Alignment.topCenter,
-                      //     child: TriangleWidgetq(
-                      //       height: 200,
-                      //       fillColor: Color(0x66303E9B),
-                      //       borderColor: Color(0xFF3D4AA1),
-                      //       borderWidth: 3.0,
-                      //       onTapDown: (details) {
-                      //         // print(fieldFactor);
-
-                      //         final RenderBox box =
-                      //             context.findRenderObject() as RenderBox;
-                      //         print("details.localPosition");
-                      //         print(details.localPosition.dx);
-                      //         print(details.localPosition.dy);
-                      //         print("details");
-                      //         // 判斷是否在三角形內
-                      //         bool isInsideTriangle = _isPointInsideTriangle(
-                      //           details.localPosition,
-                      //           Offset(100, 0), // 三角形頂點
-                      //           Offset(0, 200), // 左下角
-                      //           Offset(200, 200), // 右下角
-                      //         );
-                      //         print(isInsideTriangle);
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   left: 310 * fieldFactor,
-                      //   top: 350 * fieldFactor,
-                      //   child: Transform.rotate(
-                      //     angle: 0,
-                      //     alignment: Alignment.topCenter,
-                      //     child: TriangleWidgetq(
-                      //       height: 200,
-                      //       fillColor: Color(0x66303E9B),
-                      //       borderColor: Color(0xFF3D4AA1),
-                      //       borderWidth: 3.0,
-                      //       onTapDown: (details) {
-                      //         // print(fieldFactor);
-
-                      //         final RenderBox box =
-                      //             context.findRenderObject() as RenderBox;
-                      //         print("details.localPosition");
-                      //         print(details.localPosition.dx);
-                      //         print(details.localPosition.dy);
-                      //         print("details");
-                      //         // 判斷是否在三角形內
-                      //         bool isInsideTriangle = _isPointInsideTriangle(
-                      //           details.localPosition,
-                      //           Offset(100, 0), // 三角形頂點
-                      //           Offset(0, 200), // 左下角
-                      //           Offset(200, 200), // 右下角
-                      //         );
-                      //         print(isInsideTriangle);
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
                       TriangleWidget(
                         sideLength: 200,
                         top: 350,
@@ -371,14 +214,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderWidth: 30,
                         rotate: 3 * math.pi / 6,
                       ),
-                      // TriangleWidget(
-                      //   sideLength: 400,
-                      //   top: 350,
-                      //   left: 310,
-                      //   factor: fieldFactor,
-                      //   // rotate: math.pi / 2,
-                      //   borderWidth: 50,
-                      // )
                     ],
                   ),
                 ),
@@ -394,17 +229,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  // bool _isPointInsideTriangle(Offset p, Offset a, Offset b, Offset c) {
-  //   double sign(Offset p1, Offset p2, Offset p3) {
-  //     return (p1.dx - p3.dx) * (p2.dy - p3.dy) -
-  //         (p2.dx - p3.dx) * (p1.dy - p3.dy);
-  //   }
-
-  //   bool b1 = sign(p, a, b) < 0.0;
-  //   bool b2 = sign(p, b, c) < 0.0;
-  //   bool b3 = sign(p, c, a) < 0.0;
-
-  //   return (b1 == b2) && (b2 == b3);
-  // }
 }
