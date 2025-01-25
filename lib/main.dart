@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'util/fieldWidgets.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -257,6 +259,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Stack(
                     children: [
                       Image.asset('assets/images/2025field.png'),
+                      // InkwellContainer(
+                      //   left: 95,
+                      //   top: 40,
+                      //   width: 140,
+                      //   height: 165,
+                      //   factor: fieldFactor,
+                      //   color: Color(0x99E2B656),
+                      //   borderColor: Color(0xE6E2B656),
+                      //   borderWidth: 3,
+                      //   borderRadius: areaRadius,
+                      //   onTap: () {
+                      //     print(fieldFactor);
+                      //   },
+                      // ),
                       Positioned(
                         left: 95 * fieldFactor,
                         top: 40 * fieldFactor,
