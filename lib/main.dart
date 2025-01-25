@@ -8,59 +8,6 @@ void main() {
   runApp(const MyApp());
 }
 
-// class TrianglePainter extends CustomPainter {
-//   final double height;
-//   final Color fillColor;
-//   final Color borderColor;
-//   final double borderWidth;
-
-//   TrianglePainter(
-//       {required this.height,
-//       this.fillColor = const Color.fromARGB(40, 48, 62, 155),
-//       this.borderColor = const Color.fromARGB(90, 48, 62, 155),
-//       this.borderWidth = 1.0});
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final fillPaint = Paint()
-//       ..color = fillColor
-//       ..style = PaintingStyle.fill; // 填充樣式
-
-//     final borderPaint = Paint()
-//       ..color = borderColor
-//       ..style = PaintingStyle.stroke // 邊框樣式
-//       ..strokeWidth = borderWidth; // 邊框寬度
-
-//     final double adjustedheight = height - borderWidth;
-//     // 繪製正三角形的頂點
-//     final fillPath = Path()
-//       ..moveTo(0, 0) // 頂點（上方中心）
-//       ..lineTo(height / 2, height) // 右下角
-//       ..lineTo(-height / 2, height) // 左下角
-//       ..close(); // 關閉路徑，形成三角形
-
-//     // 繪製正三角形的頂點
-//     final borderPath = Path()
-//       ..moveTo(0, 0 + borderWidth) // 頂點（上方中心）
-//       ..lineTo(height / 2 - (3 / math.sqrt(12)) * borderWidth,
-//           height - 0.5 * borderWidth) // 右下角
-//       ..lineTo(-height / 2 + (3 / math.sqrt(12)) * borderWidth,
-//           height - 0.5 * borderWidth) // 左下角
-//       ..close(); // 關閉路徑，形成三角形
-
-//     // 繪製填充
-//     canvas.drawPath(fillPath, fillPaint);
-
-//     // 繪製邊框
-//     canvas.drawPath(borderPath, borderPaint);
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-//     return false; // 靜態繪圖時可以設置為 false
-//   }
-// }
-
 class TrianglePainter extends CustomPainter {
   final double height;
   final Color fillColor;
@@ -255,8 +202,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: fieldWidth,
                 height: fieldHeight,
                 child: Container(
-                  // margin: EdgeInsets.all(8),
-                  // color: Colors.red,
                   child: Stack(
                     children: [
                       Image.asset('assets/images/2025field.png'),
@@ -316,116 +261,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           print(fieldFactor);
                         },
                       ),
-                      // Positioned(
-                      //   left: 95 * fieldFactor,
-                      //   top: 40 * fieldFactor,
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       print(fieldFactor);
-                      //     },
-                      //     child: Container(
-                      //       width: 140 * fieldFactor,
-                      //       height: 165 * fieldFactor,
-                      //       // color: Colors.green.withAlpha(100),
-                      //       decoration: BoxDecoration(
-                      //         color: Color(0x99E2B656),
-                      //         border: Border.all(
-                      //           color: Color(0xE6E2B656),
-                      //           width: 3,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(areaRadius),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   right: 5 * fieldFactor,
-                      //   top: 40 * fieldFactor,
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       print(fieldFactor);
-                      //     },
-                      //     child: Container(
-                      //       width: 140 * fieldFactor,
-                      //       height: 165 * fieldFactor,
-                      //       // color: Colors.green.withAlpha(100),
-                      //       decoration: BoxDecoration(
-                      //         color: Color(0x99E2B656),
-                      //         border: Border.all(
-                      //           color: Color(0xE6E2B656),
-                      //           width: 3,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(areaRadius),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   left: 5 * fieldFactor,
-                      //   top: 531 * fieldFactor,
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       print(fieldFactor);
-                      //     },
-                      //     child: Container(
-                      //       width: 140 * fieldFactor,
-                      //       height: 220 * fieldFactor,
-                      //       // color: Colors.green.withAlpha(100),
-                      //       decoration: BoxDecoration(
-                      //         color: Color(0x6663B3A9),
-                      //         border: Border.all(
-                      //           color: Color(0xE663B3A9),
-                      //           width: 3,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(areaRadius),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   left: 110 * fieldFactor,
-                      //   top: 755 * fieldFactor,
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       print(fieldFactor);
-                      //     },
-                      //     child: Container(
-                      //       width: 725 * fieldFactor,
-                      //       height: 130 * fieldFactor,
-                      //       // color: Colors.green.withAlpha(100),
-                      //       decoration: BoxDecoration(
-                      //         color: Color(0x6663B3A9),
-                      //         border: Border.all(
-                      //           color: Color(0xE663B3A9),
-                      //           width: 3,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(areaRadius),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   left: 110 * fieldFactor,
-                      //   top: 600 * fieldFactor,
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       print(fieldFactor);
-                      //     },
-                      //     child: Container(
-                      //       width: 725 * fieldFactor,
-                      //       height: 130 * fieldFactor,
-                      //       // color: Colors.green.withAlpha(100),
-                      //       decoration: BoxDecoration(
-                      //         color: Color(0x66E84F47),
-                      //         border: Border.all(
-                      //           color: Color(0xFFE84F47),
-                      //           width: 3,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(areaRadius),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                       Positioned(
                         left: 165 * fieldFactor,
                         top: 630 * fieldFactor,
@@ -442,24 +277,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   borderWidth: 3,
                                   borderRadius: AppRadius.fieldAreaRadius,
                                 ),
-                                // InkWell(
-                                //   onTap: () {
-                                //     print(fieldFactor);
-                                //   },
-                                //   child: Container(
-                                //     width: 180 * fieldFactor,
-                                //     // color: Colors.green.withAlpha(100),
-                                //     decoration: BoxDecoration(
-                                //       color: Color(0x99E2B656),
-                                //       border: Border.all(
-                                //         color: Color(0xE6E2B656),
-                                //         width: 3,
-                                //       ),
-                                //       borderRadius:
-                                //           BorderRadius.circular(areaRadius),
-                                //     ),
-                                //   ),
-                                // ),
                                 Spacer(),
                                 InkwellContainer(
                                   width: 180,
@@ -469,24 +286,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   borderWidth: 3,
                                   borderRadius: AppRadius.fieldAreaRadius,
                                 ),
-                                // InkWell(
-                                //   onTap: () {
-                                //     print(fieldFactor);
-                                //   },
-                                //   child: Container(
-                                //     width: 180 * fieldFactor,
-                                //     // color: Colors.green.withAlpha(100),
-                                //     decoration: BoxDecoration(
-                                //       color: Color(0x99E2B656),
-                                //       border: Border.all(
-                                //         color: Color(0xE6E2B656),
-                                //         width: 3,
-                                //       ),
-                                //       borderRadius:
-                                //           BorderRadius.circular(areaRadius),
-                                //     ),
-                                //   ),
-                                // ),
                                 Spacer(),
                                 InkwellContainer(
                                   width: 180,
@@ -496,24 +295,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   borderWidth: 3,
                                   borderRadius: AppRadius.fieldAreaRadius,
                                 ),
-                                // InkWell(
-                                //   onTap: () {
-                                //     print(fieldFactor);
-                                //   },
-                                //   child: Container(
-                                //     width: 180 * fieldFactor,
-                                //     // color: Colors.green.withAlpha(100),
-                                //     decoration: BoxDecoration(
-                                //       color: Color(0x99E2B656),
-                                //       border: Border.all(
-                                //         color: Color(0xE6E2B656),
-                                //         width: 3,
-                                //       ),
-                                //       borderRadius:
-                                //           BorderRadius.circular(areaRadius),
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             )),
                       ),
@@ -549,7 +330,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                       ),
-
                       Positioned(
                         left: 310 * fieldFactor,
                         top: 350 * fieldFactor,
@@ -599,8 +379,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool _isPointInsideTriangle(Offset p, Offset a, Offset b, Offset c) {
-    // print(p.dx);
-    // print(p.dy);
     double sign(Offset p1, Offset p2, Offset p3) {
       return (p1.dx - p3.dx) * (p2.dy - p3.dy) -
           (p2.dx - p3.dx) * (p1.dy - p3.dy);
