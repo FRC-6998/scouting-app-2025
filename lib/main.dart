@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'util/fieldWidgets.dart';
+import 'widgets/fieldWidgets.dart';
+import 'constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -259,108 +260,150 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Stack(
                     children: [
                       Image.asset('assets/images/2025field.png'),
-                      // InkwellContainer(
-                      //   left: 95,
-                      //   top: 40,
-                      //   width: 140,
-                      //   height: 165,
-                      //   factor: fieldFactor,
-                      //   color: Color(0x99E2B656),
-                      //   borderColor: Color(0xE6E2B656),
-                      //   borderWidth: 3,
-                      //   borderRadius: areaRadius,
-                      //   onTap: () {
-                      //     print(fieldFactor);
-                      //   },
+                      InkwellContainer(
+                        left: 95,
+                        top: 40,
+                        width: 140,
+                        height: 165,
+                        factor: fieldFactor,
+                        color: AppColors.sourceAreaColor,
+                        borderColor: AppColors.sourceBorderColor,
+                        borderWidth: 3,
+                        borderRadius: AppRadius.fieldAreaRadius,
+                        onTap: () {
+                          print(fieldFactor);
+                        },
+                      ),
+                      InkwellContainer(
+                        right: 5,
+                        top: 40,
+                        width: 140,
+                        height: 165,
+                        factor: fieldFactor,
+                        color: AppColors.sourceAreaColor,
+                        borderColor: AppColors.sourceBorderColor,
+                        borderWidth: 3,
+                        borderRadius: AppRadius.fieldAreaRadius,
+                        onTap: () {
+                          print(fieldFactor);
+                        },
+                      ),
+                      InkwellContainer(
+                        left: 5,
+                        top: 531,
+                        width: 140,
+                        height: 220,
+                        factor: fieldFactor,
+                        color: AppColors.scoreAreaColor,
+                        borderColor: AppColors.scoreBorderColor,
+                        borderWidth: 3,
+                        borderRadius: AppRadius.fieldAreaRadius,
+                        onTap: () {
+                          print(fieldFactor);
+                        },
+                      ),
+                      InkwellContainer(
+                        left: 110,
+                        top: 755,
+                        width: 725,
+                        height: 130,
+                        factor: fieldFactor,
+                        color: AppColors.scoreAreaColor,
+                        borderColor: AppColors.scoreBorderColor,
+                        borderWidth: 3,
+                        borderRadius: AppRadius.fieldAreaRadius,
+                        onTap: () {
+                          print(fieldFactor);
+                        },
+                      ),
+                      // Positioned(
+                      //   left: 95 * fieldFactor,
+                      //   top: 40 * fieldFactor,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       print(fieldFactor);
+                      //     },
+                      //     child: Container(
+                      //       width: 140 * fieldFactor,
+                      //       height: 165 * fieldFactor,
+                      //       // color: Colors.green.withAlpha(100),
+                      //       decoration: BoxDecoration(
+                      //         color: Color(0x99E2B656),
+                      //         border: Border.all(
+                      //           color: Color(0xE6E2B656),
+                      //           width: 3,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(areaRadius),
+                      //       ),
+                      //     ),
+                      //   ),
                       // ),
-                      Positioned(
-                        left: 95 * fieldFactor,
-                        top: 40 * fieldFactor,
-                        child: InkWell(
-                          onTap: () {
-                            print(fieldFactor);
-                          },
-                          child: Container(
-                            width: 140 * fieldFactor,
-                            height: 165 * fieldFactor,
-                            // color: Colors.green.withAlpha(100),
-                            decoration: BoxDecoration(
-                              color: Color(0x99E2B656),
-                              border: Border.all(
-                                color: Color(0xE6E2B656),
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(areaRadius),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 5 * fieldFactor,
-                        top: 40 * fieldFactor,
-                        child: InkWell(
-                          onTap: () {
-                            print(fieldFactor);
-                          },
-                          child: Container(
-                            width: 140 * fieldFactor,
-                            height: 165 * fieldFactor,
-                            // color: Colors.green.withAlpha(100),
-                            decoration: BoxDecoration(
-                              color: Color(0x99E2B656),
-                              border: Border.all(
-                                color: Color(0xE6E2B656),
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(areaRadius),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 5 * fieldFactor,
-                        top: 531 * fieldFactor,
-                        child: InkWell(
-                          onTap: () {
-                            print(fieldFactor);
-                          },
-                          child: Container(
-                            width: 140 * fieldFactor,
-                            height: 220 * fieldFactor,
-                            // color: Colors.green.withAlpha(100),
-                            decoration: BoxDecoration(
-                              color: Color(0x6663B3A9),
-                              border: Border.all(
-                                color: Color(0xE663B3A9),
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(areaRadius),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 110 * fieldFactor,
-                        top: 755 * fieldFactor,
-                        child: InkWell(
-                          onTap: () {
-                            print(fieldFactor);
-                          },
-                          child: Container(
-                            width: 725 * fieldFactor,
-                            height: 130 * fieldFactor,
-                            // color: Colors.green.withAlpha(100),
-                            decoration: BoxDecoration(
-                              color: Color(0x6663B3A9),
-                              border: Border.all(
-                                color: Color(0xE663B3A9),
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(areaRadius),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Positioned(
+                      //   right: 5 * fieldFactor,
+                      //   top: 40 * fieldFactor,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       print(fieldFactor);
+                      //     },
+                      //     child: Container(
+                      //       width: 140 * fieldFactor,
+                      //       height: 165 * fieldFactor,
+                      //       // color: Colors.green.withAlpha(100),
+                      //       decoration: BoxDecoration(
+                      //         color: Color(0x99E2B656),
+                      //         border: Border.all(
+                      //           color: Color(0xE6E2B656),
+                      //           width: 3,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(areaRadius),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Positioned(
+                      //   left: 5 * fieldFactor,
+                      //   top: 531 * fieldFactor,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       print(fieldFactor);
+                      //     },
+                      //     child: Container(
+                      //       width: 140 * fieldFactor,
+                      //       height: 220 * fieldFactor,
+                      //       // color: Colors.green.withAlpha(100),
+                      //       decoration: BoxDecoration(
+                      //         color: Color(0x6663B3A9),
+                      //         border: Border.all(
+                      //           color: Color(0xE663B3A9),
+                      //           width: 3,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(areaRadius),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Positioned(
+                      //   left: 110 * fieldFactor,
+                      //   top: 755 * fieldFactor,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       print(fieldFactor);
+                      //     },
+                      //     child: Container(
+                      //       width: 725 * fieldFactor,
+                      //       height: 130 * fieldFactor,
+                      //       // color: Colors.green.withAlpha(100),
+                      //       decoration: BoxDecoration(
+                      //         color: Color(0x6663B3A9),
+                      //         border: Border.all(
+                      //           color: Color(0xE663B3A9),
+                      //           width: 3,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(areaRadius),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       // Positioned(
                       //   left: 110 * fieldFactor,
                       //   top: 600 * fieldFactor,
@@ -391,62 +434,86 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: 110 * fieldFactor,
                             child: Row(
                               children: [
-                                InkWell(
-                                  onTap: () {
-                                    print(fieldFactor);
-                                  },
-                                  child: Container(
-                                    width: 180 * fieldFactor,
-                                    // color: Colors.green.withAlpha(100),
-                                    decoration: BoxDecoration(
-                                      color: Color(0x99E2B656),
-                                      border: Border.all(
-                                        color: Color(0xE6E2B656),
-                                        width: 3,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(areaRadius),
-                                    ),
-                                  ),
+                                InkwellContainer(
+                                  width: 180,
+                                  factor: fieldFactor,
+                                  color: AppColors.prematchBtnColor,
+                                  borderColor: AppColors.prematchBtnBorderColor,
+                                  borderWidth: 3,
+                                  borderRadius: AppRadius.fieldAreaRadius,
                                 ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     print(fieldFactor);
+                                //   },
+                                //   child: Container(
+                                //     width: 180 * fieldFactor,
+                                //     // color: Colors.green.withAlpha(100),
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0x99E2B656),
+                                //       border: Border.all(
+                                //         color: Color(0xE6E2B656),
+                                //         width: 3,
+                                //       ),
+                                //       borderRadius:
+                                //           BorderRadius.circular(areaRadius),
+                                //     ),
+                                //   ),
+                                // ),
                                 Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    print(fieldFactor);
-                                  },
-                                  child: Container(
-                                    width: 180 * fieldFactor,
-                                    // color: Colors.green.withAlpha(100),
-                                    decoration: BoxDecoration(
-                                      color: Color(0x99E2B656),
-                                      border: Border.all(
-                                        color: Color(0xE6E2B656),
-                                        width: 3,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(areaRadius),
-                                    ),
-                                  ),
+                                InkwellContainer(
+                                  width: 180,
+                                  factor: fieldFactor,
+                                  color: AppColors.prematchBtnColor,
+                                  borderColor: AppColors.prematchBtnBorderColor,
+                                  borderWidth: 3,
+                                  borderRadius: AppRadius.fieldAreaRadius,
                                 ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     print(fieldFactor);
+                                //   },
+                                //   child: Container(
+                                //     width: 180 * fieldFactor,
+                                //     // color: Colors.green.withAlpha(100),
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0x99E2B656),
+                                //       border: Border.all(
+                                //         color: Color(0xE6E2B656),
+                                //         width: 3,
+                                //       ),
+                                //       borderRadius:
+                                //           BorderRadius.circular(areaRadius),
+                                //     ),
+                                //   ),
+                                // ),
                                 Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    print(fieldFactor);
-                                  },
-                                  child: Container(
-                                    width: 180 * fieldFactor,
-                                    // color: Colors.green.withAlpha(100),
-                                    decoration: BoxDecoration(
-                                      color: Color(0x99E2B656),
-                                      border: Border.all(
-                                        color: Color(0xE6E2B656),
-                                        width: 3,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.circular(areaRadius),
-                                    ),
-                                  ),
+                                InkwellContainer(
+                                  width: 180,
+                                  factor: fieldFactor,
+                                  color: AppColors.prematchBtnColor,
+                                  borderColor: AppColors.prematchBtnBorderColor,
+                                  borderWidth: 3,
+                                  borderRadius: AppRadius.fieldAreaRadius,
                                 ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     print(fieldFactor);
+                                //   },
+                                //   child: Container(
+                                //     width: 180 * fieldFactor,
+                                //     // color: Colors.green.withAlpha(100),
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0x99E2B656),
+                                //       border: Border.all(
+                                //         color: Color(0xE6E2B656),
+                                //         width: 3,
+                                //       ),
+                                //       borderRadius:
+                                //           BorderRadius.circular(areaRadius),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             )),
                       ),

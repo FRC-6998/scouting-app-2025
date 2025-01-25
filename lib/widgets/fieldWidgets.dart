@@ -7,8 +7,8 @@ class InkwellContainer extends StatelessWidget {
   final double? right;
   final double? bottom;
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   final double factor;
 
@@ -27,8 +27,8 @@ class InkwellContainer extends StatelessWidget {
     this.left,
     this.right,
     this.bottom,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.factor = 1,
     this.color = Colors.blue,
     this.borderColor = Colors.black,
@@ -39,7 +39,7 @@ class InkwellContainer extends StatelessWidget {
   });
   // }) : super(key: key);
 
-  double? _scaleValue(double? value, double factor) {
+  double? _multiplyIfNotNull(double? value, double factor) {
     return value != null ? value * factor : null;
   }
 
@@ -49,8 +49,8 @@ class InkwellContainer extends StatelessWidget {
       onTap: onTap,
       onTapDown: onTapDown,
       child: Container(
-        width: width * factor,
-        height: height * factor,
+        width: _multiplyIfNotNull(width, factor),
+        height: _multiplyIfNotNull(height, factor),
         decoration: BoxDecoration(
           color: color,
           border: Border.all(
@@ -64,10 +64,10 @@ class InkwellContainer extends StatelessWidget {
 
     if (top != null || left != null || right != null || bottom != null) {
       return Positioned(
-        top: _scaleValue(top, factor),
-        left: _scaleValue(left, factor),
-        right: _scaleValue(right, factor),
-        bottom: _scaleValue(bottom, factor),
+        top: _multiplyIfNotNull(top, factor),
+        left: _multiplyIfNotNull(left, factor),
+        right: _multiplyIfNotNull(right, factor),
+        bottom: _multiplyIfNotNull(bottom, factor),
         child: inkwellContainer,
       );
     }
