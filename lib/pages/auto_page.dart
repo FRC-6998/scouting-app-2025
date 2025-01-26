@@ -31,14 +31,15 @@ class AutoPage extends StatelessWidget {
           double aspectRatio = 852 / 962;
           double fieldWidth;
           if (constraints.maxWidth - constraints.maxHeight * aspectRatio >
-              constraints.maxWidth / 2) {
+              constraints.maxWidth * 2 / 5) {
             fieldWidth = constraints.maxHeight * aspectRatio;
           } else {
-            fieldWidth = constraints.maxWidth * 1 / 2;
+            fieldWidth = constraints.maxWidth * 3 / 5;
           }
           double fieldHeight = fieldWidth / aspectRatio;
           // double fieldFactor = 1;
-          double fieldFactor = fieldWidth / 852;
+          // double fieldFactor = fieldWidth / 852;//*0.7511737089201878
+          double fieldFactor = fieldWidth / 640;
           return Row(
             children: [
               SizedBox(
@@ -48,10 +49,10 @@ class AutoPage extends StatelessWidget {
                   children: [
                     Image.asset('assets/images/2025field.png'),
                     InkwellContainer(
-                      left: 95,
-                      top: 40,
-                      width: 140,
-                      height: 165,
+                      left: 71,
+                      top: 30,
+                      width: 105,
+                      height: 124,
                       factor: fieldFactor,
                       color: AppColors.sourceAreaColor,
                       borderColor: AppColors.sourceBorderColor,
@@ -62,10 +63,10 @@ class AutoPage extends StatelessWidget {
                       },
                     ),
                     InkwellContainer(
-                      right: 5,
-                      top: 40,
-                      width: 140,
-                      height: 165,
+                      right: 3.7558685446,
+                      top: 30,
+                      width: 105,
+                      height: 124,
                       factor: fieldFactor,
                       color: AppColors.sourceAreaColor,
                       borderColor: AppColors.sourceBorderColor,
@@ -75,11 +76,51 @@ class AutoPage extends StatelessWidget {
                         logger.d(fieldFactor);
                       },
                     ),
+                    Positioned(
+                        left: 193.5 * fieldFactor,
+                        top: 62 * fieldFactor,
+                        child: SizedBox(
+                          width: 320 * fieldFactor,
+                          height: 45 * fieldFactor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                                3,
+                                (index) => InkwellContainer(
+                                      width: 80,
+                                      factor: fieldFactor,
+                                      color: AppColors.sourceAreaColor,
+                                      borderColor: AppColors.sourceBorderColor,
+                                      borderWidth: 3,
+                                      borderRadius: AppRadius.fieldAreaRadius,
+                                    )),
+                          ),
+                        )),
+                    Positioned(
+                        left: 193.5 * fieldFactor,
+                        top: 143 * fieldFactor,
+                        child: SizedBox(
+                          width: 320 * fieldFactor,
+                          height: 45 * fieldFactor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                                3,
+                                (index) => InkwellContainer(
+                                      width: 80,
+                                      factor: fieldFactor,
+                                      color: AppColors.sourceAreaColor,
+                                      borderColor: AppColors.sourceBorderColor,
+                                      borderWidth: 3,
+                                      borderRadius: AppRadius.fieldAreaRadius,
+                                    )),
+                          ),
+                        )),
                     InkwellContainer(
-                      left: 5,
-                      top: 531,
-                      width: 140,
-                      height: 220,
+                      left: 3.7558685446,
+                      top: 399,
+                      width: 105,
+                      height: 165,
                       factor: fieldFactor,
                       color: AppColors.scoreAreaColor,
                       borderColor: AppColors.scoreBorderColor,
@@ -90,10 +131,10 @@ class AutoPage extends StatelessWidget {
                       },
                     ),
                     InkwellContainer(
-                      left: 110,
-                      top: 755,
-                      width: 725,
-                      height: 130,
+                      left: 82.6291079812,
+                      top: 567,
+                      width: 545,
+                      height: 98,
                       factor: fieldFactor,
                       color: AppColors.scoreAreaColor,
                       borderColor: AppColors.scoreBorderColor,
@@ -104,15 +145,15 @@ class AutoPage extends StatelessWidget {
                       },
                     ),
                     Positioned(
-                      left: 170 * fieldFactor,
-                      top: 640 * fieldFactor,
+                      left: 127.7 * fieldFactor,
+                      top: 480 * fieldFactor,
                       child: SizedBox(
-                          width: 600 * fieldFactor,
-                          height: 100 * fieldFactor,
+                          width: 450 * fieldFactor,
+                          height: 75 * fieldFactor,
                           child: Row(
                             children: [
                               InkwellContainer(
-                                width: 180,
+                                width: 135,
                                 factor: fieldFactor,
                                 color: AppColors.prematchBtnColor,
                                 borderColor: AppColors.prematchBtnBorderColor,
@@ -121,7 +162,7 @@ class AutoPage extends StatelessWidget {
                               ),
                               Spacer(),
                               InkwellContainer(
-                                width: 180,
+                                width: 135,
                                 factor: fieldFactor,
                                 color: AppColors.prematchBtnColor,
                                 borderColor: AppColors.prematchBtnBorderColor,
@@ -130,7 +171,7 @@ class AutoPage extends StatelessWidget {
                               ),
                               Spacer(),
                               InkwellContainer(
-                                width: 180,
+                                width: 135,
                                 factor: fieldFactor,
                                 color: AppColors.prematchBtnColor,
                                 borderColor: AppColors.prematchBtnBorderColor,
@@ -140,24 +181,13 @@ class AutoPage extends StatelessWidget {
                             ],
                           )),
                     ),
-                    // TriangleWidget(
-                    //   sideLength: 200,
-                    //   top: 350,
-                    //   left: 310,
-                    //   factor: fieldFactor,
-                    //   color: AppColors.reefAreaColor,
-                    //   borderColor: AppColors.reefBorderColor,
-                    //   borderWidth: 3,
-                    //   rotate: 3 * math.pi / 6,
-                    // ),
-
                     ...List.generate(
                       6,
                       (index) => TriangleWidget(
-                        sideLength: 200,
-                        left: 470 +
+                        sideLength: 150,
+                        left: 353 +
                             math.cos(math.pi / 2 + index * math.pi / 3) * 8,
-                        top: 447 -
+                        top: 335.7746478873 -
                             math.sin(math.pi / 2 + index * math.pi / 3) * 8,
                         factor: fieldFactor,
                         color: AppColors.reefAreaColor,
@@ -173,8 +203,345 @@ class AutoPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Container(
-                  color: Colors.blue,
+                child: Row(
+                  children: [
+                    Spacer(
+                      flex: 1,
+                    ),
+                    Expanded(
+                        flex: 18,
+                        child: Column(
+                          children: [
+                            Spacer(
+                              flex: 2,
+                            ),
+                            Expanded(
+                                flex: 22,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 19,
+                                      child: Stack(
+                                        children: [
+                                          // 靠左上角的 Text
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Team Number:',
+                                              style: TextStyle(
+                                                  fontSize: 24 * fieldFactor),
+                                            ),
+                                          ),
+
+                                          // 水平與垂直都置中的 Text
+                                          Center(
+                                            child: Text(
+                                              '3499',
+                                              style: TextStyle(
+                                                  fontSize: 48 * fieldFactor),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                        flex: 19,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                                flex: 3,
+                                                child: InkwellContainer(
+                                                  factor: fieldFactor,
+                                                  color: AppColors.reefBtnColor,
+                                                  borderColor: AppColors
+                                                      .reefBtnBorderColor,
+                                                  borderWidth: 3,
+                                                  borderRadius:
+                                                      AppRadius.fieldAreaRadius,
+                                                )),
+                                            Spacer(
+                                              flex: 1,
+                                            ),
+                                            Expanded(
+                                                flex: 3,
+                                                child: InkwellContainer(
+                                                  factor: fieldFactor,
+                                                  color: AppColors.reefBtnColor,
+                                                  borderColor: AppColors
+                                                      .reefBtnBorderColor,
+                                                  borderWidth: 3,
+                                                  borderRadius:
+                                                      AppRadius.fieldAreaRadius,
+                                                )),
+                                            Spacer(
+                                              flex: 1,
+                                            ),
+                                            Expanded(
+                                                flex: 3,
+                                                child: InkwellContainer(
+                                                  factor: fieldFactor,
+                                                  color: AppColors.reefBtnColor,
+                                                  borderColor: AppColors
+                                                      .reefBtnBorderColor,
+                                                  borderWidth: 3,
+                                                  borderRadius:
+                                                      AppRadius.fieldAreaRadius,
+                                                )),
+                                          ],
+                                        )),
+                                  ],
+                                )),
+                            Spacer(
+                              flex: 1,
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: InkwellContainer(
+                                height: 100,
+                                factor: fieldFactor,
+                                color: AppColors.boolBtnFalseColor,
+                                borderColor: AppColors.boolBtnFalseBorderColor,
+                                borderWidth: 3,
+                                borderRadius: AppRadius.fieldAreaRadius * 2,
+                                child: Center(
+                                  child: Text(
+                                    'AUTO LEAVE',
+                                    style: TextStyle(
+                                      // color: AppColors.prematchBtnTextColor,
+                                      fontSize: 24 * fieldFactor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Spacer(
+                              flex: 1,
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 19,
+                                    child: InkwellContainer(
+                                      factor: fieldFactor,
+                                      color: AppColors.sourceAreaColor,
+                                      borderColor: AppColors.sourceBorderColor,
+                                      borderWidth: 3,
+                                      borderRadius: AppRadius.fieldAreaRadius,
+                                      child: Center(
+                                        child: Text(
+                                          'Reef Algae',
+                                          style: TextStyle(
+                                            fontSize: 24 * fieldFactor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(
+                                    flex: 1,
+                                  ),
+                                  Expanded(
+                                    flex: 19,
+                                    child: InkwellContainer(
+                                      factor: fieldFactor,
+                                      color: AppColors.prematchBtnColor,
+                                      borderColor:
+                                          AppColors.prematchBtnBorderColor,
+                                      borderWidth: 3,
+                                      borderRadius: AppRadius.fieldAreaRadius,
+                                      child: Center(
+                                        child: Text(
+                                          'Failed',
+                                          style: TextStyle(
+                                            fontSize: 24 * fieldFactor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Spacer(
+                              flex: 1,
+                            ),
+                            Expanded(
+                                flex: 6,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        flex: 9,
+                                        child: InkwellContainer(
+                                          factor: fieldFactor,
+                                          color: AppColors.reefBtnColor,
+                                          borderColor:
+                                              AppColors.reefBtnBorderColor,
+                                          borderWidth: 3,
+                                          borderRadius:
+                                              AppRadius.fieldAreaRadius,
+                                          child: Center(
+                                            child: Text(
+                                              'L1',
+                                              style: TextStyle(
+                                                fontSize: 24 * fieldFactor,
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                        flex: 9,
+                                        child: InkwellContainer(
+                                          factor: fieldFactor,
+                                          color: AppColors.reefBtnColor,
+                                          borderColor:
+                                              AppColors.reefBtnBorderColor,
+                                          borderWidth: 3,
+                                          borderRadius:
+                                              AppRadius.fieldAreaRadius,
+                                          child: Center(
+                                            child: Text(
+                                              'L2',
+                                              style: TextStyle(
+                                                fontSize: 24 * fieldFactor,
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                        flex: 9,
+                                        child: InkwellContainer(
+                                          factor: fieldFactor,
+                                          color: AppColors.reefBtnColor,
+                                          borderColor:
+                                              AppColors.reefBtnBorderColor,
+                                          borderWidth: 3,
+                                          borderRadius:
+                                              AppRadius.fieldAreaRadius,
+                                          child: Center(
+                                            child: Text(
+                                              'L3',
+                                              style: TextStyle(
+                                                fontSize: 24 * fieldFactor,
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                        flex: 9,
+                                        child: InkwellContainer(
+                                          factor: fieldFactor,
+                                          color: AppColors.reefBtnColor,
+                                          borderColor:
+                                              AppColors.reefBtnBorderColor,
+                                          borderWidth: 3,
+                                          borderRadius:
+                                              AppRadius.fieldAreaRadius,
+                                          child: Center(
+                                            child: Text(
+                                              'L4',
+                                              style: TextStyle(
+                                                fontSize: 24 * fieldFactor,
+                                              ),
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                )),
+                            Spacer(
+                              flex: 2,
+                            ),
+                            Expanded(
+                                flex: 3,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Color(0xFFFFFFFF),
+                                            backgroundColor: Color(0xFF303E9B),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      5 * fieldFactor),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            logger.d("Back");
+                                          },
+                                          child: Text("Back",
+                                              style: TextStyle(
+                                                  fontSize: 30 * fieldFactor))),
+                                    ),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Color(0xFFFFFFFF),
+                                            backgroundColor: Color(0xFF000000),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      5 * fieldFactor),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            logger.d("Undo");
+                                          },
+                                          child: Text("Undo",
+                                              style: TextStyle(
+                                                  fontSize: 30 * fieldFactor))),
+                                    ),
+                                    Spacer(
+                                      flex: 1,
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Color(0xFFFFFFFF),
+                                            backgroundColor: Color(0xFF303E9B),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      5 * fieldFactor),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            logger.d("Tele-op");
+                                          },
+                                          child: Text("Tele-op",
+                                              style: TextStyle(
+                                                  fontSize: 30 * fieldFactor))),
+                                    ),
+                                  ],
+                                )),
+                            Spacer(
+                              flex: 2,
+                            ),
+                          ],
+                        )),
+                    Spacer(
+                      flex: 1,
+                    ),
+                  ],
                 ),
               ),
             ],

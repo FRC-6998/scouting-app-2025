@@ -34,6 +34,11 @@ class ScoutingApp extends StatelessWidget {
       //   useMaterial3: true,
       // ),
       home: AutoPage(),
+      routes: {
+        '/auto': (context) => const AutoPage(),
+        '/teleop': (context) => const AutoPage(),
+        '/endgame': (context) => const AutoPage(),
+      },
     );
   }
 }

@@ -15,6 +15,14 @@ class AppColors {
 
   static const Color prematchBtnColor = Color(0x6620273E);
   static const Color prematchBtnBorderColor = Color(0xFF20273E);
+
+  static const Color boolBtnFalseColor = Color(0x66E84F47);
+  static const Color boolBtnFalseBorderColor = Color(0xE6E84F47);
+
+  // static const Color boolBtnTrueColor = Color(0x6600FF00);
+  // static const Color boolBtnTrueBorderColor = Color(0xE600FF00);
+  static const Color boolBtnTrueColor = Color(0x6647E85F);
+  static const Color boolBtnTrueBorderColor = Color(0xE647E85F);
 }
 
 class AppRadius {
