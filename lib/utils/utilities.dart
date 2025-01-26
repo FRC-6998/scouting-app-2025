@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 double? addIfNotNull(double? value, double factor) {
   return value != null ? value + factor : null;
 }

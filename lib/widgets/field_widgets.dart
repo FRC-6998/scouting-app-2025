@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import '../utilities.dart' show multiplyIfNotNull, addIfNotNull;
+import '../utils/logger.dart' show logger;
+import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
 
 class InkwellContainer extends StatelessWidget {
   final double? top;
@@ -23,6 +24,8 @@ class InkwellContainer extends StatelessWidget {
   final VoidCallback? onTap;
   final void Function(TapDownDetails)? onTapDown;
 
+  final Widget? child;
+
   const InkwellContainer({
     this.top,
     this.left,
@@ -37,6 +40,7 @@ class InkwellContainer extends StatelessWidget {
     this.borderRadius = 5,
     this.onTap,
     this.onTapDown,
+    this.child,
     super.key,
   });
 
@@ -56,6 +60,7 @@ class InkwellContainer extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(borderRadius * factor),
         ),
+        child: child,
       ),
     );
 
@@ -107,8 +112,8 @@ class TrianglePainter extends CustomPainter {
       ..lineTo(baseEnd.dx - (3 / math.sqrt(3)) * borderWidth,
           baseEnd.dy - borderWidth) // 右下角
       ..close();
-    print(apex);
-    print(baseStart);
+    logger.t(apex);
+    logger.t(baseStart);
     // 繪製正三角形的頂點
     final borderPath = Path()
       ..moveTo(apex.dx, apex.dy + borderWidth) // 頂點
@@ -132,7 +137,6 @@ class TrianglePainter extends CustomPainter {
 }
 
 class TriangleWidget extends StatelessWidget {
-  // TODO: Finish implementing TriangleWidget
   final double? top;
   double? left;
   double? right;
