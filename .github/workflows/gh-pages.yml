@@ -1,0 +1,56 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Check Dart Code"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /${{ github.event.repository.name }}/
+
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#
+#    steps:
+#      - name: Checkout Repository
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Flutter SDK
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: 'stable'
+#
+#      - name: Install dependencies
+#        run: flutter pub get
+#
+#      - name: Build Flutter Web
+#        run: flutter build web --release --base-href "${{ github.event.repository.name }}"
+#
+#      - name: Deploy to GitHub Pages
+#        run: |
+#          git worktree add build/web gh-pages
+#          cd build/web
+#          git add .
+#          git commit -m "Deploy latest Flutter Web"
+#          git push origin gh-pages
+#          cd ../..
+#      # 如果有變更，推送到 GitHub Pages
+##      - name: Deploy to GitHub Pages
+##        run: |
+##          git config user.name github-actions
+##          git config user.email github-actions@github.com
+##          git --work-tree=build/web add --all
+##          git commit -m "Deploy Flutter Web App"
+##          git push origin HEAD:gh-pages --force
