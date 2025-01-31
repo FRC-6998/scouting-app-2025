@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:provider/provider.dart';
 
 import '../utils/logger.dart' show logger;
 import '../widgets/field_widgets.dart' show InkwellContainer, TriangleWidget;
 import '../constants.dart';
+import '../providers/scouting_data_provider.dart';
+import '../model.dart';
 
 class AutoPage extends StatelessWidget {
   const AutoPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -16,6 +18,7 @@ class AutoPage extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    ScoutingDataProvider scoutingData = Provider.of<ScoutingDataProvider>(context);
     return Scaffold(
       // appBar: AppBar(
       //   // TRY THIS: Try changing the color here to a specific color (to
@@ -48,7 +51,7 @@ class AutoPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.asset('assets/images/2025field.png'),
-                    InkwellContainer(
+                    InkwellContainer(  // l coral station
                       left: 71,
                       top: 30,
                       width: 105,
@@ -59,7 +62,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        logger.d(fieldFactor);
+                        scoutingData.addAutoPathPoint(AutoPathPoint.leftCoralStation);
                       },
                     ),
                     InkwellContainer(
@@ -73,7 +76,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        logger.d(fieldFactor);
+                        scoutingData.addAutoPathPoint(AutoPathPoint.rightCoralStation);
                       },
                     ),
                     Positioned(
@@ -93,6 +96,9 @@ class AutoPage extends StatelessWidget {
                                       borderColor: AppColors.sourceBorderColor,
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
+                                      onTap: () {
+                                        scoutingData.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundAlgae.index + index]);
+                                      },
                                     )),
                           ),
                         )),
@@ -113,6 +119,9 @@ class AutoPage extends StatelessWidget {
                                       borderColor: AppColors.sourceBorderColor,
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
+                                      onTap: () {
+                                        scoutingData.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundCoral.index + index]);
+                                      },
                                     )),
                           ),
                         )),
@@ -127,7 +136,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        logger.d(fieldFactor);
+                        scoutingData.addAutoPathPoint(AutoPathPoint.processor);
                       },
                     ),
                     InkwellContainer(
@@ -141,7 +150,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        logger.d(fieldFactor);
+                        scoutingData.addAutoPathPoint(AutoPathPoint.net);
                       },
                     ),
                     Positioned(
@@ -152,31 +161,81 @@ class AutoPage extends StatelessWidget {
                           height: 75 * fieldFactor,
                           child: Row(
                             children: [
-                              InkwellContainer(
-                                width: 135,
-                                factor: fieldFactor,
-                                color: AppColors.prematchBtnColor,
-                                borderColor: AppColors.prematchBtnBorderColor,
-                                borderWidth: 3,
-                                borderRadius: AppRadius.fieldAreaRadius,
+                              // Selector<ScoutingDataProvider, AutoStartPosition>(
+                              //   selector: (context, scoutingData) => scoutingData.autoData.startPosition,
+                              //   builder: (context, startPosition, child) {
+                              //     return InkwellContainer(
+                              //       width: 135,
+                              //       factor: fieldFactor,
+                              //       color: AppColors.unselectedBtnColor,
+                              //       borderColor: AppColors.unselectedBtnBorderColor,
+                              //       // borderWidth: 3,
+                              //       borderWidth: startPosition == AutoStartPosition.left ? 6 : 3,
+                              //       borderRadius: AppRadius.fieldAreaRadius,
+                              //       onTap: () {
+                              //         scoutingData.updateAutoData(startPosition: AutoStartPosition.left);
+                              //       },
+                              //     );
+                              //   },
+                              // ),
+                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                                selector: (context, scoutingData) => scoutingData.autoData.startPosition,
+                                builder: (context, startPosition, child) {
+                                  return InkwellContainer(
+                                    width: 135,
+                                    factor: fieldFactor,
+                                    color: startPosition == AutoStartPosition.left ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                    borderColor: startPosition == AutoStartPosition.left ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                    // color: AppColors.unselectedBtnColor,
+                                    // borderColor: AppColors.unselectedBtnBorderColor,
+                                    borderWidth: 3,
+                                    // borderWidth: startPosition == AutoStartPosition.left ? 6 : 3,
+                                    borderRadius: AppRadius.fieldAreaRadius,
+                                    onTap: () {
+                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.left);
+                                    },
+                                  );
+                                },
                               ),
                               Spacer(),
-                              InkwellContainer(
-                                width: 135,
-                                factor: fieldFactor,
-                                color: AppColors.prematchBtnColor,
-                                borderColor: AppColors.prematchBtnBorderColor,
-                                borderWidth: 3,
-                                borderRadius: AppRadius.fieldAreaRadius,
+                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                                selector: (context, scoutingData) => scoutingData.autoData.startPosition,
+                                builder: (context, startPosition, child) {
+                                  return InkwellContainer(
+                                    width: 135,
+                                    factor: fieldFactor,
+                                    color: startPosition == AutoStartPosition.center ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                    borderColor: startPosition == AutoStartPosition.center ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                    // color: AppColors.unselectedBtnColor,
+                                    // borderColor: AppColors.unselectedBtnBorderColor,
+                                    borderWidth: 3,
+                                    // borderWidth: startPosition == AutoStartPosition.center ? 6 : 3,
+                                    borderRadius: AppRadius.fieldAreaRadius,
+                                    onTap: () {
+                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.center);
+                                    },
+                                  );
+                                },
                               ),
                               Spacer(),
-                              InkwellContainer(
-                                width: 135,
-                                factor: fieldFactor,
-                                color: AppColors.prematchBtnColor,
-                                borderColor: AppColors.prematchBtnBorderColor,
-                                borderWidth: 3,
-                                borderRadius: AppRadius.fieldAreaRadius,
+                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                                selector: (context, scoutingData) => scoutingData.autoData.startPosition,
+                                builder: (context, startPosition, child) {
+                                  return InkwellContainer(
+                                    width: 135,
+                                    factor: fieldFactor,
+                                    color: startPosition == AutoStartPosition.right ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                    borderColor: startPosition == AutoStartPosition.right ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                    // color: AppColors.unselectedBtnColor,
+                                    // borderColor: AppColors.unselectedBtnBorderColor,
+                                    borderWidth: 3,
+                                    // borderWidth: startPosition == AutoStartPosition.right ? 6 : 3,
+                                    borderRadius: AppRadius.fieldAreaRadius,
+                                    onTap: () {
+                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.right);
+                                    },
+                                  );
+                                },
                               ),
                             ],
                           )),
@@ -253,43 +312,92 @@ class AutoPage extends StatelessWidget {
                                           children: [
                                             Expanded(
                                                 flex: 3,
-                                                child: InkwellContainer(
-                                                  factor: fieldFactor,
-                                                  color: AppColors.reefBtnColor,
-                                                  borderColor: AppColors
-                                                      .reefBtnBorderColor,
-                                                  borderWidth: 3,
-                                                  borderRadius:
-                                                      AppRadius.fieldAreaRadius,
-                                                )),
+                                                child:
+                                                    Selector<ScoutingDataProvider, Preload>(
+                                                      selector: (context, scoutingData) => scoutingData.autoData.preload,
+                                                      builder: (context, preload, child) {
+                                                        return InkwellContainer(
+                                                          factor: fieldFactor,
+                                                          color: preload == Preload.coral ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                                          borderColor: preload == Preload.coral ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                                          borderWidth: 3,
+                                                          borderRadius: AppRadius.fieldAreaRadius,
+                                                          onTap: () {
+                                                            scoutingData.updateAutoData(preload: Preload.coral);
+                                                          },
+                                                          child: Center(
+                                                            child: Transform.rotate(
+                                                              angle: math.pi/2,
+                                                              child:
+                                                            Image.asset(
+                                                              'assets/images/coral.png',
+                                                              width: 70 * fieldFactor,
+                                                              height: 70 * fieldFactor,
+                                                            ),
+                                                          ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                            ),
                                             Spacer(
                                               flex: 1,
                                             ),
                                             Expanded(
                                                 flex: 3,
-                                                child: InkwellContainer(
-                                                  factor: fieldFactor,
-                                                  color: AppColors.reefBtnColor,
-                                                  borderColor: AppColors
-                                                      .reefBtnBorderColor,
-                                                  borderWidth: 3,
-                                                  borderRadius:
-                                                      AppRadius.fieldAreaRadius,
-                                                )),
+                                                child:
+                                                    Selector<ScoutingDataProvider, Preload>(
+                                                      selector: (context, scoutingData) => scoutingData.autoData.preload,
+                                                      builder: (context, preload, child) {
+                                                        return InkwellContainer(
+                                                          factor: fieldFactor,
+                                                          color: preload == Preload.algae ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                                          borderColor: preload == Preload.algae ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                                          borderWidth: 3,
+                                                          borderRadius: AppRadius.fieldAreaRadius,
+                                                          onTap: () {
+                                                            scoutingData.updateAutoData(preload: Preload.algae);
+                                                          },
+                                                          child: Center(
+                                                            child: Image.asset(
+                                                              'assets/images/algae.png',
+                                                              width: 65 * fieldFactor,
+                                                              height: 65 * fieldFactor,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                            ),
                                             Spacer(
                                               flex: 1,
                                             ),
                                             Expanded(
                                                 flex: 3,
-                                                child: InkwellContainer(
-                                                  factor: fieldFactor,
-                                                  color: AppColors.reefBtnColor,
-                                                  borderColor: AppColors
-                                                      .reefBtnBorderColor,
-                                                  borderWidth: 3,
-                                                  borderRadius:
-                                                      AppRadius.fieldAreaRadius,
-                                                )),
+                                                child:
+                                                    Selector<ScoutingDataProvider, Preload>(
+                                                      selector: (context, scoutingData) => scoutingData.autoData.preload,
+                                                      builder: (context, preload, child) {
+                                                        return InkwellContainer(
+                                                          factor: fieldFactor,
+                                                          color: preload == Preload.none ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                                                          borderColor: preload == Preload.none ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                                                          borderWidth: 3,
+                                                          borderRadius: AppRadius.fieldAreaRadius,
+                                                          onTap: () {
+                                                            scoutingData.updateAutoData(preload: Preload.none);
+                                                          },
+                                                          child: Center(
+                                                            child: Image.asset(
+                                                              'assets/images/none.png',
+                                                              width: 100 * fieldFactor,
+                                                              height: 100 * fieldFactor,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                            ),
                                           ],
                                         )),
                                   ],
@@ -299,23 +407,49 @@ class AutoPage extends StatelessWidget {
                             ),
                             Expanded(
                               flex: 6,
-                              child: InkwellContainer(
-                                height: 100,
-                                factor: fieldFactor,
-                                color: AppColors.boolBtnFalseColor,
-                                borderColor: AppColors.boolBtnFalseBorderColor,
-                                borderWidth: 3,
-                                borderRadius: AppRadius.fieldAreaRadius * 2,
-                                child: Center(
-                                  child: Text(
-                                    'AUTO LEAVE',
-                                    style: TextStyle(
-                                      // color: AppColors.prematchBtnTextColor,
-                                      fontSize: 24 * fieldFactor,
-                                    ),
+                              child:
+                                  Selector<ScoutingDataProvider, bool>(
+                                    selector: (context, scoutingData) => scoutingData.autoData.leave,
+                                    builder: (context, leave, child) {
+                                      return InkwellContainer(
+                                        height: 100,
+                                        factor: fieldFactor,
+                                        color: leave ? AppColors.boolBtnTrueColor : AppColors.boolBtnFalseColor,
+                                        borderColor: leave ? AppColors.boolBtnTrueBorderColor : AppColors.boolBtnFalseBorderColor,
+                                        borderWidth: 3,
+                                        borderRadius: AppRadius.fieldAreaRadius * 2,
+                                        onTap: () {
+                                          scoutingData.updateAutoData(leave: !leave);
+                                        },
+                                        child: Center(
+                                          child: Text(
+                                            'AUTO LEAVE',
+                                            style: TextStyle(
+                                              // color: AppColors.prematchBtnTextColor,
+                                              fontSize: 24 * fieldFactor,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                ),
-                              ),
+                              // InkwellContainer(
+                              //   height: 100,
+                              //   factor: fieldFactor,
+                              //   color: AppColors.boolBtnFalseColor,
+                              //   borderColor: AppColors.boolBtnFalseBorderColor,
+                              //   borderWidth: 3,
+                              //   borderRadius: AppRadius.fieldAreaRadius * 2,
+                              //   child: Center(
+                              //     child: Text(
+                              //       'AUTO LEAVE',
+                              //       style: TextStyle(
+                              //         // color: AppColors.prematchBtnTextColor,
+                              //         fontSize: 24 * fieldFactor,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ),
                             Spacer(
                               flex: 1,
@@ -332,6 +466,9 @@ class AutoPage extends StatelessWidget {
                                       borderColor: AppColors.sourceBorderColor,
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
+                                      onTap: () {
+                                        scoutingData.addAutoPathPoint(AutoPathPoint.reefAlgae);
+                                      },
                                       child: Center(
                                         child: Text(
                                           'Reef Algae',
@@ -347,22 +484,45 @@ class AutoPage extends StatelessWidget {
                                   ),
                                   Expanded(
                                     flex: 19,
-                                    child: InkwellContainer(
-                                      factor: fieldFactor,
-                                      color: AppColors.prematchBtnColor,
-                                      borderColor:
-                                          AppColors.prematchBtnBorderColor,
-                                      borderWidth: 3,
-                                      borderRadius: AppRadius.fieldAreaRadius,
-                                      child: Center(
-                                        child: Text(
-                                          'Failed',
-                                          style: TextStyle(
-                                            fontSize: 24 * fieldFactor,
+                                    child:Selector<ScoutingDataProvider, bool>(
+                                      selector: (context, scoutingData) => scoutingData.autoData.pathPointIsSuccess,
+                                      builder: (context, pathPointIsSuccess, child) {
+                                        return InkwellContainer(
+                                          factor: fieldFactor,
+                                          color: pathPointIsSuccess ? AppColors.unselectedBtnColor : AppColors.boolBtnFalseColor,
+                                          borderColor: pathPointIsSuccess ? AppColors.unselectedBtnBorderColor : AppColors.boolBtnFalseBorderColor,
+                                          borderWidth: 3,
+                                          borderRadius: AppRadius.fieldAreaRadius,
+                                          onTap: () {
+                                            scoutingData.changeAutoPathPointStatus(!pathPointIsSuccess);
+                                          },
+                                          child: Center(
+                                            child: Text(
+                                              'Failed',
+                                              style: TextStyle(
+                                                fontSize: 24 * fieldFactor,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
+                                        );
+                                      },
                                     ),
+                                    // InkwellContainer(
+                                    //   factor: fieldFactor,
+                                    //   color: AppColors.unselectedBtnColor,
+                                    //   borderColor:
+                                    //       AppColors.unselectedBtnBorderColor,
+                                    //   borderWidth: 3,
+                                    //   borderRadius: AppRadius.fieldAreaRadius,
+                                    //   child: Center(
+                                    //     child: Text(
+                                    //       'Failed',
+                                    //       style: TextStyle(
+                                    //         fontSize: 24 * fieldFactor,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
                                 ],
                               ),
@@ -526,6 +686,8 @@ class AutoPage extends StatelessWidget {
                                           ),
                                           onPressed: () {
                                             logger.d("Tele-op");
+                                            // Navigator.pushNamed(context, '/teleop');
+                                            Navigator.pushNamed(context, '/result');
                                           },
                                           child: Text("Tele-op",
                                               style: TextStyle(

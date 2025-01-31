@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'providers/scouting_data_provider.dart';
 import 'pages/auto_page.dart';
+import 'pages/result_page.dart';
 
 void main() {
-  runApp(const ScoutingApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => ScoutingDataProvider(),
+        child: const ScoutingApp()
+    ),
+  );
 }
 
 class ScoutingApp extends StatelessWidget {
@@ -37,7 +45,7 @@ class ScoutingApp extends StatelessWidget {
       routes: {
         '/auto': (context) => const AutoPage(),
         '/teleop': (context) => const AutoPage(),
-        '/endgame': (context) => const AutoPage(),
+        '/result': (context) => const ResultPage(),
       },
     );
   }

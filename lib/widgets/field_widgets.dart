@@ -87,11 +87,11 @@ class TrianglePainter extends CustomPainter {
 
   TrianglePainter(
       {required this.apex,
-      required this.baseStart,
-      required this.baseEnd,
-      this.color = const Color.fromARGB(40, 48, 62, 155),
-      this.borderColor = const Color.fromARGB(90, 48, 62, 155),
-      this.borderWidth = 1.0});
+        required this.baseStart,
+        required this.baseEnd,
+        this.color = const Color.fromARGB(40, 48, 62, 155),
+        this.borderColor = const Color.fromARGB(90, 48, 62, 155),
+        this.borderWidth = 1.0});
 
   @override
   void paint(Canvas canvas, Size size) {
