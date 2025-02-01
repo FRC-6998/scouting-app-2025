@@ -46,14 +46,20 @@ class AppWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          child,  // 主要畫面內容
-          const VersionBadge(),  // 左下角版本號
-        ],
-      ),
-    );
+    // return Scaffold(
+    //   body: Stack(
+    //     children: [
+    //       child,  // 主要畫面內容
+    //       const VersionBadge(),  // 左下角版本號
+    //     ],
+    //   ),
+    // );
+    return Stack(
+            children: [
+              child,  // 主要畫面內容
+              const VersionBadge(),  // 左下角版本號
+            ],
+          );
   }
 }
 
