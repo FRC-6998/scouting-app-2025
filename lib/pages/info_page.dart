@@ -110,8 +110,16 @@ class _InfoPageState extends State<InfoPage> {
                   return null;
                 },
               ),
-              Spacer(flex: 3),
-
+              Spacer(flex: 2),
+              Text(
+                'Match Info:',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               Row(
                 children: [
                   Spacer(flex: 2), // 左邊間距
@@ -133,7 +141,7 @@ class _InfoPageState extends State<InfoPage> {
                         });
                         logger.d("Practice");
                       },
-                      child: Text("Practice", style: TextStyle(fontSize: 20)),
+                      child: Text("Practice", style: TextStyle(fontSize: 24)),
                     ),
                   ),
                   Spacer(flex: 1), // 增加適當的間距
@@ -155,7 +163,7 @@ class _InfoPageState extends State<InfoPage> {
                         });
                         logger.d("Qualification");
                       },
-                      child: Text("Qualification", style: TextStyle(fontSize: 20)),
+                      child: Text("Qualification", style: TextStyle(fontSize: 24)),
                     ),
                   ),
                   Spacer(flex: 1), // 增加適當的間距
@@ -177,15 +185,15 @@ class _InfoPageState extends State<InfoPage> {
                         });
                         logger.d("Playoff");
                       },
-                      child: Text("Playoff", style: TextStyle(fontSize: 20)),
+                      child: Text("Playoff", style: TextStyle(fontSize: 24)),
                     ),
                   ),
                   Spacer(flex: 2), // 右邊間距
                 ],
               ),
-              Spacer(flex: 2),
+              Spacer(flex: 3),
               Text(
-                'Match Info:',
+                'Match Number:',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 20,
@@ -198,15 +206,17 @@ class _InfoPageState extends State<InfoPage> {
               Spacer(flex: 2),
               TextFormField(
                 controller: _matchNumberController,
+                keyboardType: TextInputType.numberWithOptions(signed:true,decimal: false),
                 decoration: InputDecoration(
                   labelText: "Enter match number",
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter match number";
-                  } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return "Match number isn't valid";
+                    return 'Please enter a number';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid integer';
                   }
                   return null;
                 },
@@ -224,6 +234,7 @@ class _InfoPageState extends State<InfoPage> {
               Spacer(flex: 2),
               TextFormField(
                 controller: _teamNumberController,
+                keyboardType: TextInputType.numberWithOptions(signed:true,decimal: false),
                 decoration: InputDecoration(
                   labelText: "Enter team number",
                   border: OutlineInputBorder(),
@@ -268,7 +279,7 @@ class _InfoPageState extends State<InfoPage> {
                         child: Text(
                           'Blue Alliance',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 30,
                             color: (_selectedAlliance == Alliance.blue)
                                 ? Colors.white
                                 : Colors.black,
@@ -290,14 +301,14 @@ class _InfoPageState extends State<InfoPage> {
                       color: Colors.red,
                       borderColor: (_selectedAlliance == Alliance.red)
                           ?Colors.black
-                          :Colors.redAccent,
+                          :Color(0xFFFF8989),
                       borderWidth: 3,
                       borderRadius: 10,
                       child: Center(
                         child: Text(
                           'Red Alliance',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 30,
                             color: (_selectedAlliance == Alliance.red)
                                 ? Colors.white
                                 : Colors.black,
@@ -323,13 +334,13 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                     child: Text(
                       "Game Start",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 28, color: Colors.white),
                     ),
                   ),
                   Spacer(flex: 1),
                 ],
               ),
-              Spacer(flex: 6),
+              Spacer(flex: 4),
             ],
           ),
         ),
