@@ -297,7 +297,7 @@ class AutoPage extends StatelessWidget {
                                           // 水平與垂直都置中的 Text
                                           Center(
                                             child: Text(
-                                              '3499',
+                                              '9999',
                                               style: TextStyle(
                                                   fontSize: 48 * fieldFactor),
                                             ),

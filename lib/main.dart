@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:scout_app_v0/pages/info_page.dart';
 
 import 'providers/scouting_data_provider.dart';
 import 'pages/auto_page.dart';
@@ -48,8 +49,9 @@ class ScoutingApp extends StatelessWidget {
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
-      home: AutoPage(),
+      home: InfoPage(),
       routes: {
+        '/info': (context) => const InfoPage(),
         '/auto': (context) => const AutoPage(),
         '/teleop': (context) => const AutoPage(),
         '/result': (context) => const ResultPage(),
