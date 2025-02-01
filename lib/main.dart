@@ -32,7 +32,8 @@ class ScoutingApp extends StatelessWidget {
       title: 'Scouting App',
       home: const AppWrapper(child: InfoPage()),  // 包裝 AutoPage
       routes: {
-        '/auto': (context) => const AppWrapper(child: InfoPage()),
+        '/info': (context) => const AppWrapper(child: InfoPage()),  // 路由 '/info' 對應到 InfoPage
+        '/auto': (context) => const AppWrapper(child: AutoPage()),
         '/teleop': (context) => const AppWrapper(child: AutoPage()),
         '/result': (context) => const AppWrapper(child: ResultPage()),
       },

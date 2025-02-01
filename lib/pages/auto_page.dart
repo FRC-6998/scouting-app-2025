@@ -319,7 +319,7 @@ class AutoPage extends StatelessWidget {
                                           // 水平與垂直都置中的 Text
                                           Center(
                                             child: Text(
-                                              '9999',
+                                              scoutingData.teamNumber.toString(),
                                               style: TextStyle(
                                                   fontSize: 48 * fieldFactor),
                                             ),
@@ -694,6 +694,7 @@ class AutoPage extends StatelessWidget {
                                             ),
                                           ),
                                           onPressed: () {
+                                            Navigator.pushNamed(context,'/info');
                                             logger.d("Back");
                                           },
                                           child: Text("Back",
