@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'providers/scouting_data_provider.dart';
 import 'pages/auto_page.dart';
@@ -24,36 +25,90 @@ void main() {
 class ScoutingApp extends StatelessWidget {
   const ScoutingApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      // theme: ThemeData(
-      //   // This is the theme of your application.
-      //   //
-      //   // TRY THIS: Try running your application with "flutter run". You'll see
-      //   // the application has a purple toolbar. Then, without quitting the app,
-      //   // try changing the seedColor in the colorScheme below to Colors.green
-      //   // and then invoke "hot reload" (save your changes or press the "hot
-      //   // reload" button in a Flutter-supported IDE, or press "r" if you used
-      //   // the command line to start the app).
-      //   //
-      //   // Notice that the counter didn't reset back to zero; the application
-      //   // state is not lost during the reload. To reset the state, use hot
-      //   // restart instead.
-      //   //
-      //   // This works for code too, not just values: Most code changes can be
-      //   // tested with just a hot reload.
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
-      home: AutoPage(),
+      title: 'Scouting App',
+      home: const AppWrapper(child: AutoPage()),  // 包裝 AutoPage
       routes: {
-        '/auto': (context) => const AutoPage(),
-        '/teleop': (context) => const AutoPage(),
-        '/result': (context) => const ResultPage(),
+        '/auto': (context) => const AppWrapper(child: AutoPage()),
+        '/teleop': (context) => const AppWrapper(child: AutoPage()),
+        '/result': (context) => const AppWrapper(child: ResultPage()),
       },
+    );
+  }
+}
+
+// 包裝每個頁面的 Widget，加入版本號
+class AppWrapper extends StatelessWidget {
+  final Widget child;
+  const AppWrapper({required this.child, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          child,  // 主要畫面內容
+          const VersionBadge(),  // 左下角版本號
+        ],
+      ),
+    );
+  }
+}
+
+// class VersionBadge extends StatelessWidget {
+//   const VersionBadge({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     const String version = String.fromEnvironment("APP_VERSION", defaultValue: "1.0.0");
+//     const String buildNumber = String.fromEnvironment("BUILD_NUMBER", defaultValue: "1");
+//
+//     return Positioned(
+//       left: 10,
+//       bottom: 10,
+//       child: Text(
+//         "v$version+$buildNumber",
+//         style: const TextStyle(fontSize: 12, color: Colors.grey),
+//       ),
+//     );
+//   }
+// }
+
+// 取得版本號並顯示在左下角
+class VersionBadge extends StatefulWidget {
+  const VersionBadge({super.key});
+
+  @override
+  _VersionBadgeState createState() => _VersionBadgeState();
+}
+
+class _VersionBadgeState extends State<VersionBadge> {
+  String _version = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVersion();
+  }
+
+  Future<void> _loadVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _version = "v${packageInfo.version}+${packageInfo.buildNumber}";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 10,
+      bottom: 10,
+      child: Text(
+        _version,
+        style: const TextStyle(fontSize: 12, color: Colors.grey),
+      ),
     );
   }
 }
