@@ -65,7 +65,9 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Padding(
         padding: EdgeInsets.all(24.0), // 增加內邊距，確保內容不會緊貼螢幕邊緣
         child: Form(
