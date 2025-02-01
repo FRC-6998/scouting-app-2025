@@ -632,7 +632,7 @@ class AutoPage extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      flex: 3,
+                                      flex: 6,
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             foregroundColor: Color(0xFFFFFFFF),
@@ -654,7 +654,7 @@ class AutoPage extends StatelessWidget {
                                       flex: 1,
                                     ),
                                     Expanded(
-                                      flex: 3,
+                                      flex: 6,
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             foregroundColor: Color(0xFFFFFFFF),
@@ -676,7 +676,7 @@ class AutoPage extends StatelessWidget {
                                       flex: 1,
                                     ),
                                     Expanded(
-                                      flex: 3,
+                                      flex: 6,
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             foregroundColor: Color(0xFFFFFFFF),
