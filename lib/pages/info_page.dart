@@ -4,7 +4,8 @@ import 'package:scout_app_v0/model.dart';
 
 import '../utils/logger.dart' show logger;
 import '../widgets/field_widgets.dart' show InkwellContainer, TriangleWidget;
-import '../constants.dart';
+import '../constants.dart' show AppColors;
+import '../widgets/text_widgets.dart';
 import '../providers/scouting_data_provider.dart';
 
 class InfoPage extends StatefulWidget {
@@ -146,7 +147,7 @@ class _InfoPageState extends State<InfoPage> {
                   },
                 ),
                 Spacer(flex: 2),
-                SubTitleText('Match Info:'),
+                SubTitleText('Match Level:'),
                 Row(
                   children: [
                     Spacer(flex: 2), // 左邊間距
@@ -345,7 +346,7 @@ class _InfoPageState extends State<InfoPage> {
                     Spacer(flex: 1),
                   ],
                 ),
-                Spacer(flex: 4),
+                Spacer(flex: 3),
               ],
             ),
           ),

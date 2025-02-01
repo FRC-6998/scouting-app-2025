@@ -327,9 +327,7 @@ class AutoPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Spacer(
-                                      flex: 1,
-                                    ),
+                                    Spacer(flex: 1,),
                                     Expanded(
                                         flex: 19,
                                         child: Column(

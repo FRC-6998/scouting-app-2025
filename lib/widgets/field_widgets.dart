@@ -3,6 +3,8 @@ import 'dart:math' as math;
 
 import '../utils/logger.dart' show logger;
 import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
+import '../constants.dart' show AppColors;
+import 'text_widgets.dart' show TeleopWidgetText;
 
 class InkwellContainer extends StatelessWidget {
   final double? top;
@@ -246,3 +248,79 @@ class TriangleWidget extends StatelessWidget {
     return triangleWidget;
   }
 }
+
+class ColorChangeInkwell extends StatefulWidget {
+  final Color initialColor;
+  final Color pressedColor;
+  final Function onTap;
+  final String textString;
+
+  ColorChangeInkwell({
+    Key? key,
+    required this.initialColor,
+    required this.pressedColor,
+    required this.onTap,
+    required this.textString,
+  }) : super(key: key);
+
+  @override
+  _ColorChangeInkwellState createState() => _ColorChangeInkwellState();
+}
+
+class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
+  late Color currentColor;
+  late String text;
+
+  @override
+  void initState() {
+    super.initState();
+    currentColor = widget.initialColor;// 初始化顏色
+    text = widget.textString;
+  }
+
+  void _onTap() {
+    setState(() {
+      currentColor = widget.pressedColor; // 設定顏色為按下時的顏色
+    });
+
+    // 等待0.2秒後回復原來顏色
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        currentColor = widget.initialColor; // 恢復顏色
+      });
+    });
+
+    widget.onTap(); // 執行點擊事件的回調
+  }
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 14,
+      child: InkWell(
+        onTap: _onTap,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 100), // 設定動畫持續時間
+          decoration: BoxDecoration(
+            color: currentColor, // 使用當前顏色
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.sourceBorderColor, width: 3),
+          ),
+          child: Center(
+            child: Text(
+              text, // 直接使用 Text 而非 TeleopWidgetText
+              style: TextStyle(
+                fontSize: 24, // 可設定大小等樣式
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
