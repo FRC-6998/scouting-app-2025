@@ -34,10 +34,12 @@ class AutoPage extends StatelessWidget {
           double aspectRatio = 852 / 962;
           double fieldWidth;
           if (constraints.maxWidth - constraints.maxHeight * aspectRatio >
-              constraints.maxWidth * 2 / 5) {
+              // constraints.maxWidth * 2 / 5) {
+              constraints.maxWidth * 1/2) {
             fieldWidth = constraints.maxHeight * aspectRatio;
           } else {
-            fieldWidth = constraints.maxWidth * 3 / 5;
+            // fieldWidth = constraints.maxWidth * 3 / 5;
+            fieldWidth = constraints.maxWidth * 1/2;
           }
           double fieldHeight = fieldWidth / aspectRatio;
           // double fieldFactor = 1;
