@@ -245,21 +245,42 @@ class AutoPage extends StatelessWidget {
                     ),
                     ...List.generate(
                       6,
-                      (index) => TriangleWidget(
-                        sideLength: 150,
-                        left: 353 +
-                            math.cos(math.pi / 2 + index * math.pi / 3) * 8,
-                        top: 335.7746478873 -
-                            math.sin(math.pi / 2 + index * math.pi / 3) * 8,
-                        factor: fieldFactor,
-                        color: AppColors.reefAreaColor,
-                        borderColor: AppColors.reefBorderColor,
-                        borderWidth: 3,
-                        rotate: math.pi - index * math.pi / 3,
-                        onTapDown: (details) {
-                          logger.e('Triangle $index tapped');
+                      (index) => Selector<ScoutingDataProvider, int>(
+                        selector: (context, scoutingData) => scoutingData.autoData.selectedReefSide,
+                        builder: (context, selectedReefSide, child) {
+                          return TriangleWidget(
+                                sideLength: 150,
+                                left: 353 +
+                                    math.cos(math.pi / 2 + index * math.pi / 3) * 8,
+                                top: 335.7746478873 -
+                                    math.sin(math.pi / 2 + index * math.pi / 3) * 8,
+                                factor: fieldFactor,
+                                color: AppColors.reefAreaColor,
+                                borderColor: AppColors.reefBorderColor,
+                                borderWidth: selectedReefSide == index ? 6 : 3,
+                                rotate: math.pi - index * math.pi / 3,
+                                onTapDown: (details) {
+                                  scoutingData.changeSelectedReefSide(index);
+                                  logger.d('Triangle $index tapped');
+                                },
+                              );
                         },
                       ),
+                      //     TriangleWidget(
+                      //   sideLength: 150,
+                      //   left: 353 +
+                      //       math.cos(math.pi / 2 + index * math.pi / 3) * 8,
+                      //   top: 335.7746478873 -
+                      //       math.sin(math.pi / 2 + index * math.pi / 3) * 8,
+                      //   factor: fieldFactor,
+                      //   color: AppColors.reefAreaColor,
+                      //   borderColor: AppColors.reefBorderColor,
+                      //   borderWidth: 3,
+                      //   rotate: math.pi - index * math.pi / 3,
+                      //   onTapDown: (details) {
+                      //     logger.e('Triangle $index tapped');
+                      //   },
+                      // ),
                     ),
                   ],
                 ),
@@ -547,6 +568,13 @@ class AutoPage extends StatelessWidget {
                                           borderWidth: 3,
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
+                                          onTap: () {
+                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final enumIndex = AutoPathPoint.l1ReefAB.index + selectedSide;
+                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            logger.d("L1");
+                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                          },
                                           child: Center(
                                             child: Text(
                                               'L1',
@@ -555,6 +583,7 @@ class AutoPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+
                                         )),
                                     Spacer(
                                       flex: 1,
@@ -569,6 +598,13 @@ class AutoPage extends StatelessWidget {
                                           borderWidth: 3,
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
+                                          onTap: () {
+                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final enumIndex = AutoPathPoint.l2ReefAB.index + selectedSide;
+                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            logger.d("L2");
+                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                          },
                                           child: Center(
                                             child: Text(
                                               'L2',
@@ -591,6 +627,13 @@ class AutoPage extends StatelessWidget {
                                           borderWidth: 3,
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
+                                          onTap: () {
+                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final enumIndex = AutoPathPoint.l3ReefAB.index + selectedSide;
+                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            logger.d("L3");
+                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                          },
                                           child: Center(
                                             child: Text(
                                               'L3',
@@ -613,6 +656,13 @@ class AutoPage extends StatelessWidget {
                                           borderWidth: 3,
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
+                                          onTap: () {
+                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final enumIndex = AutoPathPoint.l4ReefAB.index + selectedSide;
+                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            logger.d("L4");
+                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                          },
                                           child: Center(
                                             child: Text(
                                               'L4',
