@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'providers/scouting_data_provider.dart';
 import 'pages/auto_page.dart';
+import 'pages/telop_page.dart';
 import 'pages/result_page.dart';
 
 void main() {
+  debugProfileBuildsEnabled = true; // 追蹤 Widget 建構
+  debugProfileBuildsEnabledUserWidgets = true; // 追蹤使用者 Widget 建構
+  debugProfileLayoutsEnabled = true; // 追蹤 RenderObject 佈局
+  debugProfilePaintsEnabled = true; // 追蹤 RenderObject 繪製
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -32,7 +38,7 @@ class ScoutingApp extends StatelessWidget {
       home: const AppWrapper(child: AutoPage()),  // 包裝 AutoPage
       routes: {
         '/auto': (context) => const AppWrapper(child: AutoPage()),
-        '/teleop': (context) => const AppWrapper(child: AutoPage()),
+        '/teleop': (context) => const AppWrapper(child: TelopPage()),
         '/result': (context) => const AppWrapper(child: ResultPage()),
       },
     );

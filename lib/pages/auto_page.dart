@@ -694,7 +694,8 @@ class AutoPage extends StatelessWidget {
                                             ),
                                           ),
                                           onPressed: () {
-                                            logger.d("Back");
+                                            logger.d("Info");
+                                            Navigator.pushNamed(context, '/info');
                                           },
                                           child: Text("Back",
                                               style: TextStyle(
@@ -739,8 +740,8 @@ class AutoPage extends StatelessWidget {
                                           ),
                                           onPressed: () {
                                             logger.d("Tele-op");
-                                            // Navigator.pushNamed(context, '/teleop');
-                                            Navigator.pushNamed(context, '/result');
+                                            Navigator.pushNamed(context, '/teleop');
+                                            // Navigator.pushNamed(context, '/result');
                                           },
                                           child: Text("Tele-op",
                                               style: TextStyle(
