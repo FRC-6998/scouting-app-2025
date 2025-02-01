@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'providers/scouting_data_provider.dart';
+import 'pages/info_page.dart';
 import 'pages/auto_page.dart';
 import 'pages/telop_page.dart';
 import 'pages/result_page.dart';
@@ -35,8 +36,9 @@ class ScoutingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scouting App',
-      home: const AppWrapper(child: AutoPage()),  // 包裝 AutoPage
+      home: const AppWrapper(child: InfoPage()),  // 包裝 AutoPage
       routes: {
+        '/info': (context) => const AppWrapper(child: InfoPage()),  // 路由 '/info' 對應到 InfoPage
         '/auto': (context) => const AppWrapper(child: AutoPage()),
         '/teleop': (context) => const AppWrapper(child: TelopPage()),
         '/result': (context) => const AppWrapper(child: ResultPage()),

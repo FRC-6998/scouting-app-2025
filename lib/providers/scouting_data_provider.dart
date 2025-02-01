@@ -163,6 +163,26 @@ class ScoutingDataProvider extends ChangeNotifier {
     _autoData.leave = leave ?? _autoData.leave;
     notifyListeners();
   }
+  void updateScoutName(String name) {
+    _scout = name;
+    notifyListeners();
+  }
+  void updateMatchLevel(MatchLevel level) {
+    _matchLevel = level;
+    notifyListeners();
+  }
+  void updateMatchNumber(int number) {
+    _matchNumber = number;
+    notifyListeners();
+  }
+  void updateEventKey(String key) {
+    _eventKey = key;
+    notifyListeners();
+  }
+  void updateTeamNumber(int number) {
+    _teamNumber = number;
+    notifyListeners();
+  }
 
   void changeAutoPathPointStatus(bool value) {
     _autoData.pathPointIsSuccess = value;

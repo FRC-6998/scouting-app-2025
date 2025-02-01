@@ -46,7 +46,7 @@ class InkwellContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget inkwellContainer = InkWell(
+    Widget inkwellContainer = GestureDetector(
       onTap: onTap,
       onTapDown: onTapDown,
       child: Container(
