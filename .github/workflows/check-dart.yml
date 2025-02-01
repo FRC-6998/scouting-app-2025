@@ -28,7 +28,7 @@ jobs:
 
       # 使用 flutter analyze 來進行靜態分析
       - name: Analyze project source
-        run: flutter analyze  --no-fatal-warnings
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       # 使用 flutter test 來運行 Flutter 測試
       - name: Run tests

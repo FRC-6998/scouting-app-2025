@@ -11,6 +11,7 @@ class AutoData {
   List<Map<String,Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
   bool pathPointIsSuccess = true;
+  int selectedReefSide = 0;
 
   AutoData({
     this.preload = Preload.unset,
@@ -137,10 +138,15 @@ class ScoutingDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-void changeAutoPathPointStatus(bool value) {
-  _autoData.pathPointIsSuccess = value;
-  notifyListeners();
-}
+  void changeAutoPathPointStatus(bool value) {
+    _autoData.pathPointIsSuccess = value;
+    notifyListeners();
+  }
+
+  void changeSelectedReefSide(int value) {
+    _autoData.selectedReefSide = value;
+    notifyListeners();
+  }
 
   void addAutoPathPoint(AutoPathPoint point )  {
     logger.d('Adding path point: $point');
