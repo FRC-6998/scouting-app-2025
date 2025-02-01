@@ -33,3 +33,19 @@ class AppColors {
 class AppRadius {
   static const double fieldAreaRadius = 5;
 }
+class SubTitleText extends StatelessWidget {
+  final String text;
+  const SubTitleText(this.text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.grey[800],
+      ),
+    );
+  }
+}
