@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 import 'providers/scouting_data_provider.dart';
 import 'pages/auto_page.dart';
 import 'pages/result_page.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-        create: (context) => ScoutingDataProvider(),
-        child: const ScoutingApp()
-    ),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight
+  ]).then((_) {
+    runApp(
+      ChangeNotifierProvider(
+          create: (context) => ScoutingDataProvider(),
+          child: const ScoutingApp()
+      ),
+    );
+  });
 }
 
 class ScoutingApp extends StatelessWidget {
