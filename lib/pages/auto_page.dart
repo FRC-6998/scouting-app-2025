@@ -19,7 +19,7 @@ class AutoPage extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     ScoutingDataProvider scoutingData = Provider.of<ScoutingDataProvider>(context);
-    // return Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   // TRY THIS: Try changing the color here to a specific color (to
       //   // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -29,8 +29,8 @@ class AutoPage extends StatelessWidget {
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(widget.title),
       // ),
-      // body: LayoutBuilder(
-      return LayoutBuilder(
+      body: LayoutBuilder(
+      // return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           double aspectRatio = 852 / 962;
           double fieldWidth;
@@ -694,8 +694,8 @@ class AutoPage extends StatelessWidget {
                                             ),
                                           ),
                                           onPressed: () {
-                                            Navigator.pushNamed(context,'/info');
-                                            logger.d("Back");
+                                            logger.d("Info");
+                                            Navigator.pushNamed(context, '/info');
                                           },
                                           child: Text("Back",
                                               style: TextStyle(
@@ -740,8 +740,8 @@ class AutoPage extends StatelessWidget {
                                           ),
                                           onPressed: () {
                                             logger.d("Tele-op");
-                                            // Navigator.pushNamed(context, '/teleop');
-                                            Navigator.pushNamed(context, '/result');
+                                            Navigator.pushNamed(context, '/teleop');
+                                            // Navigator.pushNamed(context, '/result');
                                           },
                                           child: Text("Tele-op",
                                               style: TextStyle(
@@ -763,7 +763,7 @@ class AutoPage extends StatelessWidget {
             ],
           );
         },
-      // ),
+      ),
     );
   }
 }

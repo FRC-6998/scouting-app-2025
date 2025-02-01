@@ -72,10 +72,25 @@ enum AutoPathPoint{
 }
 
 enum TelopPathPoint{
-  // TODO: Add more points
-  left,
-  right,
-  center,
+  leftCoralStation,
+  rightCoralStation,
+
+  groundCoral,
+  groundAlgae,
+
+  reefAlgae,
+  processor,
+  net,
+
+  l1Reef,
+
+  l2LeftReef,
+  l3LeftReef,
+  l4LeftReef,
+
+  l3RightReef,
+  l2RightReef,
+  l4RightReef,
 }
 
 enum BargeAction {
@@ -84,4 +99,17 @@ enum BargeAction {
   park,
   deep,
   shallow,
+}
+
+enum HangType {
+  none,
+  deep,
+  shallow,
+}
+
+enum BargePosition {
+  unset,
+  left,
+  center,
+  right,
 }

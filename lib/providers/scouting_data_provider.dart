@@ -29,7 +29,7 @@ class AutoData {
       _pathStartTime = DateTime.now();
     }
     path.add({
-      "seconds": DateTime.now().difference(_pathStartTime).inSeconds,
+      "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds,
       "position": point.name,
       "success": pathPointIsSuccess,
     });
@@ -49,13 +49,17 @@ class AutoData {
 
 class TelopData {
   BargeAction bargeAction;
+  BargePosition bargePosition;
   num hangTime;
+  HangType hangType;
   List<Map<String,Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
 
   TelopData({
     this.bargeAction = BargeAction.unset,
     this.hangTime = 0,
+    this.hangType = HangType.none,
+    this.bargePosition = BargePosition.unset,
   });
 
   bool allFieldsFilled() {
@@ -66,13 +70,15 @@ class TelopData {
     if (path.isEmpty) {
       _pathStartTime = DateTime.now();
     }
-    path.add({"point": point, "time": DateTime.now().difference(_pathStartTime).inSeconds});
+    path.add({"point": point.name, "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds});
   }
   Map<String, dynamic>toJSON() {
     return {
       'path': path,
       'bargeAction': bargeAction.name,
       'hangTime': hangTime,
+      'hangType': hangType.name,
+      'bargePosition': bargePosition.name,
     };
   }
 }
@@ -107,6 +113,26 @@ class ScoutingDataProvider extends ChangeNotifier {
   AutoData get autoData => _autoData;
 
   TelopData get telopData => _telopData;
+
+  void reset() {
+    _ulid = '';
+    _scout = '';
+    _matchLevel = MatchLevel.unset;
+    _matchNumber = 0;
+    _eventKey = 'TestEvent';
+    _teamNumber = 0;
+    _alliance = Alliance.unset;
+    _autoData.preload = Preload.unset;
+    _autoData.startPosition = AutoStartPosition.unset;
+    _autoData.leave = false;
+    _autoData.path = [];
+    _autoData.pathPointIsSuccess = true;
+    _autoData.selectedReefSide = 0;
+    _telopData.bargeAction = BargeAction.unset;
+    _telopData.hangTime = 0;
+    _telopData.path = [];
+    notifyListeners();
+  }
 
   bool infoFieldsFilled() {
     return _scout.isNotEmpty && _matchLevel != MatchLevel.unset && _matchNumber != 0 && _eventKey.isNotEmpty && _teamNumber != 0 && _alliance != Alliance.unset;
@@ -169,7 +195,7 @@ class ScoutingDataProvider extends ChangeNotifier {
   }
 
   void addAutoPathPoint(AutoPathPoint point )  {
-    logger.d('Adding path point: $point');
+    logger.d('Adding auto point: $point');
     _autoData.addPathPoint(point);
     notifyListeners();
   }
@@ -178,14 +204,18 @@ class ScoutingDataProvider extends ChangeNotifier {
   void updateTelopData({
     BargeAction? bargeAction,
     num? hangTime,
+    HangType? hangType,
+    BargePosition? bargePosition,
   }) {
     _telopData.bargeAction = bargeAction ?? _telopData.bargeAction;
     _telopData.hangTime = hangTime ?? _telopData.hangTime;
+    _telopData.hangType = hangType ?? _telopData.hangType;
+    _telopData.bargePosition = bargePosition ?? _telopData.bargePosition;
     notifyListeners();
   }
 
   void addTelopPathPoint(TelopPathPoint point )  {
-    logger.d('Adding path point: $point');
+    logger.d('Adding telop point: $point');
     _telopData.addPathPoint(point);
     notifyListeners();
   }

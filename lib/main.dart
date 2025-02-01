@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -6,9 +7,14 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'providers/scouting_data_provider.dart';
 import 'pages/info_page.dart';
 import 'pages/auto_page.dart';
+import 'pages/telop_page.dart';
 import 'pages/result_page.dart';
 
 void main() {
+  debugProfileBuildsEnabled = true; // 追蹤 Widget 建構
+  debugProfileBuildsEnabledUserWidgets = true; // 追蹤使用者 Widget 建構
+  debugProfileLayoutsEnabled = true; // 追蹤 RenderObject 佈局
+  debugProfilePaintsEnabled = true; // 追蹤 RenderObject 繪製
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
@@ -34,7 +40,7 @@ class ScoutingApp extends StatelessWidget {
       routes: {
         '/info': (context) => const AppWrapper(child: InfoPage()),  // 路由 '/info' 對應到 InfoPage
         '/auto': (context) => const AppWrapper(child: AutoPage()),
-        '/teleop': (context) => const AppWrapper(child: AutoPage()),
+        '/teleop': (context) => const AppWrapper(child: TelopPage()),
         '/result': (context) => const AppWrapper(child: ResultPage()),
       },
     );
@@ -48,14 +54,20 @@ class AppWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          child,  // 主要畫面內容
-          const VersionBadge(),  // 左下角版本號
-        ],
-      ),
-    );
+    // return Scaffold(
+    //   body: Stack(
+    //     children: [
+    //       child,  // 主要畫面內容
+    //       const VersionBadge(),  // 左下角版本號
+    //     ],
+    //   ),
+    // );
+    return Stack(
+            children: [
+              child,  // 主要畫面內容
+              const VersionBadge(),  // 左下角版本號
+            ],
+          );
   }
 }
 
