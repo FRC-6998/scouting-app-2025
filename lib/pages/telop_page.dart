@@ -1,14 +1,23 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scout_app_v0/constants.dart';
 import 'package:scout_app_v0/model.dart';
 
 import 'package:scout_app_v0/widgets/field_widgets.dart';
 import '../providers/scouting_data_provider.dart';
 import '../utils/logger.dart';
+import '../widgets/text_widgets.dart';
 
-class TelopPage extends StatelessWidget {
-  const TelopPage({super.key});
+class TeleopPage extends StatefulWidget {
+  const TeleopPage({super.key});
+
+  @override
+  _TeleopPageState createState() => _TeleopPageState();
+}
+class _TeleopPageState extends State<TeleopPage> {
+  Color _buttonColor = Colors.red;
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,36 +42,28 @@ class TelopPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Left Coral Station',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.leftCoralStation);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.sourceAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
+                                textString: 'Left Coral Station',
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.leftCoralStation);
+                                },
+                              )),
                             Spacer(),
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Right Coral Station',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.rightCoralStation);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.sourceAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
+                                textString: 'Right Coral Station',
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.rightCoralStation);
+                                },
+                              )),
                           ],
                         )),
                     Spacer(),
@@ -71,36 +72,29 @@ class TelopPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Ground Algae',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.groundAlgae);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.sourceAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
+                                textString: 'Ground Algae',
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.groundAlgae);
+                                },
+                              ),
+                            ),
                             Spacer(),
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Ground Coral',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.groundCoral);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.sourceAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
+                                textString: 'Ground Coral',
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.groundCoral);
+                                },
+                              )),
                           ],
                         )),
                     Spacer(),
@@ -109,36 +103,29 @@ class TelopPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Processor',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.processor);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.scoreAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor, // 點擊時顏色
+                                textString: 'Processor',
+                                borderColor: AppColors.scoreBorderColor,
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.processor);
+                                },
+                              ),
+                            ),
                             Spacer(),
                             Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'Net',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.net);
-                                  },
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.scoreAreaColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.scoreBorderColor,// 點擊時顏色
+                                textString: 'Net',
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.net);
+                                },
+                              )),
                           ],
                         )),
                     Spacer(),
@@ -147,128 +134,109 @@ class TelopPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 14,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L4',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l4LeftReef);
-                                          },
-                                        )),
-                                    Spacer(),
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L3',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l3LeftReef);
-                                          },
-                                        )),
-                                    Spacer(),
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L2',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l2LeftReef);
-                                          },
-                                        )),
-                                  ],
-                                )),
-                            Spacer(),
-                            Expanded(
-                                flex: 14,
-                                child: InkwellContainer(
-                                  child: Center(
-                                    child: Text(
-                                      'L1',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                      ),
+                              flex: 14,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L4',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l4LeftReef);
+                                      },
                                     ),
                                   ),
-                                  onTap: () {
-                                    scoutingData.addTelopPathPoint(TelopPathPoint.l1Reef);
-                                  },
-                                )),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L3',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l3LeftReef);
+                                      },
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L2',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l2LeftReef);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             Spacer(),
                             Expanded(
-                                flex: 14,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L4',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l4RightReef);
-                                          },
-                                        )),
-                                    Spacer(),
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L3',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l3RightReef);
-                                          },
-                                        )),
-                                    Spacer(),
-                                    Expanded(
-                                        flex: 5,
-                                        child: InkwellContainer(
-                                          child: Center(
-                                            child: Text(
-                                              'L2',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            scoutingData.addTelopPathPoint(TelopPathPoint.l2RightReef);
-                                          },
-                                        )),
-                                  ],
-                                )),
+                              flex: 14,
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.reefBtnColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                textString: 'L1',
+                                borderColor: AppColors.reefBtnBorderColor,
+                                onTap: () {
+                                  scoutingData.addTelopPathPoint(TelopPathPoint.l1Reef);
+                                },
+                              ),
+                            ),
+                            Spacer(),
+                            Expanded(
+                              flex: 14,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L4',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l4RightReef);
+                                      },
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L3',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l3RightReef);
+                                      },
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: 5,
+                                    child: ColorChangeInkwell(
+                                      initialColor: AppColors.reefBtnColor,
+                                      pressedColor: AppColors.boolBtnTrueColor,
+                                      textString: 'L2',
+                                      borderColor: AppColors.reefBtnBorderColor,
+                                      onTap: () {
+                                        scoutingData.addTelopPathPoint(TelopPathPoint.l2RightReef);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         )),
                   ])),
@@ -278,12 +246,20 @@ class TelopPage extends StatelessWidget {
                 child: Column(children: [
                   Expanded(
                       flex: 8,
-                      child: Center(
-                        child: Text("timer"),
-                      )),
+                      child: Column(
+                        children: [
+                          Expanded(
+                              flex:4,
+                              child: InkwellContainer(
+
+                              ))
+                        ],
+                      )
+
+                  ),
                   Spacer(),
                   Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: Row(
                         children: [
                           Expanded(
@@ -293,14 +269,8 @@ class TelopPage extends StatelessWidget {
                               builder: (context, bargePosition, child) {
                                 return InkwellContainer(
                                   borderWidth: bargePosition == BargePosition.left ? 4 : 0,
-                                  child: Center(
-                                    child: Text(
-                                      'Left',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
+                                  child: const TeleopWidgetText('Left'),
+                                  color: AppColors.reefAreaColor,
                                   onTap: () {
                                     scoutingData.updateTelopData(bargePosition: BargePosition.left);
                                   },
@@ -316,14 +286,8 @@ class TelopPage extends StatelessWidget {
                               builder: (context, bargePosition, child) {
                                 return InkwellContainer(
                                   borderWidth: bargePosition == BargePosition.center ? 4 : 0,
-                                  child: Center(
-                                    child: Text(
-                                      'Center',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ),
+                                  child: const TeleopWidgetText('Center'),
+                                  color: AppColors.reefAreaColor,
                                   onTap: () {
                                     scoutingData.updateTelopData(bargePosition: BargePosition.center);
                                   },
@@ -339,14 +303,8 @@ class TelopPage extends StatelessWidget {
                                 builder: (context, bargePosition, child) {
                                   return InkwellContainer(
                                         borderWidth: bargePosition == BargePosition.right ? 4 : 0,
-                                        child: Center(
-                                          child: Text(
-                                            'Right',
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                            ),
-                                          ),
-                                        ),
+                                        child: const TeleopWidgetText('Right'),
+                                        color: AppColors.reefAreaColor,
                                         onTap: () {
                                           scoutingData.updateTelopData(bargePosition: BargePosition.right);
                                         },
@@ -361,14 +319,8 @@ class TelopPage extends StatelessWidget {
                       flex: 4,
                       child: InkwellContainer(
                         borderWidth: scoutingData.telopData.bargeAction == BargeAction.park ? 4 : 0,
-                        child: Center(
-                          child: Text(
-                            'Park',
-                            style: TextStyle(
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
+                        child: const TeleopWidgetText('Park'),
+                        color: AppColors.reefAreaColor,
                         onTap: () {
                           scoutingData.updateTelopData(bargeAction: BargeAction.park);
                           // scoutingData.addScore('telop', 'highGoal', 1);
@@ -379,14 +331,8 @@ class TelopPage extends StatelessWidget {
                       flex: 4,
                       child: InkwellContainer(
                         borderWidth: scoutingData.telopData.bargeAction == BargeAction.none ? 4 : 0,
-                        child: Center(
-                          child: Text(
-                            'None',
-                            style: TextStyle(
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
+                        child: const TeleopWidgetText('None'),
+                        color: AppColors.reefAreaColor,
                         onTap: () {
                           scoutingData.updateTelopData(bargeAction: BargeAction.none);
                         },

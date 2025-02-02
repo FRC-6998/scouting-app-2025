@@ -36,11 +36,11 @@ class ScoutingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scouting App',
-      home: const AppWrapper(child: InfoPage()),  // 包裝 AutoPage
+      home: const AppWrapper(child: InfoPage()),  // 包裝 InfoPage
       routes: {
         '/info': (context) => const AppWrapper(child: InfoPage()),  // 路由 '/info' 對應到 InfoPage
         '/auto': (context) => const AppWrapper(child: AutoPage()),
-        '/teleop': (context) => const AppWrapper(child: TelopPage()),
+        '/teleop': (context) => const AppWrapper(child: TeleopPage()),
         '/result': (context) => const AppWrapper(child: ResultPage()),
       },
     );
