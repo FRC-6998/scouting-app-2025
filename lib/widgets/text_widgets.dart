@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scout_app_v0/constants.dart';
 import 'dart:math' as math;
 
 import '../utils/logger.dart' show logger;
@@ -31,8 +32,8 @@ class TeleopWidgetText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 24,
-          color: Colors.black,
+          fontSize: 27,
+          color: AppColors.unselectedBtnBorderColor,
         ),
       ),
     );

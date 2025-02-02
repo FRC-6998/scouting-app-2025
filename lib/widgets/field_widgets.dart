@@ -254,6 +254,7 @@ class ColorChangeInkwell extends StatefulWidget {
   final Color pressedColor;
   final Function onTap;
   final String textString;
+  final Color borderColor;
 
   ColorChangeInkwell({
     Key? key,
@@ -261,6 +262,7 @@ class ColorChangeInkwell extends StatefulWidget {
     required this.pressedColor,
     required this.onTap,
     required this.textString,
+    required this.borderColor,
   }) : super(key: key);
 
   @override
@@ -270,12 +272,14 @@ class ColorChangeInkwell extends StatefulWidget {
 class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
   late Color currentColor;
   late String text;
+  late Color borderColor;
 
   @override
   void initState() {
     super.initState();
     currentColor = widget.initialColor;// 初始化顏色
     text = widget.textString;
+    borderColor = widget.borderColor;
   }
 
   void _onTap() {
@@ -296,6 +300,7 @@ class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -307,13 +312,13 @@ class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
           decoration: BoxDecoration(
             color: currentColor, // 使用當前顏色
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors.sourceBorderColor, width: 3),
+            border: Border.all(color: borderColor , width: 3),
           ),
           child: Center(
             child: Text(
               text, // 直接使用 Text 而非 TeleopWidgetText
               style: TextStyle(
-                fontSize: 24, // 可設定大小等樣式
+                fontSize: 28, // 可設定大小等樣式
               ),
             ),
           ),
