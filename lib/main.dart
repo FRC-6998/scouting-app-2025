@@ -22,7 +22,7 @@ void main() {
   ]).then((_) {
     runApp(
       ChangeNotifierProvider(
-          create: (context) => ScoutingDataProvider(),
+          create: (context) => ScoutingData(),
           child: const ScoutingApp()
       ),
     );

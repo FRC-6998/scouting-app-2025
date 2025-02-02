@@ -10,8 +10,8 @@ class ResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 獲取 ScoutingDataProvider 資料
-    ScoutingDataProvider scoutingData =
-        Provider.of<ScoutingDataProvider>(context);
+    ScoutingData scoutingData =
+        Provider.of<ScoutingData>(context);
 
     // 一次性將所有資料轉換為 JSON 字串
     // scoutingData.toJSON();

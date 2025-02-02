@@ -21,7 +21,7 @@ class _TeleopPageState extends State<TeleopPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScoutingDataProvider scoutingData = Provider.of<ScoutingDataProvider>(context);
+    ScoutingData scoutingData = Provider.of<ScoutingData>(context, listen: false);
 
     return Scaffold(
         // appBar: AppBar(
@@ -250,7 +250,7 @@ class _TeleopPageState extends State<TeleopPage> {
                         children: [
                           Expanded(
                               flex:4,
-                              child: InkwellContainer(
+                              child: TapBox(
 
                               ))
                         ],
@@ -259,83 +259,69 @@ class _TeleopPageState extends State<TeleopPage> {
                   ),
                   Spacer(),
                   Expanded(
+                      flex: 4,
+                      child: TapBox(
+                        borderWidth: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? 4 : 2,
+                        color: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                        borderColor: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                        onTap: () {
+                          scoutingData.updateTelopData(bargeAction: BargeAction.park);
+                        },
+                        child: const TeleopWidgetText('PARK'),
+                      )),
+                  Spacer(),
+                  Expanded(
+                      flex: 4,
+                      child: TapBox(
+                        borderWidth: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? 4 : 2,
+                        color: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
+                        borderColor: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
+                        onTap: () {
+                          scoutingData.updateTelopData(bargeAction: BargeAction.none);
+                        },
+                        child: const TeleopWidgetText('None'),
+                      )),
+                  Spacer(),
+                  Expanded(
                       flex: 3,
                       child: Row(
                         children: [
                           Expanded(
-                            flex: 4,
-                            child: Selector<ScoutingDataProvider, BargePosition>(
-                              selector: (context, scoutingData) => scoutingData.telopData.bargePosition,
-                              builder: (context, bargePosition, child) {
-                                return InkwellContainer(
-                                  borderWidth: bargePosition == BargePosition.left ? 4 : 0,
-                                  child: const TeleopWidgetText('Left'),
-                                  color: AppColors.reefAreaColor,
-                                  onTap: () {
-                                    scoutingData.updateTelopData(bargePosition: BargePosition.left);
-                                  },
-                                );
-                              },
-                            ),
+                              flex: 4,
+                              child: TapBox(
+                                borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.left ? 4 : 2,
+                                color: AppColors.reefAreaColor,
+                                onTap: () {
+                                  scoutingData.updateTelopData(bargePosition: BargePosition.left);
+                                },
+                                child: const TeleopWidgetText('Left'),
+                              )
                           ),
                           Spacer(),
                           Expanded(
                             flex: 4,
-                            child: Selector<ScoutingDataProvider, BargePosition>(
-                              selector: (context, scoutingData) => scoutingData.telopData.bargePosition,
-                              builder: (context, bargePosition, child) {
-                                return InkwellContainer(
-                                  borderWidth: bargePosition == BargePosition.center ? 4 : 0,
-                                  child: const TeleopWidgetText('Center'),
-                                  color: AppColors.reefAreaColor,
-                                  onTap: () {
-                                    scoutingData.updateTelopData(bargePosition: BargePosition.center);
-                                  },
-                                );
+                            child: TapBox(
+                              borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.center ? 4 : 2,
+                              color: AppColors.reefAreaColor,
+                              onTap: () {
+                                scoutingData.updateTelopData(bargePosition: BargePosition.center);
                               },
+                              child: const TeleopWidgetText('Center'),
                             ),
                           ),
                           Spacer(),
                           Expanded(
                               flex: 4,
-                              child: Selector<ScoutingDataProvider, BargePosition>(
-                                selector: (context, scoutingData) => scoutingData.telopData.bargePosition,
-                                builder: (context, bargePosition, child) {
-                                  return InkwellContainer(
-                                        borderWidth: bargePosition == BargePosition.right ? 4 : 0,
-                                        child: const TeleopWidgetText('Right'),
-                                        color: AppColors.reefAreaColor,
-                                        onTap: () {
-                                          scoutingData.updateTelopData(bargePosition: BargePosition.right);
-                                        },
-                                      );
+                              child: TapBox(
+                                borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.right ? 4 : 2,
+                                color: AppColors.reefAreaColor,
+                                onTap: () {
+                                  scoutingData.updateTelopData(bargePosition: BargePosition.right);
                                 },
-                              ),
+                                child: const TeleopWidgetText('Right'),
+                              )
                           ),
                         ],
-                      )),
-                  Spacer(),
-                  Expanded(
-                      flex: 4,
-                      child: InkwellContainer(
-                        borderWidth: scoutingData.telopData.bargeAction == BargeAction.park ? 4 : 0,
-                        child: const TeleopWidgetText('Park'),
-                        color: AppColors.reefAreaColor,
-                        onTap: () {
-                          scoutingData.updateTelopData(bargeAction: BargeAction.park);
-                          // scoutingData.addScore('telop', 'highGoal', 1);
-                        },
-                      )),
-                  Spacer(),
-                  Expanded(
-                      flex: 4,
-                      child: InkwellContainer(
-                        borderWidth: scoutingData.telopData.bargeAction == BargeAction.none ? 4 : 0,
-                        child: const TeleopWidgetText('None'),
-                        color: AppColors.reefAreaColor,
-                        onTap: () {
-                          scoutingData.updateTelopData(bargeAction: BargeAction.none);
-                        },
                       )),
                   Spacer(),
                   Expanded(

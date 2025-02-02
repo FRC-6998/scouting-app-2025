@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:provider/provider.dart';
 
 import '../utils/logger.dart' show logger;
-import '../widgets/field_widgets.dart' show InkwellContainer, TriangleWidget;
+import '../widgets/field_widgets.dart' show TapBox, TapEffectBox, TriangleWidget;
 import '../constants.dart';
 import '../providers/scouting_data_provider.dart';
 import '../model.dart';
@@ -18,7 +18,7 @@ class AutoPage extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    ScoutingDataProvider scoutingDataSetter = Provider.of<ScoutingDataProvider>(context, listen: false);
+    ScoutingData scoutingDataSetter = Provider.of<ScoutingData>(context, listen: false);
     return Scaffold(
       // appBar: AppBar(
       //   // TRY THIS: Try changing the color here to a specific color (to
@@ -55,7 +55,7 @@ class AutoPage extends StatelessWidget {
                   children: [
                     Image.asset('assets/images/2025field.png'),
                     // Image.asset('assets/images/2025field.png',height: fieldHeight,width: fieldWidth,color: Colors.red,),
-                    InkwellContainer(  // l coral station
+                    TapEffectBox(  // l coral station
                       left: 71,
                       top: 30,
                       width: 105,
@@ -69,7 +69,7 @@ class AutoPage extends StatelessWidget {
                         scoutingDataSetter.addAutoPathPoint(AutoPathPoint.leftCoralStation);
                       },
                     ),
-                    InkwellContainer(
+                    TapEffectBox(
                       right: 3.7558685446,
                       top: 30,
                       width: 105,
@@ -93,7 +93,7 @@ class AutoPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: List.generate(
                                 3,
-                                (index) => InkwellContainer(
+                                (index) => TapEffectBox(
                                       width: 80,
                                       factor: fieldFactor,
                                       color: AppColors.sourceAreaColor,
@@ -116,7 +116,7 @@ class AutoPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: List.generate(
                                 3,
-                                (index) => InkwellContainer(
+                                (index) => TapEffectBox(
                                       width: 80,
                                       factor: fieldFactor,
                                       color: AppColors.sourceAreaColor,
@@ -129,7 +129,7 @@ class AutoPage extends StatelessWidget {
                                     )),
                           ),
                         )),
-                    InkwellContainer(
+                    TapEffectBox(
                       left: 3.7558685446,
                       top: 399,
                       width: 105,
@@ -143,7 +143,7 @@ class AutoPage extends StatelessWidget {
                         scoutingDataSetter.addAutoPathPoint(AutoPathPoint.processor);
                       },
                     ),
-                    InkwellContainer(
+                    TapEffectBox(
                       left: 82.6291079812,
                       top: 567,
                       width: 545,
@@ -182,10 +182,10 @@ class AutoPage extends StatelessWidget {
                               //     );
                               //   },
                               // ),
-                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                              Selector<ScoutingData, AutoStartPosition>(
                                 selector: (context, scoutingData) => scoutingData.autoData.startPosition,
                                 builder: (context, startPosition, child) {
-                                  return InkwellContainer(
+                                  return TapBox(
                                     width: 135,
                                     factor: fieldFactor,
                                     color: startPosition == AutoStartPosition.left ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
@@ -202,10 +202,10 @@ class AutoPage extends StatelessWidget {
                                 },
                               ),
                               Spacer(),
-                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                              Selector<ScoutingData, AutoStartPosition>(
                                 selector: (context, scoutingData) => scoutingData.autoData.startPosition,
                                 builder: (context, startPosition, child) {
-                                  return InkwellContainer(
+                                  return TapBox(
                                     width: 135,
                                     factor: fieldFactor,
                                     color: startPosition == AutoStartPosition.center ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
@@ -222,10 +222,10 @@ class AutoPage extends StatelessWidget {
                                 },
                               ),
                               Spacer(),
-                              Selector<ScoutingDataProvider, AutoStartPosition>(
+                              Selector<ScoutingData, AutoStartPosition>(
                                 selector: (context, scoutingData) => scoutingData.autoData.startPosition,
                                 builder: (context, startPosition, child) {
-                                  return InkwellContainer(
+                                  return TapBox(
                                     width: 135,
                                     factor: fieldFactor,
                                     color: startPosition == AutoStartPosition.right ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
@@ -246,7 +246,7 @@ class AutoPage extends StatelessWidget {
                     ),
                     ...List.generate(
                       6,
-                      (index) => Selector<ScoutingDataProvider, int>(
+                      (index) => Selector<ScoutingData, int>(
                         selector: (context, scoutingData) => scoutingData.autoData.selectedReefSide,
                         shouldRebuild: (previous, next) => (previous == index && next != index) || (previous != index && next == index),
                         builder: (context, selectedReefSide, child) {
@@ -322,10 +322,10 @@ class AutoPage extends StatelessWidget {
                                             Expanded(
                                                 flex: 3,
                                                 child:
-                                                    Selector<ScoutingDataProvider, Preload>(
+                                                    Selector<ScoutingData, Preload>(
                                                       selector: (context, scoutingData) => scoutingData.autoData.preload,
                                                       builder: (context, preload, child) {
-                                                        return InkwellContainer(
+                                                        return TapBox(
                                                           factor: fieldFactor,
                                                           color: preload == Preload.coral ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
                                                           borderColor: preload == Preload.coral ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
@@ -355,10 +355,10 @@ class AutoPage extends StatelessWidget {
                                             Expanded(
                                                 flex: 3,
                                                 child:
-                                                    Selector<ScoutingDataProvider, Preload>(
+                                                    Selector<ScoutingData, Preload>(
                                                       selector: (context, scoutingData) => scoutingData.autoData.preload,
                                                       builder: (context, preload, child) {
-                                                        return InkwellContainer(
+                                                        return TapBox(
                                                           factor: fieldFactor,
                                                           color: preload == Preload.algae ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
                                                           borderColor: preload == Preload.algae ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
@@ -384,10 +384,10 @@ class AutoPage extends StatelessWidget {
                                             Expanded(
                                                 flex: 3,
                                                 child:
-                                                    Selector<ScoutingDataProvider, Preload>(
+                                                    Selector<ScoutingData, Preload>(
                                                       selector: (context, scoutingData) => scoutingData.autoData.preload,
                                                       builder: (context, preload, child) {
-                                                        return InkwellContainer(
+                                                        return TapBox(
                                                           factor: fieldFactor,
                                                           color: preload == Preload.none ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
                                                           borderColor: preload == Preload.none ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
@@ -417,10 +417,10 @@ class AutoPage extends StatelessWidget {
                             Expanded(
                               flex: 6,
                               child:
-                                  Selector<ScoutingDataProvider, bool>(
+                                  Selector<ScoutingData, bool>(
                                     selector: (context, scoutingData) => scoutingData.autoData.leave,
                                     builder: (context, leave, child) {
-                                      return InkwellContainer(
+                                      return TapBox(
                                         height: 100,
                                         factor: fieldFactor,
                                         color: leave ? AppColors.boolBtnTrueColor : AppColors.boolBtnFalseColor,
@@ -469,7 +469,7 @@ class AutoPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     flex: 19,
-                                    child: InkwellContainer(
+                                    child: TapEffectBox(
                                       factor: fieldFactor,
                                       color: AppColors.sourceAreaColor,
                                       borderColor: AppColors.sourceBorderColor,
@@ -493,10 +493,10 @@ class AutoPage extends StatelessWidget {
                                   ),
                                   Expanded(
                                     flex: 19,
-                                    child:Selector<ScoutingDataProvider, bool>(
+                                    child:Selector<ScoutingData, bool>(
                                       selector: (context, scoutingData) => scoutingData.autoData.pathPointIsSuccess,
                                       builder: (context, pathPointIsSuccess, child) {
-                                        return InkwellContainer(
+                                        return TapBox(
                                           factor: fieldFactor,
                                           color: pathPointIsSuccess ? AppColors.unselectedBtnColor : AppColors.boolBtnFalseColor,
                                           borderColor: pathPointIsSuccess ? AppColors.unselectedBtnBorderColor : AppColors.boolBtnFalseBorderColor,
@@ -545,7 +545,7 @@ class AutoPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                         flex: 9,
-                                        child: InkwellContainer(
+                                        child: TapEffectBox(
                                           factor: fieldFactor,
                                           color: AppColors.reefBtnColor,
                                           borderColor:
@@ -554,11 +554,11 @@ class AutoPage extends StatelessWidget {
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
                                           onTap: () {
-                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final selectedSide = context.read<ScoutingData>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l1ReefAB.index + selectedSide;
                                             scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
-                                            logger.d("L1");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
+                                            // logger.d("L1");
+                                            // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -575,7 +575,7 @@ class AutoPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         flex: 9,
-                                        child: InkwellContainer(
+                                        child: TapEffectBox(
                                           factor: fieldFactor,
                                           color: AppColors.reefBtnColor,
                                           borderColor:
@@ -584,11 +584,11 @@ class AutoPage extends StatelessWidget {
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
                                           onTap: () {
-                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final selectedSide = context.read<ScoutingData>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l2ReefAB.index + selectedSide;
                                             scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
-                                            logger.d("L2");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
+                                            // logger.d("L2");
+                                            // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -604,7 +604,7 @@ class AutoPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         flex: 9,
-                                        child: InkwellContainer(
+                                        child: TapEffectBox(
                                           factor: fieldFactor,
                                           color: AppColors.reefBtnColor,
                                           borderColor:
@@ -613,11 +613,11 @@ class AutoPage extends StatelessWidget {
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
                                           onTap: () {
-                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final selectedSide = context.read<ScoutingData>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l3ReefAB.index + selectedSide;
                                             scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
-                                            logger.d("L3");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
+                                            // logger.d("L3");
+                                            // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -633,7 +633,7 @@ class AutoPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         flex: 9,
-                                        child: InkwellContainer(
+                                        child: TapEffectBox(
                                           factor: fieldFactor,
                                           color: AppColors.reefBtnColor,
                                           borderColor:
@@ -642,11 +642,11 @@ class AutoPage extends StatelessWidget {
                                           borderRadius:
                                               AppRadius.fieldAreaRadius,
                                           onTap: () {
-                                            final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
+                                            final selectedSide = context.read<ScoutingData>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l4ReefAB.index + selectedSide;
                                             scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
-                                            logger.d("L4");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
+                                            // logger.d("L4");
+                                            // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(

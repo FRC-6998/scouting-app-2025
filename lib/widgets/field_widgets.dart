@@ -6,7 +6,7 @@ import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
 import '../constants.dart' show AppColors;
 import 'text_widgets.dart' show TeleopWidgetText;
 
-class InkwellContainer extends StatelessWidget {
+class TapBox extends StatelessWidget {
   final double? top;
   final double? left;
   final double? right;
@@ -28,7 +28,7 @@ class InkwellContainer extends StatelessWidget {
 
   final Widget? child;
 
-  const InkwellContainer({
+  const TapBox({
     this.top,
     this.left,
     this.right,
@@ -48,8 +48,8 @@ class InkwellContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('InkwellContainer widget build');
-    Widget inkwellContainer = GestureDetector(
+    logger.d('TapBox widget build');
+    Widget tapBox = GestureDetector(
       onTap: onTap,
       onTapDown: onTapDown,
       child: Container(
@@ -73,10 +73,116 @@ class InkwellContainer extends StatelessWidget {
         left: multiplyIfNotNull(left, factor),
         right: multiplyIfNotNull(right, factor),
         bottom: multiplyIfNotNull(bottom, factor),
-        child: inkwellContainer,
+        child: tapBox,
       );
     }
-    return inkwellContainer;
+    return tapBox;
+  }
+}
+
+class TapEffectBox extends StatefulWidget {
+  final double? top;
+  final double? left;
+  final double? right;
+  final double? bottom;
+
+  final double? width;
+  final double? height;
+
+  final double factor;
+
+  final Color color;
+  final Color? pressedColor;
+
+  final Color borderColor;
+  final double borderWidth;
+  final double borderRadius;
+
+  final VoidCallback? onTap;
+  final void Function(TapDownDetails)? onTapDown;
+
+  final Widget? child;
+
+  const TapEffectBox({
+    this.top,
+    this.left,
+    this.right,
+    this.bottom,
+    this.width,
+    this.height,
+    this.factor = 1,
+    this.color = Colors.blue,
+    this.pressedColor,
+    this.borderColor = Colors.black,
+    this.borderWidth = 3,
+    this.borderRadius = 5,
+    this.onTap,
+    this.onTapDown,
+    this.child,
+    super.key,
+  });
+
+  @override
+  State<TapEffectBox> createState() => _TapEffectBoxState();
+}
+
+class _TapEffectBoxState extends State<TapEffectBox> {
+  late Color currentColor;
+  late Color pressedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    pressedColor = widget.pressedColor ?? Color(0x6674A7CF);
+    currentColor = widget.color;
+  }
+
+  void _onTap() {
+    setState(() {
+      currentColor = pressedColor;
+    });
+
+    Future.delayed(Duration(milliseconds: 150), () {
+      setState(() {
+        currentColor = widget.color;
+      });
+    });
+
+    widget.onTap?.call();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    logger.d('TapEffectBox widget build');
+    Widget tapEffectBox = GestureDetector(
+      onTap: _onTap,
+      onTapDown: widget.onTapDown,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        width: multiplyIfNotNull(widget.width, widget.factor),
+        height: multiplyIfNotNull(widget.height, widget.factor),
+        decoration: BoxDecoration(
+          color: currentColor,
+          border: Border.all(
+            color: widget.borderColor,
+            width: widget.borderWidth * widget.factor,
+          ),
+          borderRadius: BorderRadius.circular(widget.borderRadius * widget.factor),
+        ),
+        child: widget.child,
+      ),
+    );
+
+    if (widget.top != null || widget.left != null || widget.right != null || widget.bottom != null) {
+      return Positioned(
+        top: multiplyIfNotNull(widget.top, widget.factor),
+        left: multiplyIfNotNull(widget.left, widget.factor),
+        right: multiplyIfNotNull(widget.right, widget.factor),
+        bottom: multiplyIfNotNull(widget.bottom, widget.factor),
+        child: tapEffectBox,
+      );
+    }
+    return tapEffectBox;
   }
 }
 
@@ -290,7 +396,7 @@ class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
     });
 
     // 等待0.2秒後回復原來顏色
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 150), () {
       setState(() {
         currentColor = widget.initialColor; // 恢復顏色
       });
@@ -305,12 +411,10 @@ class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 14,
-      child: InkWell(
+        return GestureDetector(
         onTap: _onTap,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 100), // 設定動畫持續時間
+          duration: Duration(milliseconds: 150), // 設定動畫持續時間
           decoration: BoxDecoration(
             color: currentColor, // 使用當前顏色
             borderRadius: BorderRadius.circular(10),
@@ -325,7 +429,6 @@ class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
             ),
           ),
         ),
-      ),
     );
   }
 }

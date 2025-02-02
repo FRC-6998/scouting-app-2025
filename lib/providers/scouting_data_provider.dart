@@ -84,7 +84,7 @@ class TelopData {
 }
 
 
-class ScoutingDataProvider extends ChangeNotifier {
+class ScoutingData extends ChangeNotifier {
   // This is the data that will be shared across the app
   // and can be accessed by any widget that listens to this provider
   String _ulid = '';

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scout_app_v0/model.dart';
 
 import '../utils/logger.dart' show logger;
-import '../widgets/field_widgets.dart' show InkwellContainer, TriangleWidget;
+import '../widgets/field_widgets.dart' show TapBox, TriangleWidget;
 import '../constants.dart' show AppColors;
 import '../widgets/text_widgets.dart';
 import '../providers/scouting_data_provider.dart';
@@ -19,11 +19,11 @@ class _InfoPageState extends State<InfoPage> {
   late GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // 用於表單的全局鍵
   // 用於保存 Scouter name、match number 和 team number 的控制器
   late TextEditingController _scouterNameController =
-      TextEditingController(text: ScoutingDataProvider().scout);
+      TextEditingController(text: ScoutingData().scout);
   late TextEditingController _matchNumberController = TextEditingController(
-      text: ScoutingDataProvider().matchNumber.toString());
+      text: ScoutingData().matchNumber.toString());
   late TextEditingController _teamNumberController =
-      TextEditingController(text: ScoutingDataProvider().teamNumber.toString());
+      TextEditingController(text: ScoutingData().teamNumber.toString());
   late MatchLevel matchLevel;
   late Alliance _selectedAlliance;
 
@@ -31,7 +31,7 @@ class _InfoPageState extends State<InfoPage> {
   void initState() {
     super.initState();
     final scoutingData =
-        Provider.of<ScoutingDataProvider>(context, listen: false);
+        Provider.of<ScoutingData>(context, listen: false);
 
     // 初始化 TextEditingController 並設置初始值
     _scouterNameController = TextEditingController(text: scoutingData.scout);
@@ -45,19 +45,19 @@ class _InfoPageState extends State<InfoPage> {
 
     // 監聽 TextEditingController 變更，並同步更新 Provider
     _scouterNameController.addListener(() {
-      Provider.of<ScoutingDataProvider>(context, listen: false)
+      Provider.of<ScoutingData>(context, listen: false)
           .updateScoutName(_scouterNameController.text);
     });
 
     _matchNumberController.addListener(() {
       final newValue = int.tryParse(_matchNumberController.text) ?? 0;
-      Provider.of<ScoutingDataProvider>(context, listen: false)
+      Provider.of<ScoutingData>(context, listen: false)
           .updateMatchNumber(newValue);
     });
 
     _teamNumberController.addListener(() {
       final newValue = int.tryParse(_teamNumberController.text) ?? 0;
-      Provider.of<ScoutingDataProvider>(context, listen: false)
+      Provider.of<ScoutingData>(context, listen: false)
           .updateTeamNumber(newValue);
     });
   }
@@ -87,7 +87,7 @@ class _InfoPageState extends State<InfoPage> {
       }
 
       // 更新 Provider 數據
-      Provider.of<ScoutingDataProvider>(context, listen: false).updateMatchInfo(
+      Provider.of<ScoutingData>(context, listen: false).updateMatchInfo(
         scout: _scouterNameController.text,
         matchNumber: int.parse(_matchNumberController.text),
         teamNumber: int.parse(_teamNumberController.text),
@@ -268,7 +268,7 @@ class _InfoPageState extends State<InfoPage> {
                     Spacer(flex: 2),
                     Expanded(
                       flex: 9,
-                      child: InkwellContainer(
+                      child: TapBox(
                         onTap: () {
                           setState(() {
                             _selectedAlliance = Alliance.blue;
@@ -297,7 +297,7 @@ class _InfoPageState extends State<InfoPage> {
                     Spacer(flex: 1),
                     Expanded(
                       flex: 9,
-                      child: InkwellContainer(
+                      child: TapBox(
                         onTap: () {
                           setState(() {
                             _selectedAlliance = Alliance.red;
