@@ -48,22 +48,23 @@ class AutoData {
 }
 
 class TelopData {
-  BargeAction bargeAction;
-  BargePosition bargePosition;
   num hangTime;
-  BargeAction hangType;
+  BargeAction bargeTried;
+  BargeAction bargeResult;
+  BargePosition bargePosition;
+
   List<Map<String,Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
 
   TelopData({
-    this.bargeAction = BargeAction.unset,
     this.hangTime = 0,
-    this.hangType = BargeAction.none,
+    this.bargeTried = BargeAction.unset,
+    this.bargeResult = BargeAction.unset,
     this.bargePosition = BargePosition.unset,
   });
 
   bool allFieldsFilled() {
-    return bargeAction != BargeAction.unset && path.isNotEmpty;
+    return bargeResult != BargeAction.unset && path.isNotEmpty;
   }
 
   void addPathPoint(TelopPathPoint point) {
@@ -75,9 +76,9 @@ class TelopData {
   Map<String, dynamic>toJSON() {
     return {
       'path': path,
-      'bargeAction': bargeAction.name,
       'hangTime': hangTime,
-      'hangType': hangType.name,
+      'bargeTried': bargeTried.name,
+      'bargeResult': bargeResult.name,
       'bargePosition': bargePosition.name,
     };
   }
@@ -128,7 +129,7 @@ class ScoutingData extends ChangeNotifier {
     _autoData.path = [];
     _autoData.pathPointIsSuccess = true;
     _autoData.selectedReefSide = 0;
-    _telopData.bargeAction = BargeAction.unset;
+    _telopData.bargeResult = BargeAction.unset;
     _telopData.hangTime = 0;
     _telopData.path = [];
     notifyListeners();
@@ -182,14 +183,14 @@ class ScoutingData extends ChangeNotifier {
 
 
   void updateTelopData({
-    BargeAction? bargeAction,
     num? hangTime,
-    BargeAction? hangType,
+    BargeAction? bargeTried,
+    BargeAction? bargeResult,
     BargePosition? bargePosition,
   }) {
-    _telopData.bargeAction = bargeAction ?? _telopData.bargeAction;
     _telopData.hangTime = hangTime ?? _telopData.hangTime;
-    _telopData.hangType = hangType ?? _telopData.hangType;
+    _telopData.bargeTried = bargeTried ?? _telopData.bargeTried;
+    _telopData.bargeResult = bargeResult ?? _telopData.bargeResult;
     _telopData.bargePosition = bargePosition ?? _telopData.bargePosition;
     notifyListeners();
   }
