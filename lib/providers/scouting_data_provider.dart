@@ -51,14 +51,14 @@ class TelopData {
   BargeAction bargeAction;
   BargePosition bargePosition;
   num hangTime;
-  HangType hangType;
+  BargeAction hangType;
   List<Map<String,Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
 
   TelopData({
     this.bargeAction = BargeAction.unset,
     this.hangTime = 0,
-    this.hangType = HangType.none,
+    this.hangType = BargeAction.none,
     this.bargePosition = BargePosition.unset,
   });
 
@@ -184,7 +184,7 @@ class ScoutingData extends ChangeNotifier {
   void updateTelopData({
     BargeAction? bargeAction,
     num? hangTime,
-    HangType? hangType,
+    BargeAction? hangType,
     BargePosition? bargePosition,
   }) {
     _telopData.bargeAction = bargeAction ?? _telopData.bargeAction;

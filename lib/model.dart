@@ -101,12 +101,6 @@ enum BargeAction {
   shallow,
 }
 
-enum HangType {
-  none,
-  deep,
-  shallow,
-}
-
 enum BargePosition {
   unset,
   left,
