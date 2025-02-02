@@ -18,7 +18,7 @@ class AutoPage extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    ScoutingDataProvider scoutingData = Provider.of<ScoutingDataProvider>(context);
+    ScoutingDataProvider scoutingDataSetter = Provider.of<ScoutingDataProvider>(context, listen: false);
     return Scaffold(
       // appBar: AppBar(
       //   // TRY THIS: Try changing the color here to a specific color (to
@@ -54,6 +54,7 @@ class AutoPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.asset('assets/images/2025field.png'),
+                    // Image.asset('assets/images/2025field.png',height: fieldHeight,width: fieldWidth,color: Colors.red,),
                     InkwellContainer(  // l coral station
                       left: 71,
                       top: 30,
@@ -65,7 +66,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        scoutingData.addAutoPathPoint(AutoPathPoint.leftCoralStation);
+                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.leftCoralStation);
                       },
                     ),
                     InkwellContainer(
@@ -79,7 +80,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        scoutingData.addAutoPathPoint(AutoPathPoint.rightCoralStation);
+                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.rightCoralStation);
                       },
                     ),
                     Positioned(
@@ -100,7 +101,7 @@ class AutoPage extends StatelessWidget {
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
                                       onTap: () {
-                                        scoutingData.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundAlgae.index + index]);
+                                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundAlgae.index + index]);
                                       },
                                     )),
                           ),
@@ -123,7 +124,7 @@ class AutoPage extends StatelessWidget {
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
                                       onTap: () {
-                                        scoutingData.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundCoral.index + index]);
+                                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[AutoPathPoint.leftGroundCoral.index + index]);
                                       },
                                     )),
                           ),
@@ -139,7 +140,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        scoutingData.addAutoPathPoint(AutoPathPoint.processor);
+                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.processor);
                       },
                     ),
                     InkwellContainer(
@@ -153,7 +154,7 @@ class AutoPage extends StatelessWidget {
                       borderWidth: 3,
                       borderRadius: AppRadius.fieldAreaRadius,
                       onTap: () {
-                        scoutingData.addAutoPathPoint(AutoPathPoint.net);
+                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.net);
                       },
                     ),
                     Positioned(
@@ -195,7 +196,7 @@ class AutoPage extends StatelessWidget {
                                     // borderWidth: startPosition == AutoStartPosition.left ? 6 : 3,
                                     borderRadius: AppRadius.fieldAreaRadius,
                                     onTap: () {
-                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.left);
+                                      scoutingDataSetter.updateAutoData(startPosition: AutoStartPosition.left);
                                     },
                                   );
                                 },
@@ -215,7 +216,7 @@ class AutoPage extends StatelessWidget {
                                     // borderWidth: startPosition == AutoStartPosition.center ? 6 : 3,
                                     borderRadius: AppRadius.fieldAreaRadius,
                                     onTap: () {
-                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.center);
+                                      scoutingDataSetter.updateAutoData(startPosition: AutoStartPosition.center);
                                     },
                                   );
                                 },
@@ -235,7 +236,7 @@ class AutoPage extends StatelessWidget {
                                     // borderWidth: startPosition == AutoStartPosition.right ? 6 : 3,
                                     borderRadius: AppRadius.fieldAreaRadius,
                                     onTap: () {
-                                      scoutingData.updateAutoData(startPosition: AutoStartPosition.right);
+                                      scoutingDataSetter.updateAutoData(startPosition: AutoStartPosition.right);
                                     },
                                   );
                                 },
@@ -247,6 +248,7 @@ class AutoPage extends StatelessWidget {
                       6,
                       (index) => Selector<ScoutingDataProvider, int>(
                         selector: (context, scoutingData) => scoutingData.autoData.selectedReefSide,
+                        shouldRebuild: (previous, next) => (previous == index && next != index) || (previous != index && next == index),
                         builder: (context, selectedReefSide, child) {
                           return TriangleWidget(
                                 sideLength: 150,
@@ -260,27 +262,12 @@ class AutoPage extends StatelessWidget {
                                 borderWidth: selectedReefSide == index ? 6 : 3,
                                 rotate: math.pi - index * math.pi / 3,
                                 onTapDown: (details) {
-                                  scoutingData.changeSelectedReefSide(index);
+                                  scoutingDataSetter.changeSelectedReefSide(index);
                                   logger.d('Triangle $index tapped');
                                 },
                               );
                         },
                       ),
-                      //     TriangleWidget(
-                      //   sideLength: 150,
-                      //   left: 353 +
-                      //       math.cos(math.pi / 2 + index * math.pi / 3) * 8,
-                      //   top: 335.7746478873 -
-                      //       math.sin(math.pi / 2 + index * math.pi / 3) * 8,
-                      //   factor: fieldFactor,
-                      //   color: AppColors.reefAreaColor,
-                      //   borderColor: AppColors.reefBorderColor,
-                      //   borderWidth: 3,
-                      //   rotate: math.pi - index * math.pi / 3,
-                      //   onTapDown: (details) {
-                      //     logger.e('Triangle $index tapped');
-                      //   },
-                      // ),
                     ),
                   ],
                 ),
@@ -319,7 +306,7 @@ class AutoPage extends StatelessWidget {
                                           // 水平與垂直都置中的 Text
                                           Center(
                                             child: Text(
-                                              scoutingData.teamNumber.toString(),
+                                              scoutingDataSetter.teamNumber.toString(),
                                               style: TextStyle(
                                                   fontSize: 48 * fieldFactor),
                                             ),
@@ -347,7 +334,7 @@ class AutoPage extends StatelessWidget {
                                                           borderWidth: 3,
                                                           borderRadius: AppRadius.fieldAreaRadius,
                                                           onTap: () {
-                                                            scoutingData.updateAutoData(preload: Preload.coral);
+                                                            scoutingDataSetter.updateAutoData(preload: Preload.coral);
                                                           },
                                                           child: Center(
                                                             child: Transform.rotate(
@@ -380,7 +367,7 @@ class AutoPage extends StatelessWidget {
                                                           borderWidth: 3,
                                                           borderRadius: AppRadius.fieldAreaRadius,
                                                           onTap: () {
-                                                            scoutingData.updateAutoData(preload: Preload.algae);
+                                                            scoutingDataSetter.updateAutoData(preload: Preload.algae);
                                                           },
                                                           child: Center(
                                                             child: Image.asset(
@@ -409,7 +396,7 @@ class AutoPage extends StatelessWidget {
                                                           borderWidth: 3,
                                                           borderRadius: AppRadius.fieldAreaRadius,
                                                           onTap: () {
-                                                            scoutingData.updateAutoData(preload: Preload.none);
+                                                            scoutingDataSetter.updateAutoData(preload: Preload.none);
                                                           },
                                                           child: Center(
                                                             child: Image.asset(
@@ -443,7 +430,7 @@ class AutoPage extends StatelessWidget {
                                         borderWidth: 3,
                                         borderRadius: AppRadius.fieldAreaRadius * 2,
                                         onTap: () {
-                                          scoutingData.updateAutoData(leave: !leave);
+                                          scoutingDataSetter.updateAutoData(leave: !leave);
                                         },
                                         child: Center(
                                           child: Text(
@@ -491,7 +478,7 @@ class AutoPage extends StatelessWidget {
                                       borderWidth: 3,
                                       borderRadius: AppRadius.fieldAreaRadius,
                                       onTap: () {
-                                        scoutingData.addAutoPathPoint(AutoPathPoint.reefAlgae);
+                                        scoutingDataSetter.addAutoPathPoint(AutoPathPoint.reefAlgae);
                                       },
                                       child: Center(
                                         child: Text(
@@ -518,7 +505,7 @@ class AutoPage extends StatelessWidget {
                                           borderWidth: 3,
                                           borderRadius: AppRadius.fieldAreaRadius,
                                           onTap: () {
-                                            scoutingData.changeAutoPathPointStatus(!pathPointIsSuccess);
+                                            scoutingDataSetter.changeAutoPathPointStatus(!pathPointIsSuccess);
                                           },
                                           child: Center(
                                             child: Text(
@@ -571,9 +558,9 @@ class AutoPage extends StatelessWidget {
                                           onTap: () {
                                             final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l1ReefAB.index + selectedSide;
-                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
                                             logger.d("L1");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -601,9 +588,9 @@ class AutoPage extends StatelessWidget {
                                           onTap: () {
                                             final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l2ReefAB.index + selectedSide;
-                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
                                             logger.d("L2");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -630,9 +617,9 @@ class AutoPage extends StatelessWidget {
                                           onTap: () {
                                             final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l3ReefAB.index + selectedSide;
-                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
                                             logger.d("L3");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(
@@ -659,9 +646,9 @@ class AutoPage extends StatelessWidget {
                                           onTap: () {
                                             final selectedSide = context.read<ScoutingDataProvider>().autoData.selectedReefSide;
                                             final enumIndex = AutoPathPoint.l4ReefAB.index + selectedSide;
-                                            scoutingData.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
+                                            scoutingDataSetter.addAutoPathPoint(AutoPathPoint.values[enumIndex]);
                                             logger.d("L4");
-                                            logger.d(AutoPathPoint.l1ReefAB.index+Provider.of<ScoutingDataProvider>(context).autoData.selectedReefSide);
+                                            logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
                                           child: Center(
                                             child: Text(

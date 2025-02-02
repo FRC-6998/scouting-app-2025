@@ -46,6 +46,7 @@ class InkwellContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('InkwellContainer widget build');
     Widget inkwellContainer = GestureDetector(
       onTap: onTap,
       onTapDown: onTapDown,
@@ -199,6 +200,7 @@ class TriangleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('Triangle widget build');
     Widget triangleWidget = GestureDetector(
       onTapDown: (details) {
         bool isInsideTriangle = _isPointInsideTriangle(
