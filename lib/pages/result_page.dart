@@ -10,7 +10,8 @@ class ResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 獲取 ScoutingDataProvider 資料
-    ScoutingDataProvider scoutingData = Provider.of<ScoutingDataProvider>(context);
+    ScoutingDataProvider scoutingData =
+        Provider.of<ScoutingDataProvider>(context);
 
     // 一次性將所有資料轉換為 JSON 字串
     // scoutingData.toJSON();
@@ -26,7 +27,7 @@ class ResultPage extends StatelessWidget {
             children: [
               // 使用 qr_flutter 生成 QR Code，傳遞 JSON 字串
               QrImageView(
-                  data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
+                data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
                 version: QrVersions.auto, // 自動設定版本
                 size: 200.0, // QR Code 的大小
                 backgroundColor: Colors.white, // 背景顏色
@@ -38,9 +39,9 @@ class ResultPage extends StatelessWidget {
               SizedBox(height: 20),
               // 顯示 JSON 內容（方便測試）
               SelectableText(
-                scoutingData.toString(),
-                style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                textAlign: TextAlign.right,
+                JsonEncoder.withIndent('  ').convert(scoutingData.toJSON()),
+                style: TextStyle(fontSize: 24, color: Colors.black),
+                // textAlign: TextAlign.right,
               ),
             ],
           ),
