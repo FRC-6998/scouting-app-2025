@@ -3,7 +3,8 @@ import 'dart:math' as math;
 import 'package:provider/provider.dart';
 
 import '../utils/logger.dart' show logger;
-import '../widgets/field_widgets.dart' show TapBox, TapEffectBox, TriangleWidget;
+import '../widgets/tap_widgets.dart' show TapBox, TapEffectBox;
+import '../widgets/triangle_widgets.dart' show TriangleWidget;
 import '../constants.dart';
 import '../providers/scouting_data_provider.dart';
 import '../model.dart';

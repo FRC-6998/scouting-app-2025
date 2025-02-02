@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scout_app_v0/model.dart';
 
 import '../utils/logger.dart' show logger;
-import '../widgets/field_widgets.dart' show TapBox, TriangleWidget;
+import '../widgets/tap_widgets.dart' show TapBox;
 import '../constants.dart' show AppColors;
 import '../widgets/text_widgets.dart';
 import '../providers/scouting_data_provider.dart';

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:scout_app_v0/constants.dart';
 import 'package:scout_app_v0/model.dart';
 
-import 'package:scout_app_v0/widgets/field_widgets.dart';
+import 'package:scout_app_v0/widgets/tap_widgets.dart';
 import '../providers/scouting_data_provider.dart';
 import '../utils/logger.dart';
 import '../widgets/text_widgets.dart';
