@@ -1,15 +1,16 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Build and Deploy Flutter Web to GitHub Pages
 
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Check Dart Code"]
+    workflows: ["Increase Build Number"]
     types:
       - completed
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     permissions:
       contents: write
@@ -24,7 +25,6 @@ jobs:
 #jobs:
 #  deploy:
 #    runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 #
 #    steps:
 #      - name: Checkout Repository
