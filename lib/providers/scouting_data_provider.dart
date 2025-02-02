@@ -90,20 +90,20 @@ class ScoutingData extends ChangeNotifier {
   String _ulid = '';
   String _scout = '';
   MatchLevel _matchLevel = MatchLevel.unset;
-  int _matchNumber = 0;
+  String _matchNumber = '';
   String _eventKey = 'TestEvent';
-  int _teamNumber = 0;
+  String _teamNumber = '';
   Alliance _alliance = Alliance.unset;
 
   String get scout => _scout;
 
   MatchLevel get matchLevel => _matchLevel;
 
-  int get matchNumber => _matchNumber;
+  String get matchNumber => _matchNumber;
 
   String get eventKey => _eventKey;
 
-  int get teamNumber => _teamNumber;
+  String get teamNumber => _teamNumber;
 
   Alliance get alliance => _alliance;
 
@@ -118,9 +118,9 @@ class ScoutingData extends ChangeNotifier {
     _ulid = '';
     _scout = '';
     _matchLevel = MatchLevel.unset;
-    _matchNumber = 0;
+    _matchNumber = '';
     _eventKey = 'TestEvent';
-    _teamNumber = 0;
+    _teamNumber = '';
     _alliance = Alliance.unset;
     _autoData.preload = Preload.unset;
     _autoData.startPosition = AutoStartPosition.unset;
@@ -138,12 +138,12 @@ class ScoutingData extends ChangeNotifier {
     return _scout.isNotEmpty && _matchLevel != MatchLevel.unset && _matchNumber != 0 && _eventKey.isNotEmpty && _teamNumber != 0 && _alliance != Alliance.unset;
   }
 
-  void updateMatchInfo({
+  void updateInfoData({
     String? scout,
     MatchLevel? matchLevel,
-    int? matchNumber,
+    String? matchNumber,
     String? eventKey,
-    int? teamNumber,
+    String? teamNumber,
     Alliance? alliance,
   }) {
     _scout = scout ?? _scout;
@@ -161,26 +161,6 @@ class ScoutingData extends ChangeNotifier {
     _autoData.preload = preload ?? _autoData.preload;
     _autoData.startPosition = startPosition ?? _autoData.startPosition;
     _autoData.leave = leave ?? _autoData.leave;
-    notifyListeners();
-  }
-  void updateScoutName(String name) {
-    _scout = name;
-    notifyListeners();
-  }
-  void updateMatchLevel(MatchLevel level) {
-    _matchLevel = level;
-    notifyListeners();
-  }
-  void updateMatchNumber(int number) {
-    _matchNumber = number;
-    notifyListeners();
-  }
-  void updateEventKey(String key) {
-    _eventKey = key;
-    notifyListeners();
-  }
-  void updateTeamNumber(int number) {
-    _teamNumber = number;
     notifyListeners();
   }
 

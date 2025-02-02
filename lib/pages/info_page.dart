@@ -36,29 +36,24 @@ class _InfoPageState extends State<InfoPage> {
     // 初始化 TextEditingController 並設置初始值
     _scouterNameController = TextEditingController(text: scoutingData.scout);
     _matchNumberController =
-        TextEditingController(text: scoutingData.matchNumber.toString());
+        TextEditingController(text: scoutingData.matchNumber);
     _teamNumberController =
-        TextEditingController(text: scoutingData.teamNumber.toString());
+        TextEditingController(text: scoutingData.teamNumber);
 
     matchLevel = scoutingData.matchLevel;
     _selectedAlliance = scoutingData.alliance;
 
     // 監聽 TextEditingController 變更，並同步更新 Provider
     _scouterNameController.addListener(() {
-      Provider.of<ScoutingData>(context, listen: false)
-          .updateScoutName(_scouterNameController.text);
+      scoutingData.updateInfoData(scout: _scouterNameController.text);
     });
 
     _matchNumberController.addListener(() {
-      final newValue = int.tryParse(_matchNumberController.text) ?? 0;
-      Provider.of<ScoutingData>(context, listen: false)
-          .updateMatchNumber(newValue);
+      scoutingData.updateInfoData(matchNumber: _matchNumberController.text);
     });
 
     _teamNumberController.addListener(() {
-      final newValue = int.tryParse(_teamNumberController.text) ?? 0;
-      Provider.of<ScoutingData>(context, listen: false)
-          .updateTeamNumber(newValue);
+      scoutingData.updateInfoData(teamNumber: _teamNumberController.text);
     });
   }
 
@@ -87,10 +82,10 @@ class _InfoPageState extends State<InfoPage> {
       }
 
       // 更新 Provider 數據
-      Provider.of<ScoutingData>(context, listen: false).updateMatchInfo(
+      Provider.of<ScoutingData>(context, listen: false).updateInfoData(
         scout: _scouterNameController.text,
-        matchNumber: int.parse(_matchNumberController.text),
-        teamNumber: int.parse(_teamNumberController.text),
+        matchNumber: _matchNumberController.text,
+        teamNumber: _teamNumberController.text,
         matchLevel: matchLevel,
         alliance: _selectedAlliance,
         eventKey: 'NTWC',
