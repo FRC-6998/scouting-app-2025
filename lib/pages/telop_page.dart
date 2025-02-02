@@ -8,6 +8,8 @@ import 'package:scout_app_v0/widgets/tap_widgets.dart';
 import '../providers/scouting_data_provider.dart';
 import '../utils/logger.dart';
 import '../widgets/text_widgets.dart';
+// import '../widgets/hang_timer_widget.dart';
+import '../widgets/stateless_hang_timer.dart';
 
 class TeleopPage extends StatefulWidget {
   const TeleopPage({super.key});
@@ -15,13 +17,14 @@ class TeleopPage extends StatefulWidget {
   @override
   _TeleopPageState createState() => _TeleopPageState();
 }
+
 class _TeleopPageState extends State<TeleopPage> {
   Color _buttonColor = Colors.red;
 
-
   @override
   Widget build(BuildContext context) {
-    ScoutingData scoutingData = Provider.of<ScoutingData>(context, listen: false);
+    ScoutingData scoutingData =
+        Provider.of<ScoutingData>(context, listen: false);
 
     return Scaffold(
         // appBar: AppBar(
@@ -42,28 +45,32 @@ class _TeleopPageState extends State<TeleopPage> {
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.sourceAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
-                                textString: 'Left Coral Station',
-                                onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.leftCoralStation);
-                                },
-                              )),
+                                flex: 14,
+                                child: ColorChangeInkwell(
+                                  initialColor: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  // 點擊時顏色
+                                  textString: 'Left Coral Station',
+                                  onTap: () {
+                                    scoutingData.addTelopPathPoint(
+                                        TelopPathPoint.leftCoralStation);
+                                  },
+                                )),
                             Spacer(),
                             Expanded(
-                              flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.sourceAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
-                                textString: 'Right Coral Station',
-                                onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.rightCoralStation);
-                                },
-                              )),
+                                flex: 14,
+                                child: ColorChangeInkwell(
+                                  initialColor: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  // 點擊時顏色
+                                  textString: 'Right Coral Station',
+                                  onTap: () {
+                                    scoutingData.addTelopPathPoint(
+                                        TelopPathPoint.rightCoralStation);
+                                  },
+                                )),
                           ],
                         )),
                     Spacer(),
@@ -76,25 +83,27 @@ class _TeleopPageState extends State<TeleopPage> {
                               child: ColorChangeInkwell(
                                 initialColor: AppColors.sourceAreaColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
+                                borderColor: AppColors.sourceBorderColor,
                                 textString: 'Ground Algae',
                                 onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.groundAlgae);
+                                  scoutingData.addTelopPathPoint(
+                                      TelopPathPoint.groundAlgae);
                                 },
                               ),
                             ),
                             Spacer(),
                             Expanded(
-                              flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.sourceAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.sourceBorderColor,// 點擊時顏色
-                                textString: 'Ground Coral',
-                                onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.groundCoral);
-                                },
-                              )),
+                                flex: 14,
+                                child: ColorChangeInkwell(
+                                  initialColor: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  textString: 'Ground Coral',
+                                  onTap: () {
+                                    scoutingData.addTelopPathPoint(
+                                        TelopPathPoint.groundCoral);
+                                  },
+                                )),
                           ],
                         )),
                     Spacer(),
@@ -106,26 +115,28 @@ class _TeleopPageState extends State<TeleopPage> {
                               flex: 14,
                               child: ColorChangeInkwell(
                                 initialColor: AppColors.scoreAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor, // 點擊時顏色
+                                pressedColor: AppColors.boolBtnTrueColor,
                                 textString: 'Processor',
                                 borderColor: AppColors.scoreBorderColor,
                                 onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.processor);
+                                  scoutingData.addTelopPathPoint(
+                                      TelopPathPoint.processor);
                                 },
                               ),
                             ),
                             Spacer(),
                             Expanded(
-                              flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.scoreAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.scoreBorderColor,// 點擊時顏色
-                                textString: 'Net',
-                                onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.net);
-                                },
-                              )),
+                                flex: 14,
+                                child: ColorChangeInkwell(
+                                  initialColor: AppColors.scoreAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.scoreBorderColor,
+                                  textString: 'Net',
+                                  onTap: () {
+                                    scoutingData
+                                        .addTelopPathPoint(TelopPathPoint.net);
+                                  },
+                                )),
                           ],
                         )),
                     Spacer(),
@@ -145,7 +156,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L4',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l4LeftReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l4LeftReef);
                                       },
                                     ),
                                   ),
@@ -158,7 +170,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L3',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l3LeftReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l3LeftReef);
                                       },
                                     ),
                                   ),
@@ -171,7 +184,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L2',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l2LeftReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l2LeftReef);
                                       },
                                     ),
                                   ),
@@ -187,7 +201,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 textString: 'L1',
                                 borderColor: AppColors.reefBtnBorderColor,
                                 onTap: () {
-                                  scoutingData.addTelopPathPoint(TelopPathPoint.l1Reef);
+                                  scoutingData
+                                      .addTelopPathPoint(TelopPathPoint.l1Reef);
                                 },
                               ),
                             ),
@@ -204,7 +219,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L4',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l4RightReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l4RightReef);
                                       },
                                     ),
                                   ),
@@ -217,7 +233,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L3',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l3RightReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l3RightReef);
                                       },
                                     ),
                                   ),
@@ -230,7 +247,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                       textString: 'L2',
                                       borderColor: AppColors.reefBtnBorderColor,
                                       onTap: () {
-                                        scoutingData.addTelopPathPoint(TelopPathPoint.l2RightReef);
+                                        scoutingData.addTelopPathPoint(
+                                            TelopPathPoint.l2RightReef);
                                       },
                                     ),
                                   ),
@@ -245,42 +263,80 @@ class _TeleopPageState extends State<TeleopPage> {
                 flex: 15,
                 child: Column(children: [
                   Expanded(
-                      flex: 8,
-                      child: Column(
-                        children: [
-                          Expanded(
-                              flex:4,
-                              child: TapBox(
-
-                              ))
-                        ],
-                      )
-
+                    flex: 8,
+                    child: StatelessHangTimer(),
+                    // child: HangTimer(
+                    //   timeEnd: (hangType, success, hangTime) {
+                    //     scoutingData.updateTelopData(
+                    //         hangType: hangType, hangTime: hangTime);
+                    //     if (success) {
+                    //       scoutingData.updateTelopData(bargeAction: hangType);
+                    //     }
+                    //   },
+                    //   onReset: () {
+                    //     scoutingData.updateTelopData(
+                    //         bargeAction: BargeAction.unset);
+                    //   },
+                    // )
                   ),
                   Spacer(),
                   Expanded(
-                      flex: 4,
-                      child: TapBox(
-                        borderWidth: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? 4 : 2,
-                        color: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
-                        borderColor: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.park ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
-                        onTap: () {
-                          scoutingData.updateTelopData(bargeAction: BargeAction.park);
-                        },
-                        child: const TeleopWidgetText('PARK'),
-                      )),
+                    flex: 4,
+                    child: Selector<ScoutingData, BargeAction>(
+                      selector: (_, scoutingData) =>
+                          scoutingData.telopData.bargeAction,
+                      builder: (context, bargeAction, child) {
+                        final isSelected = bargeAction == BargeAction.park;
+
+                        return TapBox(
+                          borderWidth: isSelected ? 4 : 2,
+                          color: isSelected
+                              ? AppColors.selectedBtnColor
+                              : AppColors.unselectedBtnColor,
+                          borderColor: isSelected
+                              ? AppColors.selectedBtnBorderColor
+                              : AppColors.unselectedBtnBorderColor,
+                          onTap: () {
+                            if (bargeAction != BargeAction.shallow &&
+                                bargeAction != BargeAction.deep) {
+                              scoutingData.updateTelopData(
+                                  bargeAction: BargeAction.park);
+                            }
+                          },
+                          child: const TeleopWidgetText('PARK'),
+                        );
+                      },
+                    ),
+                  ),
                   Spacer(),
                   Expanded(
-                      flex: 4,
-                      child: TapBox(
-                        borderWidth: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? 4 : 2,
-                        color: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? AppColors.selectedBtnColor : AppColors.unselectedBtnColor,
-                        borderColor: context.select<ScoutingData, BargeAction>((value) => value.telopData.bargeAction) == BargeAction.none ? AppColors.selectedBtnBorderColor : AppColors.unselectedBtnBorderColor,
-                        onTap: () {
-                          scoutingData.updateTelopData(bargeAction: BargeAction.none);
-                        },
-                        child: const TeleopWidgetText('None'),
-                      )),
+                    flex: 4,
+                    child: Selector<ScoutingData, BargeAction>(
+                      selector: (_, scoutingData) =>
+                          scoutingData.telopData.bargeAction,
+                      builder: (context, bargeAction, child) {
+                        final isSelected = bargeAction == BargeAction.none;
+
+                        return TapBox(
+                          borderWidth: isSelected ? 4 : 2,
+                          color: isSelected
+                              ? AppColors.selectedBtnColor
+                              : AppColors.unselectedBtnColor,
+                          borderColor: isSelected
+                              ? AppColors.selectedBtnBorderColor
+                              : AppColors.unselectedBtnBorderColor,
+                          onTap: () {
+                            if (bargeAction != BargeAction.shallow &&
+                                bargeAction != BargeAction.deep) {
+                              scoutingData.updateTelopData(
+                                  bargeAction: BargeAction.none);
+                            }
+                          },
+                          child: const TeleopWidgetText('NONE'),
+                        );
+                      },
+                    ),
+                  ),
                   Spacer(),
                   Expanded(
                       flex: 3,
@@ -289,22 +345,35 @@ class _TeleopPageState extends State<TeleopPage> {
                           Expanded(
                               flex: 4,
                               child: TapBox(
-                                borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.left ? 4 : 2,
+                                borderWidth:
+                                    context.select<ScoutingData, BargePosition>(
+                                                (value) => value
+                                                    .telopData.bargePosition) ==
+                                            BargePosition.left
+                                        ? 4
+                                        : 2,
                                 color: AppColors.reefAreaColor,
                                 onTap: () {
-                                  scoutingData.updateTelopData(bargePosition: BargePosition.left);
+                                  scoutingData.updateTelopData(
+                                      bargePosition: BargePosition.left);
                                 },
                                 child: const TeleopWidgetText('Left'),
-                              )
-                          ),
+                              )),
                           Spacer(),
                           Expanded(
                             flex: 4,
                             child: TapBox(
-                              borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.center ? 4 : 2,
+                              borderWidth:
+                                  context.select<ScoutingData, BargePosition>(
+                                              (value) => value
+                                                  .telopData.bargePosition) ==
+                                          BargePosition.center
+                                      ? 4
+                                      : 2,
                               color: AppColors.reefAreaColor,
                               onTap: () {
-                                scoutingData.updateTelopData(bargePosition: BargePosition.center);
+                                scoutingData.updateTelopData(
+                                    bargePosition: BargePosition.center);
                               },
                               child: const TeleopWidgetText('Center'),
                             ),
@@ -313,14 +382,20 @@ class _TeleopPageState extends State<TeleopPage> {
                           Expanded(
                               flex: 4,
                               child: TapBox(
-                                borderWidth: context.select<ScoutingData, BargePosition>((value) => value.telopData.bargePosition) == BargePosition.right ? 4 : 2,
+                                borderWidth:
+                                    context.select<ScoutingData, BargePosition>(
+                                                (value) => value
+                                                    .telopData.bargePosition) ==
+                                            BargePosition.right
+                                        ? 4
+                                        : 2,
                                 color: AppColors.reefAreaColor,
                                 onTap: () {
-                                  scoutingData.updateTelopData(bargePosition: BargePosition.right);
+                                  scoutingData.updateTelopData(
+                                      bargePosition: BargePosition.right);
                                 },
                                 child: const TeleopWidgetText('Right'),
-                              )
-                          ),
+                              )),
                         ],
                       )),
                   Spacer(),
