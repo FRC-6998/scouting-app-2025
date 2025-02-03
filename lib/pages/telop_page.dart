@@ -437,6 +437,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                 ),
                                 onPressed: () {
                                   logger.d("Undo");
+                                  scoutingDataSetter.telopData.undoPathPoint();
                                 },
                                 child: Text("Undo",
                                     style: TextStyle(fontSize: 30))),

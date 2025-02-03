@@ -36,6 +36,11 @@ class AutoData {
     pathPointIsSuccess = true;
   }
 
+  void undoPathPoint() {
+    if (path.isNotEmpty) {
+      path.removeLast();
+    }
+  }
 
   Map<String, dynamic>toJSON() {
     return {
@@ -73,6 +78,13 @@ class TelopData {
     }
     path.add({"point": point.name, "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds});
   }
+
+  void undoPathPoint() {
+    if (path.isNotEmpty) {
+      path.removeLast();
+    }
+  }
+
   Map<String, dynamic>toJSON() {
     return {
       'path': path,
