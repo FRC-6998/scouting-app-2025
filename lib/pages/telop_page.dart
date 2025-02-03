@@ -458,7 +458,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                   logger.d("result");
                                   Navigator.pushNamed(context, '/result');
                                 },
-                                child: Text("QRcode",
+                                child: Text("End",
                                     style: TextStyle(fontSize: 30))),
                           ),
                         ],
