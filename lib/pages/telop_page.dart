@@ -42,37 +42,48 @@ class _TeleopPageState extends State<TeleopPage> {
                   child: Column(children: [
                     Expanded(
                         flex: 5,
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 14,
-                                child: ColorChangeInkwell(
-                                  initialColor: AppColors.sourceAreaColor,
-                                  pressedColor: AppColors.boolBtnTrueColor,
-                                  borderColor: AppColors.sourceBorderColor,
-                                  // 點擊時顏色
-                                  textString: 'Left Coral Station',
-                                  onTap: () {
-                                    scoutingDataSetter.addTelopPathPoint(
-                                        TelopPathPoint.leftCoralStation);
-                                  },
-                                )),
-                            Spacer(),
-                            Expanded(
-                                flex: 14,
-                                child: ColorChangeInkwell(
-                                  initialColor: AppColors.sourceAreaColor,
-                                  pressedColor: AppColors.boolBtnTrueColor,
-                                  borderColor: AppColors.sourceBorderColor,
-                                  // 點擊時顏色
-                                  textString: 'Right Coral Station',
-                                  onTap: () {
-                                    scoutingDataSetter.addTelopPathPoint(
-                                        TelopPathPoint.rightCoralStation);
-                                  },
-                                )),
-                          ],
-                        )),
+                        child: ColorChangeInkwell(
+                          initialColor: AppColors.sourceAreaColor,
+                          pressedColor: AppColors.boolBtnTrueColor,
+                          borderColor: AppColors.sourceBorderColor,
+                          textString: 'Coral Station',
+                          onTap: () {
+                            scoutingDataSetter.addTelopPathPoint(
+                                TelopPathPoint.coralStation);
+                          },
+                        )
+                        // child: Row(
+                        //   children: [
+                        //     Expanded(
+                        //         flex: 14,
+                        //         child: ColorChangeInkwell(
+                        //           initialColor: AppColors.sourceAreaColor,
+                        //           pressedColor: AppColors.boolBtnTrueColor,
+                        //           borderColor: AppColors.sourceBorderColor,
+                        //           // 點擊時顏色
+                        //           textString: 'Left Coral Station',
+                        //           onTap: () {
+                        //             scoutingDataSetter.addTelopPathPoint(
+                        //                 TelopPathPoint.leftCoralStation);
+                        //           },
+                        //         )),
+                        //     Spacer(),
+                        //     Expanded(
+                        //         flex: 14,
+                        //         child: ColorChangeInkwell(
+                        //           initialColor: AppColors.sourceAreaColor,
+                        //           pressedColor: AppColors.boolBtnTrueColor,
+                        //           borderColor: AppColors.sourceBorderColor,
+                        //           // 點擊時顏色
+                        //           textString: 'Right Coral Station',
+                        //           onTap: () {
+                        //             scoutingDataSetter.addTelopPathPoint(
+                        //                 TelopPathPoint.rightCoralStation);
+                        //           },
+                        //         )),
+                        //   ],
+                        // )
+                    ),
                     Spacer(),
                     Expanded(
                         flex: 5,
@@ -141,55 +152,20 @@ class _TeleopPageState extends State<TeleopPage> {
                         )),
                     Spacer(),
                     Expanded(
-                        flex: 17,
+                        flex: 10,
                         child: Row(
                           children: [
                             Expanded(
                               flex: 14,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L4',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l4LeftReef);
-                                      },
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L3',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l3LeftReef);
-                                      },
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L2',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l2LeftReef);
-                                      },
-                                    ),
-                                  ),
-                                ],
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.reefBtnColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.reefBtnBorderColor,
+                                textString: 'L2',
+                                onTap: () {
+                                  scoutingDataSetter.addTelopPathPoint(
+                                      TelopPathPoint.l2Reef);
+                                },
                               ),
                             ),
                             Spacer(),
@@ -198,65 +174,162 @@ class _TeleopPageState extends State<TeleopPage> {
                               child: ColorChangeInkwell(
                                 initialColor: AppColors.reefBtnColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
-                                textString: 'L1',
                                 borderColor: AppColors.reefBtnBorderColor,
+                                textString: 'L3',
                                 onTap: () {
-                                  scoutingDataSetter
-                                      .addTelopPathPoint(TelopPathPoint.l1Reef);
+                                  scoutingDataSetter.addTelopPathPoint(
+                                      TelopPathPoint.l3Reef);
                                 },
                               ),
                             ),
                             Spacer(),
                             Expanded(
                               flex: 14,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L4',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l4RightReef);
-                                      },
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L3',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l3RightReef);
-                                      },
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Expanded(
-                                    flex: 5,
-                                    child: ColorChangeInkwell(
-                                      initialColor: AppColors.reefBtnColor,
-                                      pressedColor: AppColors.boolBtnTrueColor,
-                                      textString: 'L2',
-                                      borderColor: AppColors.reefBtnBorderColor,
-                                      onTap: () {
-                                        scoutingDataSetter.addTelopPathPoint(
-                                            TelopPathPoint.l2RightReef);
-                                      },
-                                    ),
-                                  ),
-                                ],
+                              child: ColorChangeInkwell(
+                                initialColor: AppColors.reefBtnColor,
+                                pressedColor: AppColors.boolBtnTrueColor,
+                                borderColor: AppColors.reefBtnBorderColor,
+                                textString: 'L4',
+                                onTap: () {
+                                  scoutingDataSetter.addTelopPathPoint(
+                                      TelopPathPoint.l4Reef);
+                                },
                               ),
                             ),
                           ],
+                        ),
+                    ),
+                    Spacer(),
+                    Expanded(
+                        flex:6,
+                        child: ColorChangeInkwell(
+                          initialColor: AppColors.reefBtnColor,
+                          pressedColor: AppColors.boolBtnTrueColor,
+                          borderColor: AppColors.reefBtnBorderColor,
+                          textString: 'L1',
+                          onTap: () {
+                            scoutingDataSetter.addTelopPathPoint(
+                                TelopPathPoint.l1Reef);
+                          },
                         )),
+
+                    // Expanded(
+                    //     flex: 17,
+                    //     child: Row(
+                    //       children: [
+                    //         Expanded(
+                    //           flex: 14,
+                    //           child: Column(
+                    //             children: [
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L4',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l4LeftReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //               Spacer(),
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L3',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l3LeftReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //               Spacer(),
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L2',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l2LeftReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //         Spacer(),
+                    //         Expanded(
+                    //           flex: 14,
+                    //           child: ColorChangeInkwell(
+                    //             initialColor: AppColors.reefBtnColor,
+                    //             pressedColor: AppColors.boolBtnTrueColor,
+                    //             textString: 'L1',
+                    //             borderColor: AppColors.reefBtnBorderColor,
+                    //             onTap: () {
+                    //               scoutingDataSetter
+                    //                   .addTelopPathPoint(TelopPathPoint.l1Reef);
+                    //             },
+                    //           ),
+                    //         ),
+                    //         Spacer(),
+                    //         Expanded(
+                    //           flex: 14,
+                    //           child: Column(
+                    //             children: [
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L4',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l4RightReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //               Spacer(),
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L3',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l3RightReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //               Spacer(),
+                    //               Expanded(
+                    //                 flex: 5,
+                    //                 child: ColorChangeInkwell(
+                    //                   initialColor: AppColors.reefBtnColor,
+                    //                   pressedColor: AppColors.boolBtnTrueColor,
+                    //                   textString: 'L2',
+                    //                   borderColor: AppColors.reefBtnBorderColor,
+                    //                   onTap: () {
+                    //                     scoutingDataSetter.addTelopPathPoint(
+                    //                         TelopPathPoint.l2RightReef);
+                    //                   },
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     )),
                   ])),
               Spacer(),
               Expanded(

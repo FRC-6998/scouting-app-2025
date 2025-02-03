@@ -72,8 +72,9 @@ enum AutoPathPoint{
 }
 
 enum TelopPathPoint{
-  leftCoralStation,
-  rightCoralStation,
+  // leftCoralStation,
+  // rightCoralStation,
+  coralStation,
 
   groundCoral,
   groundAlgae,
@@ -83,14 +84,9 @@ enum TelopPathPoint{
   net,
 
   l1Reef,
-
-  l2LeftReef,
-  l3LeftReef,
-  l4LeftReef,
-
-  l3RightReef,
-  l2RightReef,
-  l4RightReef,
+  l2Reef,
+  l3Reef,
+  l4Reef,
 }
 
 enum BargeAction {
