@@ -28,7 +28,7 @@ class _TeleopPageState extends State<TeleopPage> {
 
     return Scaffold(
         // appBar: AppBar(
-        //   title: const Text('telop Page'),
+        //   title: const Text('teleop Page'),
         // ),
         body: Column(
       children: [
@@ -48,8 +48,8 @@ class _TeleopPageState extends State<TeleopPage> {
                           borderColor: AppColors.sourceBorderColor,
                           textString: 'Coral Station',
                           onTap: () {
-                            scoutingDataSetter.addTelopPathPoint(
-                                TelopPathPoint.coralStation);
+                            scoutingDataSetter.addTeleopPathPoint(
+                                TeleopPathPoint.coralStation);
                           },
                         )
                         // child: Row(
@@ -63,8 +63,8 @@ class _TeleopPageState extends State<TeleopPage> {
                         //           // 點擊時顏色
                         //           textString: 'Left Coral Station',
                         //           onTap: () {
-                        //             scoutingDataSetter.addTelopPathPoint(
-                        //                 TelopPathPoint.leftCoralStation);
+                        //             scoutingDataSetter.addTeleopPathPoint(
+                        //                 TeleopPathPoint.leftCoralStation);
                         //           },
                         //         )),
                         //     Spacer(),
@@ -77,8 +77,8 @@ class _TeleopPageState extends State<TeleopPage> {
                         //           // 點擊時顏色
                         //           textString: 'Right Coral Station',
                         //           onTap: () {
-                        //             scoutingDataSetter.addTelopPathPoint(
-                        //                 TelopPathPoint.rightCoralStation);
+                        //             scoutingDataSetter.addTeleopPathPoint(
+                        //                 TeleopPathPoint.rightCoralStation);
                         //           },
                         //         )),
                         //   ],
@@ -97,8 +97,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderColor: AppColors.sourceBorderColor,
                                 textString: 'Ground Algae',
                                 onTap: () {
-                                  scoutingDataSetter.addTelopPathPoint(
-                                      TelopPathPoint.groundAlgae);
+                                  scoutingDataSetter.addTeleopPathPoint(
+                                      TeleopPathPoint.groundAlgae);
                                 },
                               ),
                             ),
@@ -111,8 +111,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                   borderColor: AppColors.sourceBorderColor,
                                   textString: 'Ground Coral',
                                   onTap: () {
-                                    scoutingDataSetter.addTelopPathPoint(
-                                        TelopPathPoint.groundCoral);
+                                    scoutingDataSetter.addTeleopPathPoint(
+                                        TeleopPathPoint.groundCoral);
                                   },
                                 )),
                           ],
@@ -130,8 +130,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 textString: 'Processor',
                                 borderColor: AppColors.scoreBorderColor,
                                 onTap: () {
-                                  scoutingDataSetter.addTelopPathPoint(
-                                      TelopPathPoint.processor);
+                                  scoutingDataSetter.addTeleopPathPoint(
+                                      TeleopPathPoint.processor);
                                 },
                               ),
                             ),
@@ -145,7 +145,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                   textString: 'Net',
                                   onTap: () {
                                     scoutingDataSetter
-                                        .addTelopPathPoint(TelopPathPoint.net);
+                                        .addTeleopPathPoint(TeleopPathPoint.net);
                                   },
                                 )),
                           ],
@@ -163,8 +163,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderColor: AppColors.reefBtnBorderColor,
                                 textString: 'L2',
                                 onTap: () {
-                                  scoutingDataSetter.addTelopPathPoint(
-                                      TelopPathPoint.l2Reef);
+                                  scoutingDataSetter.addTeleopPathPoint(
+                                      TeleopPathPoint.l2Reef);
                                 },
                               ),
                             ),
@@ -177,8 +177,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderColor: AppColors.reefBtnBorderColor,
                                 textString: 'L3',
                                 onTap: () {
-                                  scoutingDataSetter.addTelopPathPoint(
-                                      TelopPathPoint.l3Reef);
+                                  scoutingDataSetter.addTeleopPathPoint(
+                                      TeleopPathPoint.l3Reef);
                                 },
                               ),
                             ),
@@ -191,8 +191,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderColor: AppColors.reefBtnBorderColor,
                                 textString: 'L4',
                                 onTap: () {
-                                  scoutingDataSetter.addTelopPathPoint(
-                                      TelopPathPoint.l4Reef);
+                                  scoutingDataSetter.addTeleopPathPoint(
+                                      TeleopPathPoint.l4Reef);
                                 },
                               ),
                             ),
@@ -208,8 +208,8 @@ class _TeleopPageState extends State<TeleopPage> {
                           borderColor: AppColors.reefBtnBorderColor,
                           textString: 'L1',
                           onTap: () {
-                            scoutingDataSetter.addTelopPathPoint(
-                                TelopPathPoint.l1Reef);
+                            scoutingDataSetter.addTeleopPathPoint(
+                                TeleopPathPoint.l1Reef);
                           },
                         )),
 
@@ -229,8 +229,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L4',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l4LeftReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l4LeftReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -243,8 +243,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L3',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l3LeftReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l3LeftReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -257,8 +257,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L2',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l2LeftReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l2LeftReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -275,7 +275,7 @@ class _TeleopPageState extends State<TeleopPage> {
                     //             borderColor: AppColors.reefBtnBorderColor,
                     //             onTap: () {
                     //               scoutingDataSetter
-                    //                   .addTelopPathPoint(TelopPathPoint.l1Reef);
+                    //                   .addTeleopPathPoint(TeleopPathPoint.l1Reef);
                     //             },
                     //           ),
                     //         ),
@@ -292,8 +292,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L4',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l4RightReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l4RightReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -306,8 +306,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L3',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l3RightReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l3RightReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -320,8 +320,8 @@ class _TeleopPageState extends State<TeleopPage> {
                     //                   textString: 'L2',
                     //                   borderColor: AppColors.reefBtnBorderColor,
                     //                   onTap: () {
-                    //                     scoutingDataSetter.addTelopPathPoint(
-                    //                         TelopPathPoint.l2RightReef);
+                    //                     scoutingDataSetter.addTeleopPathPoint(
+                    //                         TeleopPathPoint.l2RightReef);
                     //                   },
                     //                 ),
                     //               ),
@@ -340,16 +340,16 @@ class _TeleopPageState extends State<TeleopPage> {
                     // child: StatelessHangTimer(),
                     child: HangTimer(
                       onStart: (bargeAction) {
-                        scoutingDataSetter.updateTelopData(bargeResult: bargeAction, bargeTried: bargeAction);
+                        scoutingDataSetter.updateTeleopData(bargeResult: bargeAction, bargeTried: bargeAction);
                       },
                       onEnd: (bargeTried, success, hangTime) {
-                        scoutingDataSetter.updateTelopData(hangTime: hangTime);
+                        scoutingDataSetter.updateTeleopData(hangTime: hangTime);
                         if (!success) {
-                          scoutingDataSetter.updateTelopData(bargeResult: BargeAction.unset);
+                          scoutingDataSetter.updateTeleopData(bargeResult: BargeAction.unset);
                         }
                       },
                       onReset: () {
-                        scoutingDataSetter.updateTelopData(
+                        scoutingDataSetter.updateTeleopData(
                             bargeResult: BargeAction.unset);
                       },
                     )
@@ -359,7 +359,7 @@ class _TeleopPageState extends State<TeleopPage> {
                     flex: 4,
                     child: Selector<ScoutingData, BargeAction>(
                       selector: (_, scoutingData) =>
-                          scoutingData.telopData.bargeResult,
+                          scoutingData.teleopData.bargeResult,
                       builder: (context, bargeResult, child) {
                         final isSelected = bargeResult == BargeAction.park;
 
@@ -374,7 +374,7 @@ class _TeleopPageState extends State<TeleopPage> {
                           onTap: () {
                             if (bargeResult != BargeAction.shallow &&
                                 bargeResult != BargeAction.deep) {
-                              scoutingDataSetter.updateTelopData(
+                              scoutingDataSetter.updateTeleopData(
                                   bargeResult: BargeAction.park);
                             }
                           },
@@ -388,7 +388,7 @@ class _TeleopPageState extends State<TeleopPage> {
                     flex: 4,
                     child: Selector<ScoutingData, BargeAction>(
                       selector: (_, scoutingData) =>
-                          scoutingData.telopData.bargeResult,
+                          scoutingData.teleopData.bargeResult,
                       builder: (context, bargeResult, child) {
                         final isSelected = bargeResult == BargeAction.none;
 
@@ -403,7 +403,7 @@ class _TeleopPageState extends State<TeleopPage> {
                           onTap: () {
                             if (bargeResult != BargeAction.shallow &&
                                 bargeResult != BargeAction.deep) {
-                              scoutingDataSetter.updateTelopData(
+                              scoutingDataSetter.updateTeleopData(
                                   bargeResult: BargeAction.none);
                             }
                           },
@@ -423,13 +423,13 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderWidth:
                                     context.select<ScoutingData, BargePosition>(
                                                 (value) => value
-                                                    .telopData.bargePosition) ==
+                                                    .teleopData.bargePosition) ==
                                             BargePosition.left
                                         ? 4
                                         : 2,
                                 color: AppColors.reefAreaColor,
                                 onTap: () {
-                                  scoutingDataSetter.updateTelopData(
+                                  scoutingDataSetter.updateTeleopData(
                                       bargePosition: BargePosition.left);
                                 },
                                 child: const TeleopWidgetText('Left'),
@@ -441,13 +441,13 @@ class _TeleopPageState extends State<TeleopPage> {
                               borderWidth:
                                   context.select<ScoutingData, BargePosition>(
                                               (value) => value
-                                                  .telopData.bargePosition) ==
+                                                  .teleopData.bargePosition) ==
                                           BargePosition.center
                                       ? 4
                                       : 2,
                               color: AppColors.reefAreaColor,
                               onTap: () {
-                                scoutingDataSetter.updateTelopData(
+                                scoutingDataSetter.updateTeleopData(
                                     bargePosition: BargePosition.center);
                               },
                               child: const TeleopWidgetText('Center'),
@@ -460,13 +460,13 @@ class _TeleopPageState extends State<TeleopPage> {
                                 borderWidth:
                                     context.select<ScoutingData, BargePosition>(
                                                 (value) => value
-                                                    .telopData.bargePosition) ==
+                                                    .teleopData.bargePosition) ==
                                             BargePosition.right
                                         ? 4
                                         : 2,
                                 color: AppColors.reefAreaColor,
                                 onTap: () {
-                                  scoutingDataSetter.updateTelopData(
+                                  scoutingDataSetter.updateTeleopData(
                                       bargePosition: BargePosition.right);
                                 },
                                 child: const TeleopWidgetText('Right'),
@@ -510,7 +510,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                 ),
                                 onPressed: () {
                                   logger.d("Undo");
-                                  scoutingDataSetter.telopData.undoPathPoint();
+                                  scoutingDataSetter.teleopData.undoPathPoint();
                                 },
                                 child: Text("Undo",
                                     style: TextStyle(fontSize: 30))),

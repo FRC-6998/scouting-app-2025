@@ -7,7 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'providers/scouting_data_provider.dart';
 import 'pages/info_page.dart';
 import 'pages/auto_page.dart';
-import 'pages/telop_page.dart';
+import 'pages/teleop_page.dart';
 import 'pages/result_page.dart';
 
 void main() {

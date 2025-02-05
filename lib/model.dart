@@ -71,7 +71,7 @@ enum AutoPathPoint{
   l4ReefKL,
 }
 
-enum TelopPathPoint{
+enum TeleopPathPoint{
   // leftCoralStation,
   // rightCoralStation,
   coralStation,

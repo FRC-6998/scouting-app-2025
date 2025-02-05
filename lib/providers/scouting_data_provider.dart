@@ -52,7 +52,7 @@ class AutoData {
   }
 }
 
-class TelopData {
+class TeleopData {
   num hangTime;
   BargeAction bargeTried;
   BargeAction bargeResult;
@@ -61,7 +61,7 @@ class TelopData {
   List<Map<String,Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
 
-  TelopData({
+  TeleopData({
     this.hangTime = 0,
     this.bargeTried = BargeAction.unset,
     this.bargeResult = BargeAction.unset,
@@ -72,7 +72,7 @@ class TelopData {
     return bargeResult != BargeAction.unset && path.isNotEmpty;
   }
 
-  void addPathPoint(TelopPathPoint point) {
+  void addPathPoint(TeleopPathPoint point) {
     if (path.isEmpty) {
       _pathStartTime = DateTime.now();
     }
@@ -121,11 +121,11 @@ class ScoutingData extends ChangeNotifier {
   Alliance get alliance => _alliance;
 
  final AutoData _autoData = AutoData();
- final TelopData _telopData = TelopData();
+ final TeleopData _teleopData = TeleopData();
 
   AutoData get autoData => _autoData;
 
-  TelopData get telopData => _telopData;
+  TeleopData get teleopData => _teleopData;
 
   void reset() {
     _ulid = '';
@@ -141,9 +141,9 @@ class ScoutingData extends ChangeNotifier {
     _autoData.path = [];
     _autoData.pathPointIsSuccess = true;
     _autoData.selectedReefSide = 0;
-    _telopData.bargeResult = BargeAction.unset;
-    _telopData.hangTime = 0;
-    _telopData.path = [];
+    _teleopData.bargeResult = BargeAction.unset;
+    _teleopData.hangTime = 0;
+    _teleopData.path = [];
     notifyListeners();
   }
 
@@ -194,22 +194,22 @@ class ScoutingData extends ChangeNotifier {
   }
 
 
-  void updateTelopData({
+  void updateTeleopData({
     num? hangTime,
     BargeAction? bargeTried,
     BargeAction? bargeResult,
     BargePosition? bargePosition,
   }) {
-    _telopData.hangTime = hangTime ?? _telopData.hangTime;
-    _telopData.bargeTried = bargeTried ?? _telopData.bargeTried;
-    _telopData.bargeResult = bargeResult ?? _telopData.bargeResult;
-    _telopData.bargePosition = bargePosition ?? _telopData.bargePosition;
+    _teleopData.hangTime = hangTime ?? _teleopData.hangTime;
+    _teleopData.bargeTried = bargeTried ?? _teleopData.bargeTried;
+    _teleopData.bargeResult = bargeResult ?? _teleopData.bargeResult;
+    _teleopData.bargePosition = bargePosition ?? _teleopData.bargePosition;
     notifyListeners();
   }
 
-  void addTelopPathPoint(TelopPathPoint point )  {
-    logger.d('Adding telop point: $point');
-    _telopData.addPathPoint(point);
+  void addTeleopPathPoint(TeleopPathPoint point )  {
+    logger.d('Adding teleop point: $point');
+    _teleopData.addPathPoint(point);
     notifyListeners();
   }
 
@@ -226,7 +226,7 @@ class ScoutingData extends ChangeNotifier {
       'team_number': teamNumber,
       'alliance': alliance.name,
       'auto': autoData.toJSON(),
-      'telop': telopData.toJSON(),
+      'teleop': teleopData.toJSON(),
     };
   }
 
