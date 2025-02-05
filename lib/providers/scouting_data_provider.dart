@@ -30,7 +30,7 @@ class AutoData {
     }
     path.add({
       "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds,
-      "position": point.name,
+      "point": point.name,
       "success": pathPointIsSuccess,
     });
     pathPointIsSuccess = true;
@@ -45,7 +45,7 @@ class AutoData {
   Map<String, dynamic>toJSON() {
     return {
       'preload': preload.name,
-      'startPosition': startPosition.name,
+      'start_position': startPosition.name,
       'leave': leave,
       'path': path,
     };
@@ -88,10 +88,10 @@ class TelopData {
   Map<String, dynamic>toJSON() {
     return {
       'path': path,
-      'hangTime': hangTime,
-      'bargeTried': bargeTried.name,
-      'bargeResult': bargeResult.name,
-      'bargePosition': bargePosition.name,
+      'hang_time': hangTime,
+      'barge_tried': bargeTried.name,
+      'barge_result': bargeResult.name,
+      'barge_position': bargePosition.name,
     };
   }
 }
@@ -220,13 +220,13 @@ class ScoutingData extends ChangeNotifier {
     return {
       'ulid': _ulid,
       'scout': scout,
-      'matchLevel': matchLevel.name,
-      'matchNumber': matchNumber,
-      'eventKey': eventKey,
-      'teamNumber': teamNumber,
+      'match_level': matchLevel.name,
+      'match_number': matchNumber,
+      'event_key': eventKey,
+      'team_number': teamNumber,
       'alliance': alliance.name,
-      'autoData': autoData.toJSON(),
-      'telopData': telopData.toJSON(),
+      'auto': autoData.toJSON(),
+      'telop': telopData.toJSON(),
     };
   }
 
