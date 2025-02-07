@@ -7,6 +7,7 @@ import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
 
 class SubTitleText extends StatelessWidget {
   final String text;
+
   const SubTitleText(this.text, {super.key});
 
   @override
@@ -24,17 +25,16 @@ class SubTitleText extends StatelessWidget {
 
 class TeleopWidgetText extends StatelessWidget {
   final String text;
+
   const TeleopWidgetText(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 27,
-          color: AppColors.unselectedBtnBorderColor,
-        ),
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 28,
+        color: AppColors.unselectedBtnBorderColor,
       ),
     );
   }

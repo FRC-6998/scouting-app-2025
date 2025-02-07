@@ -35,6 +35,10 @@ dependencies:
   ulid: ^2.0.0
   package_info_plus: ^8.1.4
   qr_flutter: ^4.1.0
+  yaml: ^3.1.2
+  msgpack_dart: ^1.0.0
+  base45: ^0.0.3
+  archive: ^3.4.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

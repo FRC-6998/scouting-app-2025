@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/logger.dart' show logger;
-import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
+import '../utils/utilities.dart' show multiplyIfNotNull;
 
 class TapBox extends StatelessWidget {
   final double? top;
@@ -60,7 +60,9 @@ class TapBox extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(borderRadius * factor),
         ),
-        child: child,
+        child: Center(
+          child: child,
+        ),
       ),
     );
 
@@ -166,7 +168,9 @@ class _TapEffectBoxState extends State<TapEffectBox> {
           ),
           borderRadius: BorderRadius.circular(widget.borderRadius * widget.factor),
         ),
-        child: widget.child,
+        child: Center(
+          child: widget.child,
+        ),
       ),
     );
 
@@ -182,77 +186,4 @@ class _TapEffectBoxState extends State<TapEffectBox> {
     return tapEffectBox;
   }
 }
-
-class ColorChangeInkwell extends StatefulWidget {
-  final Color initialColor;
-  final Color pressedColor;
-  final Function onTap;
-  final String textString;
-  final Color borderColor;
-
-  ColorChangeInkwell({
-    Key? key,
-    required this.initialColor,
-    required this.pressedColor,
-    required this.onTap,
-    required this.textString,
-    required this.borderColor,
-  }) : super(key: key);
-
-  @override
-  _ColorChangeInkwellState createState() => _ColorChangeInkwellState();
-}
-
-class _ColorChangeInkwellState extends State<ColorChangeInkwell> {
-  late Color currentColor;
-  late String text;
-  late Color borderColor;
-
-  @override
-  void initState() {
-    super.initState();
-    currentColor = widget.initialColor;// 初始化顏色
-    text = widget.textString;
-    borderColor = widget.borderColor;
-  }
-
-  void _onTap() {
-    setState(() {
-      currentColor = widget.pressedColor; // 設定顏色為按下時的顏色
-    });
-
-    // 等待0.2秒後回復原來顏色
-    Future.delayed(Duration(milliseconds: 150), () {
-      setState(() {
-        currentColor = widget.initialColor; // 恢復顏色
-      });
-    });
-
-    widget.onTap(); // 執行點擊事件的回調
-  }
-
-  @override
-  Widget build(BuildContext context) {
-        return GestureDetector(
-        onTap: _onTap,
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 150), // 設定動畫持續時間
-          decoration: BoxDecoration(
-            color: currentColor, // 使用當前顏色
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderColor , width: 3),
-          ),
-          child: Center(
-            child: Text(
-              text, // 直接使用 Text 而非 TeleopWidgetText
-              style: TextStyle(
-                fontSize: 28, // 可設定大小等樣式
-              ),
-            ),
-          ),
-        ),
-    );
-  }
-}
-
 

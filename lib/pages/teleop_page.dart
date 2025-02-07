@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scout_app_v0/constants.dart';
@@ -9,6 +10,7 @@ import '../providers/scouting_data_provider.dart';
 import '../utils/logger.dart';
 import '../widgets/text_widgets.dart';
 import '../widgets/hang_timer_widget.dart';
+import '../widgets/image_widgets.dart';
 // import '../widgets/stateless_hang_timer.dart';
 
 class TeleopPage extends StatefulWidget {
@@ -41,48 +43,70 @@ class _TeleopPageState extends State<TeleopPage> {
                   flex: 15,
                   child: Column(children: [
                     Expanded(
-                        flex: 5,
-                        child: ColorChangeInkwell(
-                          initialColor: AppColors.sourceAreaColor,
+                      flex: 5,
+                      // child: ColorChangeInkwell(
+                      //   initialColor: AppColors.sourceAreaColor,
+                      //   pressedColor: AppColors.boolBtnTrueColor,
+                      //   borderColor: AppColors.sourceBorderColor,
+                      //   textString: 'Coral Station',
+                      //   onTap: () {
+                      //     scoutingDataSetter.addTeleopPathPoint(
+                      //         TeleopPathPoint.coralStation);
+                      //   },
+                      // )
+                      child: TapEffectBox(
+                          color: AppColors.sourceAreaColor,
                           pressedColor: AppColors.boolBtnTrueColor,
                           borderColor: AppColors.sourceBorderColor,
-                          textString: 'Coral Station',
                           onTap: () {
                             scoutingDataSetter.addTeleopPathPoint(
                                 TeleopPathPoint.coralStation);
                           },
-                        )
-                        // child: Row(
-                        //   children: [
-                        //     Expanded(
-                        //         flex: 14,
-                        //         child: ColorChangeInkwell(
-                        //           initialColor: AppColors.sourceAreaColor,
-                        //           pressedColor: AppColors.boolBtnTrueColor,
-                        //           borderColor: AppColors.sourceBorderColor,
-                        //           // 點擊時顏色
-                        //           textString: 'Left Coral Station',
-                        //           onTap: () {
-                        //             scoutingDataSetter.addTeleopPathPoint(
-                        //                 TeleopPathPoint.leftCoralStation);
-                        //           },
-                        //         )),
-                        //     Spacer(),
-                        //     Expanded(
-                        //         flex: 14,
-                        //         child: ColorChangeInkwell(
-                        //           initialColor: AppColors.sourceAreaColor,
-                        //           pressedColor: AppColors.boolBtnTrueColor,
-                        //           borderColor: AppColors.sourceBorderColor,
-                        //           // 點擊時顏色
-                        //           textString: 'Right Coral Station',
-                        //           onTap: () {
-                        //             scoutingDataSetter.addTeleopPathPoint(
-                        //                 TeleopPathPoint.rightCoralStation);
-                        //           },
-                        //         )),
-                        //   ],
-                        // )
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CoralImage(
+                                sideLength: 80,
+                              ),
+                              Text(
+                                ' Coral Station',
+                                style: TextStyle(
+                                  fontSize: 27,
+                                ),
+                              ),
+                            ],
+                          )),
+                      // child: Row(
+                      //   children: [
+                      //     Expanded(
+                      //         flex: 14,
+                      //         child: ColorChangeInkwell(
+                      //           initialColor: AppColors.sourceAreaColor,
+                      //           pressedColor: AppColors.boolBtnTrueColor,
+                      //           borderColor: AppColors.sourceBorderColor,
+                      //           // 點擊時顏色
+                      //           textString: 'Left Coral Station',
+                      //           onTap: () {
+                      //             scoutingDataSetter.addTeleopPathPoint(
+                      //                 TeleopPathPoint.leftCoralStation);
+                      //           },
+                      //         )),
+                      //     Spacer(),
+                      //     Expanded(
+                      //         flex: 14,
+                      //         child: ColorChangeInkwell(
+                      //           initialColor: AppColors.sourceAreaColor,
+                      //           pressedColor: AppColors.boolBtnTrueColor,
+                      //           borderColor: AppColors.sourceBorderColor,
+                      //           // 點擊時顏色
+                      //           textString: 'Right Coral Station',
+                      //           onTap: () {
+                      //             scoutingDataSetter.addTeleopPathPoint(
+                      //                 TeleopPathPoint.rightCoralStation);
+                      //           },
+                      //         )),
+                      //   ],
+                      // )
                     ),
                     Spacer(),
                     Expanded(
@@ -90,33 +114,54 @@ class _TeleopPageState extends State<TeleopPage> {
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.sourceAreaColor,
-                                pressedColor: AppColors.boolBtnTrueColor,
-                                borderColor: AppColors.sourceBorderColor,
-                                textString: 'Ground Algae',
-                                onTap: () {
-                                  scoutingDataSetter.addTeleopPathPoint(
-                                      TeleopPathPoint.groundAlgae);
-                                },
-                              ),
-                            ),
+                                flex: 14,
+                                child: TapEffectBox(
+                                  color: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  onTap: () {
+                                    scoutingDataSetter.addTeleopPathPoint(
+                                        TeleopPathPoint.groundAlgae);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlgaeImage(
+                                        sideLength: 60,
+                                      ),
+                                      Text(
+                                        ' Ground Algae',
+                                        style: TextStyle(
+                                          fontSize: 27,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                             Spacer(),
                             Expanded(
                                 flex: 14,
-                                child: ColorChangeInkwell(
-                                  initialColor: AppColors.sourceAreaColor,
+                                child: TapEffectBox(
+                                  color: AppColors.sourceAreaColor,
                                   pressedColor: AppColors.boolBtnTrueColor,
                                   borderColor: AppColors.sourceBorderColor,
-                                  textString: 'Ground Coral',
                                   onTap: () {
                                     scoutingDataSetter.addTeleopPathPoint(
                                         TeleopPathPoint.groundCoral);
                                   },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CoralImage(
+                                        sideLength: 60,
+                                      ),
+                                      TeleopWidgetText(' Ground Coral'),
+                                    ],
+                                  ),
                                 )),
                           ],
                         )),
+
                     Spacer(),
                     Expanded(
                         flex: 5,
@@ -124,93 +169,106 @@ class _TeleopPageState extends State<TeleopPage> {
                           children: [
                             Expanded(
                               flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.scoreAreaColor,
+                              child: TapEffectBox(
+                                color: AppColors.scoreAreaColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
-                                textString: 'Processor',
                                 borderColor: AppColors.scoreBorderColor,
                                 onTap: () {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.processor);
                                 },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    AlgaeImage(
+                                      sideLength: 60,
+                                    ),
+                                    TeleopWidgetText(' Processor'),
+                                  ],
+                                ),
                               ),
                             ),
                             Spacer(),
                             Expanded(
                                 flex: 14,
-                                child: ColorChangeInkwell(
-                                  initialColor: AppColors.scoreAreaColor,
+                                child: TapEffectBox(
+                                  color: AppColors.scoreAreaColor,
                                   pressedColor: AppColors.boolBtnTrueColor,
                                   borderColor: AppColors.scoreBorderColor,
-                                  textString: 'Net',
                                   onTap: () {
-                                    scoutingDataSetter
-                                        .addTeleopPathPoint(TeleopPathPoint.net);
+                                    scoutingDataSetter.addTeleopPathPoint(
+                                        TeleopPathPoint.net);
                                   },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlgaeImage(
+                                        sideLength: 60,
+                                      ),
+                                      TeleopWidgetText(' Net'),
+                                    ],
+                                  ),
                                 )),
                           ],
                         )),
                     Spacer(),
                     Expanded(
-                        flex: 10,
-                        child: Row(
-                          children: [
-                            Expanded(
+                      flex: 10,
+                      child: Row(
+                        children: [
+                          Expanded(
                               flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.reefBtnColor,
+                              child: TapEffectBox(
+                                color: AppColors.reefBtnColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
                                 borderColor: AppColors.reefBtnBorderColor,
-                                textString: 'L2',
                                 onTap: () {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l2Reef);
                                 },
-                              ),
-                            ),
-                            Spacer(),
-                            Expanded(
+                                child: TeleopWidgetText('L2'),
+                              )),
+                          Spacer(),
+                          Expanded(
                               flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.reefBtnColor,
+                              child: TapEffectBox(
+                                color: AppColors.reefBtnColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
                                 borderColor: AppColors.reefBtnBorderColor,
-                                textString: 'L3',
                                 onTap: () {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l3Reef);
                                 },
-                              ),
-                            ),
-                            Spacer(),
-                            Expanded(
+                                child: TeleopWidgetText('L3'),
+                              )),
+                          Spacer(),
+                          Expanded(
                               flex: 14,
-                              child: ColorChangeInkwell(
-                                initialColor: AppColors.reefBtnColor,
+                              child: TapEffectBox(
+                                color: AppColors.reefBtnColor,
                                 pressedColor: AppColors.boolBtnTrueColor,
                                 borderColor: AppColors.reefBtnBorderColor,
-                                textString: 'L4',
                                 onTap: () {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l4Reef);
                                 },
-                              ),
-                            ),
-                          ],
-                        ),
+                                child: TeleopWidgetText('L4'),
+                              )),
+                        ],
+                      ),
                     ),
                     Spacer(),
                     Expanded(
-                        flex:6,
-                        child: ColorChangeInkwell(
-                          initialColor: AppColors.reefBtnColor,
+                        flex: 6,
+                        child: TapEffectBox(
+                          color: AppColors.reefBtnColor,
                           pressedColor: AppColors.boolBtnTrueColor,
                           borderColor: AppColors.reefBtnBorderColor,
-                          textString: 'L1',
                           onTap: () {
-                            scoutingDataSetter.addTeleopPathPoint(
-                                TeleopPathPoint.l1Reef);
+                            scoutingDataSetter
+                                .addTeleopPathPoint(TeleopPathPoint.l1Reef);
                           },
+                          child: TeleopWidgetText('L1'),
                         )),
 
                     // Expanded(
@@ -336,24 +394,27 @@ class _TeleopPageState extends State<TeleopPage> {
                 flex: 15,
                 child: Column(children: [
                   Expanded(
-                    flex: 8,
-                    // child: StatelessHangTimer(),
-                    child: HangTimer(
-                      onStart: (bargeAction) {
-                        scoutingDataSetter.updateTeleopData(bargeResult: bargeAction, bargeTried: bargeAction);
-                      },
-                      onEnd: (bargeTried, success, hangTime) {
-                        scoutingDataSetter.updateTeleopData(hangTime: hangTime);
-                        if (!success) {
-                          scoutingDataSetter.updateTeleopData(bargeResult: BargeAction.unset);
-                        }
-                      },
-                      onReset: () {
-                        scoutingDataSetter.updateTeleopData(
-                            bargeResult: BargeAction.unset);
-                      },
-                    )
-                  ),
+                      flex: 8,
+                      // child: StatelessHangTimer(),
+                      child: HangTimer(
+                        onStart: (bargeAction) {
+                          scoutingDataSetter.updateTeleopData(
+                              bargeResult: bargeAction,
+                              bargeTried: bargeAction);
+                        },
+                        onEnd: (bargeTried, success, hangTime) {
+                          scoutingDataSetter.updateTeleopData(
+                              hangTime: hangTime);
+                          if (!success) {
+                            scoutingDataSetter.updateTeleopData(
+                                bargeResult: BargeAction.unset);
+                          }
+                        },
+                        onReset: () {
+                          scoutingDataSetter.updateTeleopData(
+                              bargeResult: BargeAction.unset);
+                        },
+                      )),
                   Spacer(),
                   Expanded(
                     flex: 4,
@@ -422,8 +483,8 @@ class _TeleopPageState extends State<TeleopPage> {
                               child: TapBox(
                                 borderWidth:
                                     context.select<ScoutingData, BargePosition>(
-                                                (value) => value
-                                                    .teleopData.bargePosition) ==
+                                                (value) => value.teleopData
+                                                    .bargePosition) ==
                                             BargePosition.left
                                         ? 4
                                         : 2,
@@ -459,8 +520,8 @@ class _TeleopPageState extends State<TeleopPage> {
                               child: TapBox(
                                 borderWidth:
                                     context.select<ScoutingData, BargePosition>(
-                                                (value) => value
-                                                    .teleopData.bargePosition) ==
+                                                (value) => value.teleopData
+                                                    .bargePosition) ==
                                             BargePosition.right
                                         ? 4
                                         : 2,
