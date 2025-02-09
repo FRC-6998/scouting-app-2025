@@ -1,4 +1,5 @@
-  import 'dart:typed_data';
+  import 'dart:convert';
+import 'dart:typed_data';
   import 'package:flutter/services.dart';
 import 'package:scout_app_v0/utils/logger.dart';
   import 'package:yaml/yaml.dart';
@@ -7,7 +8,7 @@ import 'package:scout_app_v0/utils/logger.dart';
   import 'package:archive/archive.dart';
 
   class QRStringProcessor {
-    Map<dynamic, dynamic>? schema;
+    Map<String, dynamic>? schema;
 
     // QRStringProcessor(String? schemaPath, {String? schemaString}) {
     //   if (schemaPath != null) {
@@ -40,15 +41,14 @@ QRStringProcessor._();
     /// Load OpenAPI YAML schema from a string
     void loadSchemaFromYamlString(String yamlString) {
       // return loadYaml(yamlString) as Map<String, dynamic>;
-      schema = loadYaml(yamlString) as Map;
+      schema = jsonDecode(jsonEncode(loadYaml(yamlString)['schema']));
       logger.d(schema);
     }
 
     /// Load OpenAPI YAML schema from a file
     Future<void> loadSchemaFromFile(String filePath) async {
-      final fileData = await rootBundle.loadString(filePath);
-      schema = loadYaml(fileData) as Map;
-      logger.d(schema);
+      final yamlString = await rootBundle.loadString(filePath);
+      loadSchemaFromYamlString(yamlString);
     }
 
 
@@ -56,11 +56,12 @@ QRStringProcessor._();
     /// Flatten nested objects based on schema
     static List<dynamic> _flattenObject(
         Map<String, dynamic> data,
-        Map<dynamic, dynamic> schema,
+        Map<String, dynamic> schema,
         ) {
       final result = <dynamic>[];
 
       final properties = schema['properties'] as Map<String, dynamic>? ?? {};
+      logger.d('get properties: $properties');
       for (final entry in properties.entries) {
         final key = entry.key;
         Map<String, dynamic> prop = entry.value;
@@ -148,7 +149,7 @@ QRStringProcessor._();
     /// Unflatten data back into nested objects based on schema
     static (Map<String, dynamic>, int) _unflattenObject(
         List<dynamic> data,
-        Map<dynamic, dynamic> schema, [
+        Map<String, dynamic> schema, [
           int startIdx = 0,
         ]) {
 
@@ -261,6 +262,7 @@ QRStringProcessor._();
         throw Exception('Schema is empty');
       }
       final flattenedData = _flattenObject(data, schema!);
+      logger.d('flattenedData: $flattenedData');
       final packed = serialize(flattenedData);
       final compressed = Uint8List.fromList(ZLibEncoder().encode(packed));
       return Base45.encode(compressed);

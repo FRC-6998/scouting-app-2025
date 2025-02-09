@@ -57,6 +57,10 @@ class ResultPage extends StatelessWidget {
                             'Compresed QR Code',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
+                          SelectableText(
+                              qrStringProcessor.encodeQRObject(scoutingData.toJSON()),
+                              style: TextStyle(fontSize: 24, color: Colors.black),
+                          ),
                           SizedBox(height: 20),
                           // 顯示 JSON 內容（方便測試）
                           SelectableText(
