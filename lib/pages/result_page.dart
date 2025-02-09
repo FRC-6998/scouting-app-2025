@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:scout_app_v0/utils/QRcode_process.dart';
 import '../providers/scouting_data_provider.dart';
 
 class ResultPage extends StatelessWidget {
@@ -29,9 +30,34 @@ class ResultPage extends StatelessWidget {
               QrImageView(
                 data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
                 version: QrVersions.auto, // 自動設定版本
-                size: 200.0, // QR Code 的大小
+                size: 400.0, // QR Code 的大小
                 backgroundColor: Colors.white, // 背景顏色
               ),
+              FutureBuilder(
+                  future: QRStringProcessor.init('schema/scout_data_QRcode_schema.yml'),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      final qrStringProcessor = snapshot.data as QRStringProcessor;
+                      return QrImageView(
+                        // data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
+                        data: qrStringProcessor.encodeQRObject(scoutingData.toJSON()), // QR Code 的資料
+                        version: QrVersions.auto, // 自動設定版本
+                        size: 400.0, // QR Code 的大小
+                        backgroundColor: Colors.white, // 背景顏色
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }
+              ),
+
+        // QrImageView(
+        //         // data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
+        //         data: qrStringProcessor.encodeQRObject(scoutingData.toJSON()), // QR Code 的資料
+        //         version: QrVersions.auto, // 自動設定版本
+        //         size: 400.0, // QR Code 的大小
+        //         backgroundColor: Colors.white, // 背景顏色
+        //       ),
               Text(
                 'Scan this QR Code',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

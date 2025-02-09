@@ -1,0 +1,3 @@
+[submodule "assests/schema"]
+	path = assets/schema
+	url = https://github.com/FRC6998-8th/2025_scouting_schema.git
