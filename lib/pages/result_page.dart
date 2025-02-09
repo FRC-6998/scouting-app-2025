@@ -38,7 +38,7 @@ class ResultPage extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               FutureBuilder(
-                  future: QRStringProcessor.init('schema/scout_data_QRcode_schema.yml'),
+                  future: QRStringProcessor.init('assets/schema/scout_data_QRcode_schema.yml'),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.hasError) {
