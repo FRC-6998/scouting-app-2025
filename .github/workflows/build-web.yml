@@ -17,9 +17,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          token: ${{ secrets.SCHEMA_READ_TOKEN }}
+
+      - name: Checkout submodules with FG-PAT
+        run: |
+          git submodule sync
+          git submodule update --init --recursive --remote
+        env:
+          GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
+          GIT_ASKPASS: ""
+          GITHUB_TOKEN: ${{ secrets.SCHEMA_TOKEN }}  # 讓 Submodule 用 FG-PAT 拉取
+
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
