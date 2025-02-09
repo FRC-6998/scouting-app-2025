@@ -41,6 +41,9 @@ class ResultPage extends StatelessWidget {
                   future: QRStringProcessor.init('schema/scout_data_QRcode_schema.yml'),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
                       final qrStringProcessor = snapshot.data as QRStringProcessor;
                       return Column(
                         children: [
