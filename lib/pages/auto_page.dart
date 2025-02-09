@@ -437,16 +437,13 @@ class AutoPage extends StatelessWidget {
                                                               preload: Preload
                                                                   .coral);
                                                     },
-                                                    child: Center(
-                                                      child: Transform.rotate(
-                                                        angle: math.pi / 2,
-                                                        child: Image.asset(
-                                                          'assets/images/coral.png',
-                                                          width:
-                                                              70 * fieldFactor,
-                                                          height:
-                                                              70 * fieldFactor,
-                                                        ),
+                                                    child: Transform.rotate(
+                                                      angle: math.pi / 2,
+                                                      child: Image.asset(
+                                                        'assets/images/coral.png',
+                                                        width: 70 * fieldFactor,
+                                                        height:
+                                                            70 * fieldFactor,
                                                       ),
                                                     ),
                                                   );
@@ -489,13 +486,10 @@ class AutoPage extends StatelessWidget {
                                                               preload: Preload
                                                                   .algae);
                                                     },
-                                                    child: Center(
-                                                      child: Image.asset(
-                                                        'assets/images/algae.png',
-                                                        width: 65 * fieldFactor,
-                                                        height:
-                                                            65 * fieldFactor,
-                                                      ),
+                                                    child: Image.asset(
+                                                      'assets/images/algae.png',
+                                                      width: 65 * fieldFactor,
+                                                      height: 65 * fieldFactor,
                                                     ),
                                                   );
                                                 },
@@ -537,14 +531,10 @@ class AutoPage extends StatelessWidget {
                                                               preload:
                                                                   Preload.none);
                                                     },
-                                                    child: Center(
-                                                      child: Image.asset(
-                                                        'assets/images/none.png',
-                                                        width:
-                                                            100 * fieldFactor,
-                                                        height:
-                                                            100 * fieldFactor,
-                                                      ),
+                                                    child: Image.asset(
+                                                      'assets/images/none.png',
+                                                      width: 100 * fieldFactor,
+                                                      height: 100 * fieldFactor,
                                                     ),
                                                   );
                                                 },
@@ -578,13 +568,11 @@ class AutoPage extends StatelessWidget {
                                       scoutingDataSetter.updateAutoData(
                                           leave: !leave);
                                     },
-                                    child: Center(
-                                      child: Text(
-                                        'AUTO LEAVE',
-                                        style: TextStyle(
-                                          // color: AppColors.prematchBtnTextColor,
-                                          fontSize: 24 * fieldFactor,
-                                        ),
+                                    child: Text(
+                                      'AUTO LEAVE',
+                                      style: TextStyle(
+                                        // color: AppColors.prematchBtnTextColor,
+                                        fontSize: 24 * fieldFactor,
                                       ),
                                     ),
                                   );
@@ -627,8 +615,7 @@ class AutoPage extends StatelessWidget {
                                         scoutingDataSetter.addAutoPathPoint(
                                             AutoPathPoint.reefAlgae);
                                       },
-                                      child: Center(
-                                          child: Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -644,7 +631,7 @@ class AutoPage extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      )),
+                                      ),
                                     ),
                                   ),
                                   Spacer(
@@ -676,12 +663,10 @@ class AutoPage extends StatelessWidget {
                                                 .changeAutoPathPointStatus(
                                                     !pathPointIsSuccess);
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              'Failed',
-                                              style: TextStyle(
-                                                fontSize: 24 * fieldFactor,
-                                              ),
+                                          child: Text(
+                                            'Failed',
+                                            style: TextStyle(
+                                              fontSize: 24 * fieldFactor,
                                             ),
                                           ),
                                         );
@@ -738,12 +723,10 @@ class AutoPage extends StatelessWidget {
                                             // logger.d("L1");
                                             // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              'L1',
-                                              style: TextStyle(
-                                                fontSize: 24 * fieldFactor,
-                                              ),
+                                          child: Text(
+                                            'L1',
+                                            style: TextStyle(
+                                              fontSize: 24 * fieldFactor,
                                             ),
                                           ),
                                         )),
@@ -774,12 +757,10 @@ class AutoPage extends StatelessWidget {
                                             // logger.d("L2");
                                             // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              'L2',
-                                              style: TextStyle(
-                                                fontSize: 24 * fieldFactor,
-                                              ),
+                                          child: Text(
+                                            'L2',
+                                            style: TextStyle(
+                                              fontSize: 24 * fieldFactor,
                                             ),
                                           ),
                                         )),
@@ -810,12 +791,10 @@ class AutoPage extends StatelessWidget {
                                             // logger.d("L3");
                                             // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              'L3',
-                                              style: TextStyle(
-                                                fontSize: 24 * fieldFactor,
-                                              ),
+                                          child: Text(
+                                            'L3',
+                                            style: TextStyle(
+                                              fontSize: 24 * fieldFactor,
                                             ),
                                           ),
                                         )),
@@ -846,12 +825,10 @@ class AutoPage extends StatelessWidget {
                                             // logger.d("L4");
                                             // logger.d(AutoPathPoint.l1ReefAB.index+context.read<ScoutingDataProvider>().autoData.selectedReefSide);
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              'L4',
-                                              style: TextStyle(
-                                                fontSize: 24 * fieldFactor,
-                                              ),
+                                          child: Text(
+                                            'L4',
+                                            style: TextStyle(
+                                              fontSize: 24 * fieldFactor,
                                             ),
                                           ),
                                         )),

@@ -276,7 +276,6 @@ class _InfoPageState extends State<InfoPage> {
                             : Colors.lightBlueAccent,
                         borderWidth: 3,
                         borderRadius: 10,
-                        child: Center(
                           child: Text(
                             'Blue Alliance',
                             style: TextStyle(
@@ -286,7 +285,6 @@ class _InfoPageState extends State<InfoPage> {
                                   : Colors.black,
                             ),
                           ),
-                        ),
                       ),
                     ),
                     Spacer(flex: 1),
@@ -305,7 +303,6 @@ class _InfoPageState extends State<InfoPage> {
                             : Color(0xFFFF8989),
                         borderWidth: 3,
                         borderRadius: 10,
-                        child: Center(
                           child: Text(
                             'Red Alliance',
                             style: TextStyle(
@@ -315,7 +312,6 @@ class _InfoPageState extends State<InfoPage> {
                                   : Colors.black,
                             ),
                           ),
-                        ),
                       ),
                     ),
                     Spacer(flex: 2),
