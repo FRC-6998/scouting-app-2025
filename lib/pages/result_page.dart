@@ -34,7 +34,7 @@ class ResultPage extends StatelessWidget {
                 backgroundColor: Colors.white, // 背景顏色
               ),
               Text(
-                'Scan this QR Code',
+                'Scan this fat QR Code',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               FutureBuilder(
