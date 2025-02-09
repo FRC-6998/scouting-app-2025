@@ -23,6 +23,7 @@ jobs:
           repository: FRC6998-8th/2025_scouting_schema
           path: assets/schema
           token: ${{ secrets.SCHEMA_READ_TOKEN }}
+      - run: ls -l assets/schema
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
