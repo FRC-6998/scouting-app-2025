@@ -220,8 +220,7 @@ class _InfoPageState extends State<InfoPage> {
                 Spacer(flex: 2),
                 TextFormField(
                   controller: _matchNumberController,
-                  keyboardType: TextInputType.numberWithOptions(
-                      signed: true, decimal: false),
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "Enter match number",
                     border: OutlineInputBorder(),
