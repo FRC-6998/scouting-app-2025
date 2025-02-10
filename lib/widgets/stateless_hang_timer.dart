@@ -4,7 +4,7 @@ import '../widgets/text_widgets.dart';
 import '../utils/logger.dart' show logger;
 
 class StatelessHangTimer extends StatelessWidget {
-  const StatelessHangTimer({Key? key}) : super(key: key);
+  const StatelessHangTimer({super.key});
 
   @override
   Widget build(BuildContext context) {

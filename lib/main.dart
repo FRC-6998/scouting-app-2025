@@ -71,31 +71,12 @@ class AppWrapper extends StatelessWidget {
   }
 }
 
-// class VersionBadge extends StatelessWidget {
-//   const VersionBadge({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     const String version = String.fromEnvironment("APP_VERSION", defaultValue: "1.0.0");
-//     const String buildNumber = String.fromEnvironment("BUILD_NUMBER", defaultValue: "1");
-//
-//     return Positioned(
-//       left: 10,
-//       bottom: 10,
-//       child: Text(
-//         "v$version+$buildNumber",
-//         style: const TextStyle(fontSize: 12, color: Colors.grey),
-//       ),
-//     );
-//   }
-// }
-
 // 取得版本號並顯示在左下角
 class VersionBadge extends StatefulWidget {
   const VersionBadge({super.key});
 
   @override
-  _VersionBadgeState createState() => _VersionBadgeState();
+  State<VersionBadge> createState() => _VersionBadgeState();
 }
 
 class _VersionBadgeState extends State<VersionBadge> {

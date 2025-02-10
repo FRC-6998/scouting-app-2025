@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scout_app_v0/constants.dart';
-import 'dart:math' as math;
 
-import '../utils/logger.dart' show logger;
-import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
 
 class SubTitleText extends StatelessWidget {
   final String text;

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:scout_app_v0/utils/QRcode_process.dart';
+import 'package:scout_app_v0/utils/qrcode_process.dart';
 import '../providers/scouting_data_provider.dart';
 
 class ResultPage extends StatelessWidget {

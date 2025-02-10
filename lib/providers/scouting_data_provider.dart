@@ -148,7 +148,7 @@ class ScoutingData extends ChangeNotifier {
   }
 
   bool infoFieldsFilled() {
-    return _scout.isNotEmpty && _matchLevel != MatchLevel.unset && _matchNumber != 0 && _eventKey.isNotEmpty && _teamNumber != 0 && _alliance != Alliance.unset;
+    return _scout.isNotEmpty && _matchLevel != MatchLevel.unset && _matchNumber.isNotEmpty && _eventKey.isNotEmpty && _teamNumber.isNotEmpty && _alliance != Alliance.unset;
   }
 
   void updateInfoData({

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../utils/logger.dart' show logger;
@@ -11,11 +10,10 @@ class HangTimer extends StatefulWidget {
   final Function(BargeAction bargeAction)? onStart;
   final VoidCallback? onReset;
 
-  const HangTimer({this.onEnd, this.onStart, this.onReset, Key? key})
-      : super(key: key);
+  const HangTimer({this.onEnd, this.onStart, this.onReset, super.key});
 
   @override
-  _HangTimerState createState() => _HangTimerState();
+  State<HangTimer> createState() => _HangTimerState();
 }
 
 class _HangTimerState extends State<HangTimer>

@@ -12,11 +12,11 @@ class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
 
   @override
-  _InfoPageState createState() => _InfoPageState();
+  State<InfoPage> createState() => _InfoPageState();
 }
 
 class _InfoPageState extends State<InfoPage> {
-  late GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // 用於表單的全局鍵
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // 用於表單的全局鍵
   // 用於保存 Scouter name、match number 和 team number 的控制器
   late TextEditingController _scouterNameController =
       TextEditingController(text: ScoutingData().scout);

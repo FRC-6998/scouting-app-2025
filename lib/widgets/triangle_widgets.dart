@@ -64,52 +64,48 @@ class TrianglePainter extends CustomPainter {
   }
 }
 
+
 class TriangleWidget extends StatelessWidget {
   final double? top;
-  double? left;
-  double? right;
+  final double? left;
+  final double? right;
   final double? bottom;
 
-  double sideLength = 0;
-
+  final double sideLength;
   final double factor;
-
   final Color color;
-
   final Color borderColor;
-  double borderWidth;
+  final double borderWidth;
+
+  late final double _height;
+  late final Offset _apex;
+  late final Offset _baseStart;
+  late final Offset _baseEnd;
 
   final double rotate;
-
-  double _height = 0;
-  Offset _apex = Offset.zero;
-  Offset _baseStart = Offset.zero;
-  Offset _baseEnd = Offset.zero;
-
   final void Function(TapDownDetails)? onTapDown;
 
   TriangleWidget({
-    required this.sideLength,
+    required double sideLength,
     this.top,
-    this.left,
-    this.right,
+    left,
+    right,
     this.bottom,
     this.factor = 1,
     this.color = Colors.blue,
     this.borderColor = Colors.black,
-    this.borderWidth = 3,
+    double borderWidth = 3,
     this.rotate = 0,
     this.onTapDown,
     super.key,
-  }) {
-    left = addIfNotNull(left, -sideLength / 2);
-    right = addIfNotNull(right, sideLength / 2);
-    borderWidth *= factor;
-    sideLength *= factor;
-    _height = sideLength * math.sqrt(3) / 2;
-    _apex = Offset(sideLength / 2, 0);
+  })  : left = addIfNotNull(left, -sideLength / 2),
+        right = addIfNotNull(right, sideLength / 2),
+        sideLength = sideLength * factor,
+        borderWidth = borderWidth * factor {
+    _height = this.sideLength * math.sqrt(3) / 2;
+    _apex = Offset(this.sideLength / 2, 0);
     _baseStart = Offset(0, _height);
-    _baseEnd = Offset(sideLength, _height);
+    _baseEnd = Offset(this.sideLength, _height);
   }
 
   bool _isPointInsideTriangle(Offset p, Offset a, Offset b, Offset c) {
