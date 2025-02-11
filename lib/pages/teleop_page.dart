@@ -39,30 +39,57 @@ class _TeleopPageState extends State<TeleopPage> {
                   flex: 15,
                   child: Column(children: [
                     Expanded(
-                      flex: 5,
-                      child: TapEffectBox(
-                          color: AppColors.sourceAreaColor,
-                          pressedColor: AppColors.boolBtnTrueColor,
-                          borderColor: AppColors.sourceBorderColor,
-                          onTap: () {
-                            scoutingDataSetter.addTeleopPathPoint(
-                                TeleopPathPoint.coralStation);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CoralImage(
-                                sideLength: 80,
-                              ),
-                              Text(
-                                ' Coral Station',
-                                style: TextStyle(
-                                  fontSize: 27,
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
+                        flex: 5,
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 14,
+                                child: TapEffectBox(
+                                  color: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  onTap: () {
+                                    scoutingDataSetter.addTeleopPathPoint(
+                                        TeleopPathPoint.reefAlgae);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AlgaeImage(
+                                        sideLength: 60,
+                                      ),
+                                      Text(
+                                        ' Reef Algae',
+                                        style: TextStyle(
+                                          fontSize: 27,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            Spacer(),
+                            Expanded(
+                                flex: 14,
+                                child: TapEffectBox(
+                                  color: AppColors.sourceAreaColor,
+                                  pressedColor: AppColors.boolBtnTrueColor,
+                                  borderColor: AppColors.sourceBorderColor,
+                                  onTap: () {
+                                    scoutingDataSetter.addTeleopPathPoint(
+                                        TeleopPathPoint.coralStation);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CoralImage(
+                                        sideLength: 60,
+                                      ),
+                                      TeleopWidgetText(' Coral Station'),
+                                    ],
+                                  ),
+                                )),
+                          ],
+                        )),
                     Spacer(),
                     Expanded(
                         flex: 5,
