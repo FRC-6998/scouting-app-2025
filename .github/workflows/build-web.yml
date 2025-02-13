@@ -28,7 +28,7 @@ jobs:
         with:
           channel: stable
 #      - run: flutter config --enable-web
-      - run: flutter build web --release --base-href "${{ github.event.repository.name }}"
+      - run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
       - name: Deploy to GitHub Pages
         run: |
           git worktree add build/web gh-pages
