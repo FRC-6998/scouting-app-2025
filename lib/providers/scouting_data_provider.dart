@@ -218,6 +218,7 @@ class ScoutingData extends ChangeNotifier {
       _ulid = Ulid().toString();
     }
     return {
+      'data_type': 'objective_data',
       'ulid': _ulid,
       'scout': scout,
       'match_level': matchLevel.name,
