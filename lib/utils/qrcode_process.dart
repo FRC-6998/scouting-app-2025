@@ -86,7 +86,12 @@ class QRStringProcessor {
       // Handle enums
       else if (prop.containsKey('enum')) {
         final enumList = prop['enum'] as List<dynamic>;
-        result.add(childData != null ? enumList.indexOf(childData) : -1);
+        if (childData != null && enumList.contains(childData)) {
+          result.add(enumList.indexOf(childData));
+        } else {
+          result.add(-1);
+          result.add(childData);
+        }
       }
       // Handle primitive types
       else {
@@ -131,7 +136,12 @@ class QRStringProcessor {
     else if (schema.containsKey('enum')) {
       final enumList = schema['enum'] as List<dynamic>;
       for (final item in data) {
-        result.add(enumList.indexOf(item));
+        if (enumList.contains(item)) {
+          result.add(enumList.indexOf(item));
+        } else {
+          result.add(-1);
+          result.add(item);
+        }
       }
     }
     // Primitive type array
@@ -180,8 +190,12 @@ class QRStringProcessor {
       else if (prop.containsKey('enum')) {
         final enumList = prop['enum'] as List<dynamic>;
         final value = data[idx] as int;
-        result[key] =
-            (value >= 0 && value < enumList.length) ? enumList[value] : null;
+        if (value != -1) {
+          result[key] = enumList[value];
+        } else {
+          result[key] = data[idx + 1];
+          idx++;
+        }
         idx++;
       }
       // Handle primitive types
@@ -230,7 +244,12 @@ class QRStringProcessor {
       else if (schema.containsKey('enum')) {
         final enumList = schema['enum'] as List<dynamic>;
         final value = data[idx] as int;
-        result.add(enumList[value]);
+        if (value != -1) {
+          result.add(enumList[value]);
+        } else {
+          result.add(data[idx + 1]);
+          idx++;
+        }
         idx++;
       }
       // Primitive type array
