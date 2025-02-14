@@ -40,8 +40,8 @@ class ResultPage extends StatelessWidget {
                         final qrStringProcessor =
                             snapshot.data as QRStringProcessor;
                         return QrImageView(
-                          data: qrStringProcessor.encodeQRObject(
-                              scoutingData.toJSON()), // QR Code 的資料
+                          data: 'objective_data|${qrStringProcessor.encodeQRObject(
+                              scoutingData.toJSON())}', // QR Code 的資料
                           version: QrVersions.auto, // 自動設定版本
                           size: min(constraints.maxHeight,
                               constraints.maxWidth), // QR Code 的大小
