@@ -139,6 +139,7 @@ class ScoutingData extends ChangeNotifier {
     _eventKey = '2025NNKIEMock';
     _teamNumber = '';
     _alliance = Alliance.unset;
+    _comment = '';
     _autoData.preload = Preload.unset;
     _autoData.startPosition = AutoStartPosition.unset;
     _autoData.leave = false;
