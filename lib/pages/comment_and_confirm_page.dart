@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:scout_app_v0/widgets/commit_confirm_dialog.dart';
+import 'package:scout_app_v0/providers/scouting_data_provider.dart';
 
 class CommentAndConfirmPage extends StatelessWidget {
   const CommentAndConfirmPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ScoutingData scoutingData =
+        Provider.of<ScoutingData>(context, listen: false);
+
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Comment and Confirm Page'),
+          title: const Text('Comment and Confirm Page',
+              style: TextStyle(fontSize: 30)),
+          automaticallyImplyLeading: false,
         ),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -16,33 +25,72 @@ class CommentAndConfirmPage extends StatelessWidget {
               // Expanded(
               //   flex: 1,
               //     child:
+              // Spacer(),
               const Align(
                   alignment: Alignment.topLeft,
                   child: Text('Comment:', style: TextStyle(fontSize: 25))),
               // ),
-              // Spacer(),
+              Spacer(),
               Expanded(
-                flex: 10,
-                child: TextField(
-                  maxLines: null,
-                  expands: true,
-                  textAlignVertical: TextAlignVertical.top,
-                  style: const TextStyle(fontSize: 20),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Please enter your comment here',
-                  ),
+                flex: 26,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 22,
+                      child: TextField(
+                        maxLines: null,
+                        expands: true,
+                        textAlignVertical: TextAlignVertical.top,
+                        style: const TextStyle(fontSize: 25),
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          hintText: 'Please enter your comment here',
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Expanded(
+                      flex: 18,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Scout: ${scoutingData.scout}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Event Key: ${scoutingData.eventKey}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Match Level: ${scoutingData.matchLevel.name}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Match Number: ${scoutingData.matchNumber}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Alliance: ${scoutingData.alliance.name}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Team Number: ${scoutingData.teamNumber}',
+                              style: TextStyle(fontSize: 25)),
+                          Text(
+                              'Hang Type: ${scoutingData.teleopData.bargeResult.name}',
+                              style: TextStyle(fontSize: 25)),
+                        ],
+                      ),
+//                       child: Text('''
+// Scout: ${scoutingData.scout}
+// Event Key: ${scoutingData.eventKey}
+// Match Level: ${scoutingData.matchLevel.name}
+// Match Number: ${scoutingData.matchNumber}
+// Alliance: ${scoutingData.alliance.name}
+// Team Number: ${scoutingData.teamNumber}
+// Hang Type: ${scoutingData.teleopData.bargeResult.name}
+//                       ''', style: TextStyle(fontSize: 25)),
+                    ),
+                  ],
                 ),
               ),
               Spacer(),
               Expanded(
-                  flex: 15,
-                  child: Container(
-                    color: Colors.red,
-                  )),
-              Spacer(),
-              Expanded(
-                  flex: 4,
+                  flex: 2,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -78,7 +126,8 @@ class CommentAndConfirmPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               // logger.d("comment");
-                              Navigator.pushNamed(context, '/result');
+                              // Navigator.pushNamed(context, '/result');
+                              showCommitConfirmDialog(context);
                             },
                             child: Text("Confirm",
                                 style: TextStyle(fontSize: 30))),
@@ -86,7 +135,9 @@ class CommentAndConfirmPage extends StatelessWidget {
                       Spacer(),
                     ],
                   )),
-              Spacer(),
+              Spacer(
+                flex: 2,
+              ),
             ],
           ),
         ));
