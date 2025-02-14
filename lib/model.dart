@@ -98,7 +98,7 @@ enum BargeAction {
 }
 
 enum BargePosition {
-  unset,
+  none,
   left,
   center,
   right,

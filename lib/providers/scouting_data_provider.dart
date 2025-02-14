@@ -65,7 +65,7 @@ class TeleopData {
     this.hangTime = 0,
     this.bargeTried = BargeAction.unset,
     this.bargeResult = BargeAction.unset,
-    this.bargePosition = BargePosition.unset,
+    this.bargePosition = BargePosition.none,
   });
 
   bool allFieldsFilled() {
