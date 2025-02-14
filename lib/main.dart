@@ -8,7 +8,8 @@ import 'providers/scouting_data_provider.dart';
 import 'pages/info_page.dart';
 import 'pages/auto_page.dart';
 import 'pages/teleop_page.dart';
-import 'pages/result_page.dart';
+import 'pages/comment_and_confirm_page.dart';
+import 'pages/dev_result_page.dart';
 
 void main() {
   // debugProfileBuildsEnabled = true; // 追蹤 Widget 建構
@@ -16,15 +17,12 @@ void main() {
   // debugProfileLayoutsEnabled = true; // 追蹤 RenderObject 佈局
   // debugProfilePaintsEnabled = true; // 追蹤 RenderObject 繪製
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight
-  ]).then((_) {
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
+      .then((_) {
     runApp(
       ChangeNotifierProvider(
-          create: (context) => ScoutingData(),
-          child: const ScoutingApp()
-      ),
+          create: (context) => ScoutingData(), child: const ScoutingApp()),
     );
   });
 }
@@ -36,12 +34,14 @@ class ScoutingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Scouting App',
-      home: const AppWrapper(child: InfoPage()),  // 包裝 InfoPage
+      home: const AppWrapper(child: InfoPage()), // 包裝 InfoPage
       routes: {
-        '/info': (context) => const AppWrapper(child: InfoPage()),  // 路由 '/info' 對應到 InfoPage
+        '/info': (context) =>
+            const AppWrapper(child: InfoPage()), // 路由 '/info' 對應到 InfoPage
         '/auto': (context) => const AppWrapper(child: AutoPage()),
         '/teleop': (context) => const AppWrapper(child: TeleopPage()),
-        '/result': (context) => const AppWrapper(child: ResultPage()),
+        '/comment': (context) => const AppWrapper(child: CommentAndConfirmPage()),
+        '/result': (context) => const AppWrapper(child: DevResultPage()),
       },
     );
   }
@@ -63,11 +63,11 @@ class AppWrapper extends StatelessWidget {
     //   ),
     // );
     return Stack(
-            children: [
-              child,  // 主要畫面內容
-              const VersionBadge(),  // 左下角版本號
-            ],
-          );
+      children: [
+        child, // 主要畫面內容
+        const VersionBadge(), // 左下角版本號
+      ],
+    );
   }
 }
 

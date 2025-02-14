@@ -208,7 +208,18 @@ class _TeleopPageState extends State<TeleopPage> {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l2Reef);
                                 },
-                                child: TeleopWidgetText('L2'),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TeleopWidgetText(' L2'),
+                                    Text(
+                                      '10',
+                                      style: TextStyle(
+                                        fontSize: 27,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               )),
                           Spacer(),
                           Expanded(
@@ -453,8 +464,8 @@ class _TeleopPageState extends State<TeleopPage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  logger.d("result");
-                                  Navigator.pushNamed(context, '/result');
+                                  logger.d("comment");
+                                  Navigator.pushNamed(context, '/comment');
                                 },
                                 child: Text("End",
                                     style: TextStyle(fontSize: 30))),
