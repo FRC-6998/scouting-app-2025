@@ -16,21 +16,21 @@ class CommentAndConfirmPage extends StatelessWidget {
               // Expanded(
               //   flex: 1,
               //     child:
-          const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Comment:', style: TextStyle(fontSize: 25))),
-        // ),
+              const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Comment:', style: TextStyle(fontSize: 25))),
+              // ),
               // Spacer(),
               Expanded(
                 flex: 10,
                 child: TextField(
                   maxLines: null,
                   expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                  style: const TextStyle(fontSize: 20),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    // labelText: 'Comment',
                     hintText: 'Please enter your comment here',
-                    // alignLabelWithHint: true,
                   ),
                 ),
               ),
@@ -59,12 +59,13 @@ class CommentAndConfirmPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               // logger.d("Back");
-                              Navigator.pushNamed(context, '/auto');
+                              // Navigator.pop(context);
+                              Navigator.pushNamed(context, '/teleop');
                             },
                             child:
-                                Text("Auto", style: TextStyle(fontSize: 30))),
+                                Text("Telop", style: TextStyle(fontSize: 30))),
                       ),
-                      Spacer(flex:2),
+                      Spacer(flex: 2),
                       Expanded(
                         flex: 5,
                         child: ElevatedButton(
@@ -77,9 +78,10 @@ class CommentAndConfirmPage extends StatelessWidget {
                             ),
                             onPressed: () {
                               // logger.d("comment");
-                              Navigator.pushNamed(context, '/comment');
+                              Navigator.pushNamed(context, '/result');
                             },
-                            child: Text("End", style: TextStyle(fontSize: 30))),
+                            child: Text("Confirm",
+                                style: TextStyle(fontSize: 30))),
                       ),
                       Spacer(),
                     ],

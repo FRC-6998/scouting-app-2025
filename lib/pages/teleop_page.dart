@@ -208,18 +208,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l2Reef);
                                 },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TeleopWidgetText(' L2'),
-                                    Text(
-                                      '10',
-                                      style: TextStyle(
-                                        fontSize: 27,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: TeleopWidgetText('L2'),
                               )),
                           Spacer(),
                           Expanded(
