@@ -30,13 +30,10 @@ jobs:
 #      - run: flutter config --enable-web
       - run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
       - name: Deploy to GitHub Pages
-        run: |
-          git worktree add build/web gh-pages
-          cd build/web
-          git add .
-          git commit -m "Deploy latest Flutter Web"
-          git push origin gh-pages
-          cd ../..
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build/web
 
 
 #      - uses: bluefireteam/flutter-gh-pages@v7
