@@ -351,6 +351,17 @@ class AutoPage extends StatelessWidget {
                         },
                       ),
                     ),
+                    Positioned(
+                      left: 120 * fieldFactor,
+                      bottom: 0,
+                      child: Text(
+                        // 'Last Point: ',
+                        'Last Point: ${context.select((ScoutingData scoutingData) => scoutingData.autoData.path.isNotEmpty ? scoutingData.autoData.path.last['point'] : 'None')}',
+                        style: TextStyle(
+                          fontSize: 24 * fieldFactor,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
