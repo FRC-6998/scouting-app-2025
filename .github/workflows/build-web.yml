@@ -39,5 +39,5 @@ jobs:
         with:
           branch: gh-pages
           folder: build/web
-          git-config-name: github-actions
-          git-config-email: github-actions@github.com
+          # git-config-name: github-actions
+          # git-config-email: github-actions@github.com
