@@ -1,30 +1,58 @@
 import 'package:flutter/material.dart';
 
-// 弹出对话框
-Future<bool?> showCommitConfirmDialog(context) {
+Future<bool?> showAlertDialog(
+    context, {
+      String title = 'Alert',
+      String content = 'This is an alert dialog.',
+      String confirmText = 'OK',
+      String cancelText = 'Cancel',
+      double fontSize = 20,
+      VoidCallback? onConfirm,
+      VoidCallback? onCancel,
+    }) {
   return showDialog<bool>(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text("Confirm"),
-        content: Text("Are you sure want to commit data?\nData cannot be modified after commit."),
-        // content: Column(children: [
-        //   Text("Are you sure want to commit data?"),
-        //   Text("Data cannot be modified after commit."),
-        // ]),
+        title: Text(title),
+        content: Text(content, style: TextStyle(fontSize: fontSize)),
         actions: <Widget>[
           TextButton(
-            child: Text("Back to Edit"),
-            onPressed: () => Navigator.of(context).pop(),
+            child: Text(cancelText, style: TextStyle(fontSize: fontSize)),
+            onPressed: () {
+              if (onCancel != null) {
+                onCancel();
+              }
+            },
           ),
           TextButton(
-            child: Text("Commit data"),
+            child: Text(confirmText, style: TextStyle(fontSize: fontSize)),
             onPressed: () {
-              Navigator.pushNamed(context, '/result');
+              if (onConfirm != null) {
+                onConfirm();
+              }
             },
           ),
         ],
       );
+    },
+  );
+}
+
+
+// 弹出对话框
+Future<bool?> showCommitConfirmDialog(context) {
+  return showAlertDialog(
+    context,
+    title: 'Commit Confirm',
+    content: 'Are you sure want to commit data?\nData cannot be modified after commit.',
+    confirmText: 'Commit data',
+    cancelText: 'Cancel',
+    onConfirm: () {
+      Navigator.pushNamed(context, '/result');
+    },
+    onCancel: () {
+      Navigator.of(context).pop();
     },
   );
 }

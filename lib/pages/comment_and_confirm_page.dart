@@ -12,6 +12,7 @@ class CommentAndConfirmPage extends StatelessWidget {
     ScoutingData scoutingData =
         Provider.of<ScoutingData>(context, listen: false);
 
+    TextEditingController commentController = TextEditingController(text: scoutingData.comment);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Comment and Confirm Page',
@@ -49,6 +50,10 @@ class CommentAndConfirmPage extends StatelessWidget {
                           ),
                           hintText: 'Please enter your comment here',
                         ),
+                        controller: commentController,
+                        onChanged: (text) {
+                          scoutingData.updateComment(text);
+                        },
                       ),
                     ),
                     Spacer(),
@@ -75,15 +80,6 @@ class CommentAndConfirmPage extends StatelessWidget {
                               style: TextStyle(fontSize: 25)),
                         ],
                       ),
-//                       child: Text('''
-// Scout: ${scoutingData.scout}
-// Event Key: ${scoutingData.eventKey}
-// Match Level: ${scoutingData.matchLevel.name}
-// Match Number: ${scoutingData.matchNumber}
-// Alliance: ${scoutingData.alliance.name}
-// Team Number: ${scoutingData.teamNumber}
-// Hang Type: ${scoutingData.teleopData.bargeResult.name}
-//                       ''', style: TextStyle(fontSize: 25)),
                     ),
                   ],
                 ),

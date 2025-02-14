@@ -1,108 +1,116 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scout_app_v0/utils/qrcode_process.dart';
+import 'package:scout_app_v0/widgets/commit_confirm_dialog.dart';
 import '../providers/scouting_data_provider.dart';
 
-class DevResultPage extends StatelessWidget {
-  const DevResultPage({super.key});
+class ResultPage extends StatelessWidget {
+  const ResultPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // 獲取 ScoutingDataProvider 資料
-    ScoutingData scoutingData = Provider.of<ScoutingData>(context);
+    ScoutingData scoutingData =
+        Provider.of<ScoutingData>(context, listen: false);
 
     // 一次性將所有資料轉換為 JSON 字串
     // scoutingData.toJSON();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result Page'),
+        title: const Text('Result Page', style: TextStyle(fontSize: 30)),
+        automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // 使用 qr_flutter 生成 QR Code，傳遞 JSON 字串
-              QrImageView(
-                data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
-                version: QrVersions.auto, // 自動設定版本
-                size: 400.0, // QR Code 的大小
-                backgroundColor: Colors.white, // 背景顏色
-              ),
-              Text(
-                'Scan this fat QR Code',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              FutureBuilder(
-                  future: QRStringProcessor.init(
-                      'assets/schema/scout_data_QRcode_schema.yml'),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
+      body: Container(
+          margin: const EdgeInsets.all(20),
+          child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            return Row(
+              children: [
+                FutureBuilder(
+                    future: QRStringProcessor.init(
+                        'assets/schema/objective_data_QRcode_schema.yaml'),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        final qrStringProcessor =
+                            snapshot.data as QRStringProcessor;
+                        return QrImageView(
+                          data: qrStringProcessor.encodeQRObject(
+                              scoutingData.toJSON()), // QR Code 的資料
+                          version: QrVersions.auto, // 自動設定版本
+                          size: min(constraints.maxHeight,
+                              constraints.maxWidth), // QR Code 的大小
+                          backgroundColor: Colors.white, // 背景顏色
+                        );
+                      } else {
+                        return CircularProgressIndicator();
                       }
-                      final qrStringProcessor =
-                          snapshot.data as QRStringProcessor;
-                      return Column(
+                    }),
+                // Spacer(),
+                Expanded(
+                    child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 18,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          QrImageView(
-                            data: qrStringProcessor.encodeQRObject(
-                                scoutingData.toJSON()), // QR Code 的資料
-                            version: QrVersions.auto, // 自動設定版本
-                            size: 400.0, // QR Code 的大小
-                            backgroundColor: Colors.white, // 背景顏色
-                          ),
-                          Text(
-                            'Compresed QR Code',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 40),
-                          SelectableText(
-                            qrStringProcessor
-                                .encodeQRObject(scoutingData.toJSON()),
-                            style: TextStyle(fontSize: 24, color: Colors.black),
-                          ),
-                          Text(
-                            'Encoded data',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          // SizedBox(height: 20),
-                          // // 顯示 JSON 內容（方便測試）
-                          // SelectableText(
-                          //   JsonEncoder.withIndent('  ').convert(scoutingData.toJSON()),
-                          //   style: TextStyle(fontSize: 24, color: Colors.black),
-                          //   // textAlign: TextAlign.right,
-                          // ),
+                          Text('Scout: ${scoutingData.scout}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Event Key: ${scoutingData.eventKey}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Match Level: ${scoutingData.matchLevel.name}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Match Number: ${scoutingData.matchNumber}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Alliance: ${scoutingData.alliance.name}',
+                              style: TextStyle(fontSize: 25)),
+                          Text('Team Number: ${scoutingData.teamNumber}',
+                              style: TextStyle(fontSize: 25)),
+                          // Text(
+                          //     'Hang Type: ${scoutingData.teleopData.bargeResult.name}',
+                          //     style: TextStyle(fontSize: 25)),
                         ],
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  }),
-
-              // QrImageView(
-              //         // data: jsonEncode(scoutingData.toJSON()), // QR Code 的資料
-              //         data: qrStringProcessor.encodeQRObject(scoutingData.toJSON()), // QR Code 的資料
-              //         version: QrVersions.auto, // 自動設定版本
-              //         size: 400.0, // QR Code 的大小
-              //         backgroundColor: Colors.white, // 背景顏色
-              //       ),
-              SizedBox(height: 20),
-              // 顯示 JSON 內容（方便測試）
-              SelectableText(
-                JsonEncoder.withIndent('  ').convert(scoutingData.toJSON()),
-                style: TextStyle(fontSize: 24, color: Colors.black),
-                // textAlign: TextAlign.right,
-              ),
-            ],
-          ),
-        ),
-      ),
+                      ),
+                    ),
+                    // Spacer(),
+                    Expanded(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showAlertDialog(
+                            context,
+                            title: 'New Match Confirm',
+                            content: 'Are you sure want to start a new match?\nAll data will be reset.',
+                            confirmText: 'Start New Match',
+                            cancelText: 'Cancel',
+                            onConfirm: () {
+                              scoutingData.reset();
+                              Navigator.pushNamed(context, '/info');
+                            },
+                            onCancel: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                        child:
+                            Text("New Match", style: TextStyle(fontSize: 30)),
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ))
+              ],
+            );
+          })),
     );
   }
 }

@@ -9,7 +9,7 @@ import 'pages/info_page.dart';
 import 'pages/auto_page.dart';
 import 'pages/teleop_page.dart';
 import 'pages/comment_and_confirm_page.dart';
-import 'pages/dev_result_page.dart';
+import 'pages/result_page.dart';
 
 void main() {
   // debugProfileBuildsEnabled = true; // 追蹤 Widget 建構
@@ -41,7 +41,7 @@ class ScoutingApp extends StatelessWidget {
         '/auto': (context) => const AppWrapper(child: AutoPage()),
         '/teleop': (context) => const AppWrapper(child: TeleopPage()),
         '/comment': (context) => const AppWrapper(child: CommentAndConfirmPage()),
-        '/result': (context) => const AppWrapper(child: DevResultPage()),
+        '/result': (context) => const AppWrapper(child: ResultPage()),
       },
     );
   }

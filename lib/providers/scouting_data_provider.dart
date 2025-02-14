@@ -107,6 +107,7 @@ class ScoutingData extends ChangeNotifier {
   String _eventKey = 'TestEvent';
   String _teamNumber = '';
   Alliance _alliance = Alliance.unset;
+  String _comment = '';
 
   String get scout => _scout;
 
@@ -120,6 +121,8 @@ class ScoutingData extends ChangeNotifier {
 
   Alliance get alliance => _alliance;
 
+  String get comment => _comment;
+
  final AutoData _autoData = AutoData();
  final TeleopData _teleopData = TeleopData();
 
@@ -127,12 +130,13 @@ class ScoutingData extends ChangeNotifier {
 
   TeleopData get teleopData => _teleopData;
 
+
   void reset() {
     _ulid = '';
     _scout = '';
     _matchLevel = MatchLevel.unset;
     _matchNumber = '';
-    _eventKey = 'TestEvent';
+    _eventKey = '2025NNKIEMock';
     _teamNumber = '';
     _alliance = Alliance.unset;
     _autoData.preload = Preload.unset;
@@ -141,8 +145,10 @@ class ScoutingData extends ChangeNotifier {
     _autoData.path = [];
     _autoData.pathPointIsSuccess = true;
     _autoData.selectedReefSide = 0;
-    _teleopData.bargeResult = BargeAction.unset;
     _teleopData.hangTime = 0;
+    _teleopData.bargeTried = BargeAction.unset;
+    _teleopData.bargeResult = BargeAction.unset;
+    _teleopData.bargePosition = BargePosition.none;
     _teleopData.path = [];
     notifyListeners();
   }
@@ -213,6 +219,11 @@ class ScoutingData extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateComment(String comment) {
+    _comment = comment;
+    notifyListeners();
+  }
+
   Map<String,dynamic> toJSON() {
     if (_ulid.isEmpty) {
       _ulid = Ulid().toString();
@@ -228,6 +239,7 @@ class ScoutingData extends ChangeNotifier {
       'alliance': alliance.name,
       'auto': autoData.toJSON(),
       'teleop': teleopData.toJSON(),
+      'comment': comment,
     };
   }
 
