@@ -93,7 +93,8 @@ class ResultPage extends StatelessWidget {
                             cancelText: 'Cancel',
                             onConfirm: () {
                               scoutingData.reset();
-                              Navigator.pushNamed(context, '/info');
+                              Navigator.pushNamedAndRemoveUntil(context, '/info', (route) => false);
+                              // Navigator.pushNamed(context, '/info');
                             },
                             onCancel: () {
                               Navigator.of(context).pop();
