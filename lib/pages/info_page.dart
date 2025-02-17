@@ -219,6 +219,7 @@ class _InfoPageState extends State<InfoPage> {
                 SubTitleText('Match Number:'),
                 Spacer(flex: 2),
                 TextFormField(
+                  maxLength: 2,
                   controller: _matchNumberController,
                   keyboardType: TextInputType.numberWithOptions(
                       signed: true, decimal: false),
