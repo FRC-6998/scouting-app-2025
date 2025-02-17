@@ -132,10 +132,10 @@ class _InfoPageState extends State<InfoPage> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
+                    RegExp regex = RegExp(r'[^\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u0041-\u005A\u0061-\u007A]');
                     if (value == null || value.isEmpty) {
                       return "Please enter your name";
-                    } else if (!RegExp(r'(?=.*[A-Z])').hasMatch(value) &&
-                        !RegExp(r'(?=.*[a-z])').hasMatch(value)) {
+                    } else if (regex.hasMatch(value)) {
                       return "Name isn't valid";
                     }
                     return null;
