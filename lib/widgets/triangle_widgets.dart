@@ -4,6 +4,32 @@ import 'dart:math' as math;
 import '../utils/utilities.dart' show multiplyIfNotNull, addIfNotNull;
 import '../utils/logger.dart' show logger;
 
+class TriangleClipper extends CustomClipper<Path> {
+  final Offset apex;
+  final Offset baseStart;
+  final Offset baseEnd;
+
+  TriangleClipper({
+    required this.apex,
+    required this.baseStart,
+    required this.baseEnd,
+  });
+
+  @override
+  Path getClip(Size size) {
+    final path = Path()
+      ..moveTo(apex.dx, apex.dy)
+      ..lineTo(baseStart.dx, baseStart.dy)
+      ..lineTo(baseEnd.dx, baseEnd.dy)
+      ..close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
 
 class TrianglePainter extends CustomPainter {
   final Offset apex;
@@ -15,11 +41,11 @@ class TrianglePainter extends CustomPainter {
 
   TrianglePainter(
       {required this.apex,
-        required this.baseStart,
-        required this.baseEnd,
-        this.color = const Color.fromARGB(40, 48, 62, 155),
-        this.borderColor = const Color.fromARGB(90, 48, 62, 155),
-        this.borderWidth = 1.0});
+      required this.baseStart,
+      required this.baseEnd,
+      this.color = const Color.fromARGB(40, 48, 62, 155),
+      this.borderColor = const Color.fromARGB(90, 48, 62, 155),
+      this.borderWidth = 1.0});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -64,7 +90,6 @@ class TrianglePainter extends CustomPainter {
   }
 }
 
-
 class TriangleWidget extends StatelessWidget {
   final double? top;
   final double? left;
@@ -108,36 +133,18 @@ class TriangleWidget extends StatelessWidget {
     _baseEnd = Offset(this.sideLength, _height);
   }
 
-  bool _isPointInsideTriangle(Offset p, Offset a, Offset b, Offset c) {
-    double sign(Offset p1, Offset p2, Offset p3) {
-      return (p1.dx - p3.dx) * (p2.dy - p3.dy) -
-          (p2.dx - p3.dx) * (p1.dy - p3.dy);
-    }
-
-    bool b1 = sign(p, a, b) < 0.0;
-    bool b2 = sign(p, b, c) < 0.0;
-    bool b3 = sign(p, c, a) < 0.0;
-
-    return (b1 == b2) && (b2 == b3);
-  }
-
   @override
   Widget build(BuildContext context) {
-    logger.d('Triangle widget build');
-    Widget triangleWidget = GestureDetector(
-      onTapDown: (details) {
-        bool isInsideTriangle = _isPointInsideTriangle(
-          details.localPosition,
-          _apex,
-          _baseStart,
-          _baseEnd,
-        );
-        if (isInsideTriangle) {
-          onTapDown?.call(details);
-        }
-      },
-      child: CustomPaint(
-          size: Size(sideLength, sideLength),
+    logger.d('Triangle widget build, key: $key');
+    Widget triangleWidget = ClipPath(
+      clipper: TriangleClipper(
+        apex: _apex,
+        baseStart: _baseStart,
+        baseEnd: _baseEnd,
+      ),
+      child: GestureDetector(
+        onTapDown: onTapDown,
+        child: CustomPaint(
           painter: TrianglePainter(
             apex: _apex,
             baseStart: _baseStart,
@@ -145,7 +152,10 @@ class TriangleWidget extends StatelessWidget {
             color: color,
             borderColor: borderColor,
             borderWidth: borderWidth,
-          )),
+          ),
+          size: Size(sideLength, _height),
+        ),
+      ),
     );
 
     if (rotate != 0) {
@@ -160,9 +170,7 @@ class TriangleWidget extends StatelessWidget {
       return Positioned(
         top: multiplyIfNotNull(top, factor),
         left: multiplyIfNotNull(left, factor),
-        // left: addIfNotNull(multiplyIfNotNull(left, factor), -sideLength / 2),
         right: multiplyIfNotNull(right, factor),
-        // right: addIfNotNull(multiplyIfNotNull(right, factor), sideLength / 2),
         bottom: multiplyIfNotNull(bottom, factor),
         child: triangleWidget,
       );

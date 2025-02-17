@@ -333,6 +333,7 @@ class AutoPage extends StatelessWidget {
                             (previous != index && next == index),
                         builder: (context, selectedReefSide, child) {
                           return TriangleWidget(
+                            key: ValueKey(index),
                             sideLength: 150,
                             left: 353 +
                                 math.cos(math.pi / 2 + index * math.pi / 3) * 8,
