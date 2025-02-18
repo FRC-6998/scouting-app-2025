@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scout_app_v0/model.dart';
+import 'package:scout_app_v0/widgets/commit_confirm_dialog.dart';
 
 import '../utils/logger.dart' show logger;
 import '../widgets/tap_widgets.dart' show TapBox;
@@ -65,20 +66,20 @@ class _InfoPageState extends State<InfoPage> {
     super.dispose();
   }
 
-  void _toAutoPage() {
+  bool _infoFieldsFilled() {
     if (_formKey.currentState?.validate() ?? false) {
       if (matchLevel == MatchLevel.unset) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please select a match level.')),
         );
-        return;
+        return false;
       }
 
       if (_selectedAlliance == Alliance.unset) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please select an alliance.')),
         );
-        return;
+        return false;
       }
 
       // 更新 Provider 數據
@@ -90,17 +91,19 @@ class _InfoPageState extends State<InfoPage> {
         alliance: _selectedAlliance,
         eventKey: 'NTWC',
       );
+      return true;
 
-      Navigator.pushNamed(context, '/auto');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please correct the errors in the form.')),
       );
+      return false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final scoutingData = Provider.of<ScoutingData>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
@@ -321,9 +324,39 @@ class _InfoPageState extends State<InfoPage> {
                 Spacer(flex: 5),
                 Row(
                   children: [
-                    Spacer(flex: 10),
+                    Spacer(flex: 14,),
                     ElevatedButton(
-                      onPressed: _toAutoPage,
+                      onPressed: () {
+                        if (_infoFieldsFilled()) {
+                          showAlertDialog(
+                            context,
+                            title: 'Bypass',
+                            content: 'Are you sure you want to bypass this match?',
+                            onConfirm: () {
+                              scoutingData.updateBypass(true);
+                              Navigator.pushNamed(context, '/result');
+                            },
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFCF1B1B), // 設定按鈕顏色
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: Text(
+                        "Bypass",
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ),
+                    Spacer(flex: 1),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_infoFieldsFilled()) {
+                          Navigator.pushNamed(context, '/auto');
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF46B6FF), // 設定按鈕顏色
                         shape: RoundedRectangleBorder(
@@ -335,7 +368,7 @@ class _InfoPageState extends State<InfoPage> {
                         style: TextStyle(fontSize: 30, color: Colors.white),
                       ),
                     ),
-                    Spacer(flex: 1),
+                    Spacer(flex: 2,),
                   ],
                 ),
                 Spacer(flex: 3),

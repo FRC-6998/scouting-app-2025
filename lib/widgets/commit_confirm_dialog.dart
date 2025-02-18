@@ -4,7 +4,7 @@ Future<bool?> showAlertDialog(
     context, {
       String title = 'Alert',
       String content = 'This is an alert dialog.',
-      String confirmText = 'OK',
+      String confirmText = 'Yes',
       String cancelText = 'Cancel',
       double fontSize = 20,
       VoidCallback? onConfirm,
