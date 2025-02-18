@@ -29,8 +29,8 @@ class AutoData {
       _pathStartTime = DateTime.now();
     }
     path.add({
-      "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds,
       "point": point.name,
+      "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds,
       "success": pathPointIsSuccess,
     });
     pathPointIsSuccess = true;
