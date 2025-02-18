@@ -107,20 +107,18 @@ class ScoutingData extends ChangeNotifier {
   String _eventKey = 'TestEvent';
   String _teamNumber = '';
   Alliance _alliance = Alliance.unset;
+  bool _bypass = false;
+  bool _disabled = false;
   String _comment = '';
 
   String get scout => _scout;
-
   MatchLevel get matchLevel => _matchLevel;
-
   String get matchNumber => _matchNumber;
-
   String get eventKey => _eventKey;
-
   String get teamNumber => _teamNumber;
-
   Alliance get alliance => _alliance;
-
+  bool get bypass => _bypass;
+  bool get disabled => _disabled;
   String get comment => _comment;
 
  final AutoData _autoData = AutoData();
@@ -139,6 +137,8 @@ class ScoutingData extends ChangeNotifier {
     _eventKey = '2025NNKIEMock';
     _teamNumber = '';
     _alliance = Alliance.unset;
+    _bypass = false;
+    _disabled = false;
     _comment = '';
     _autoData.preload = Preload.unset;
     _autoData.startPosition = AutoStartPosition.unset;
@@ -172,6 +172,16 @@ class ScoutingData extends ChangeNotifier {
     _eventKey = eventKey ?? _eventKey;
     _teamNumber = teamNumber ?? _teamNumber;
     _alliance = alliance ?? _alliance;
+    notifyListeners();
+  }
+
+  void updateBypass(bool value) {
+    _bypass = value;
+    notifyListeners();
+  }
+
+  void updateDisabled(bool value) {
+    _disabled = value;
     notifyListeners();
   }
 
@@ -237,6 +247,8 @@ class ScoutingData extends ChangeNotifier {
       'event_key': eventKey,
       'team_number': teamNumber,
       'alliance': alliance.name,
+      'bypass': bypass,
+      'disabled': disabled,
       'auto': autoData.toJSON(),
       'teleop': teleopData.toJSON(),
       'comment': comment,
