@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:scout_app_v0/constants.dart';
 import 'package:scout_app_v0/widgets/commit_confirm_dialog.dart';
 import 'package:scout_app_v0/providers/scouting_data_provider.dart';
+import 'package:scout_app_v0/widgets/tap_widgets.dart';
 
 class CommentAndConfirmPage extends StatelessWidget {
   const CommentAndConfirmPage({super.key});
@@ -12,7 +14,8 @@ class CommentAndConfirmPage extends StatelessWidget {
     ScoutingData scoutingData =
         Provider.of<ScoutingData>(context, listen: false);
 
-    TextEditingController commentController = TextEditingController(text: scoutingData.comment);
+    TextEditingController commentController =
+        TextEditingController(text: scoutingData.comment);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Comment and Confirm Page',
@@ -78,6 +81,18 @@ class CommentAndConfirmPage extends StatelessWidget {
                           Text(
                               'Hang Type: ${scoutingData.teleopData.bargeResult.name}',
                               style: TextStyle(fontSize: 25)),
+                          TapBox(
+                            color: context.select<ScoutingData, bool>(
+                                    (scoutingData) => scoutingData.disabled)
+                                ? AppColors.boolBtnFalseColor
+                                : AppColors.boolBtnTrueBorderColor,
+                            child:
+                                Text('DISABLE', style: TextStyle(fontSize: 30)),
+                            onTap: () {
+                              scoutingData
+                                  .updateDisabled(!scoutingData.disabled);
+                            },
+                          ),
                         ],
                       ),
                     ),
