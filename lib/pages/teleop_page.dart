@@ -501,7 +501,7 @@ class _TeleopPageState extends State<TeleopPage> {
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Color(0xFFFFFFFF),
-                                  backgroundColor: Color(0xFF000000),
+                                  backgroundColor: Color(0xFFEF7373),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   ),
