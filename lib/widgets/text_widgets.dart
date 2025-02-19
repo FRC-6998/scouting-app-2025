@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scout_app_v0/constants.dart';
 
 
 class SubTitleText extends StatelessWidget {
