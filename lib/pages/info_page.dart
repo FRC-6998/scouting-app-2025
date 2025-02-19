@@ -334,7 +334,10 @@ class _InfoPageState extends State<InfoPage> {
                             content: 'Are you sure you want to bypass this match?',
                             onConfirm: () {
                               scoutingData.updateBypass(true);
-                              Navigator.pushNamed(context, '/result');
+                              Navigator.pushNamedAndRemoveUntil(context, '/result', (route) => false);
+                            },
+                            onCancel: () {
+                              Navigator.pop(context);
                             },
                           );
                         }
