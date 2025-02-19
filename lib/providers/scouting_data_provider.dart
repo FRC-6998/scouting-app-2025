@@ -59,6 +59,7 @@ class TeleopData {
   BargePosition bargePosition;
 
   List<Map<String,Object>> path = [];
+  Map<TeleopPathPoint, int> pathCount = {};
   DateTime _pathStartTime = DateTime.now();
 
   TeleopData({
@@ -76,11 +77,13 @@ class TeleopData {
     if (path.isEmpty) {
       _pathStartTime = DateTime.now();
     }
+    pathCount[point] = (pathCount[point] ?? 0) + 1;
     path.add({"point": point.name, "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds});
   }
 
   void undoPathPoint() {
     if (path.isNotEmpty) {
+      pathCount[TeleopPathPoint.values.byName(path.last['point'] as String)] = (pathCount[TeleopPathPoint.values.byName(path.last['point'] as String)] ?? 0) - 1;
       path.removeLast();
     }
   }
@@ -227,6 +230,11 @@ class ScoutingData extends ChangeNotifier {
   void addTeleopPathPoint(TeleopPathPoint point )  {
     logger.d('Adding teleop point: $point');
     _teleopData.addPathPoint(point);
+    notifyListeners();
+  }
+
+  void undoTeleopPathPoint() {
+    _teleopData.undoPathPoint();
     notifyListeners();
   }
 

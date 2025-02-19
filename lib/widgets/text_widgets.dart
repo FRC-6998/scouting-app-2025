@@ -31,7 +31,7 @@ class TeleopWidgetText extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: 28,
-        color: AppColors.unselectedBtnBorderColor,
+        // color: AppColors.unselectedBtnBorderColor,
       ),
     );
   }

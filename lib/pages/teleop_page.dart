@@ -206,7 +206,17 @@ class _TeleopPageState extends State<TeleopPage> {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l2Reef);
                                 },
-                                child: TeleopWidgetText('L2'),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(context.select((ScoutingData scoutingData) => scoutingData.teleopData.pathCount[TeleopPathPoint.l2Reef] ?? 0).toString(),
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                      ),
+                                    ),
+                                    TeleopWidgetText(' L2'),
+                                  ],
+                                ),
                               )),
                           Spacer(),
                           Expanded(
@@ -219,7 +229,17 @@ class _TeleopPageState extends State<TeleopPage> {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l3Reef);
                                 },
-                                child: TeleopWidgetText('L3'),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(context.select((ScoutingData scoutingData) => scoutingData.teleopData.pathCount[TeleopPathPoint.l3Reef] ?? 0).toString(),
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                      ),
+                                    ),
+                                    TeleopWidgetText(' L3'),
+                                  ],
+                                ),
                               )),
                           Spacer(),
                           Expanded(
@@ -232,7 +252,17 @@ class _TeleopPageState extends State<TeleopPage> {
                                   scoutingDataSetter.addTeleopPathPoint(
                                       TeleopPathPoint.l4Reef);
                                 },
-                                child: TeleopWidgetText('L4'),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(context.select((ScoutingData scoutingData) => scoutingData.teleopData.pathCount[TeleopPathPoint.l4Reef] ?? 0).toString(),
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                      ),
+                                    ),
+                                    TeleopWidgetText(' L4'),
+                                  ],
+                                ),
                               )),
                         ],
                       ),
@@ -248,7 +278,23 @@ class _TeleopPageState extends State<TeleopPage> {
                             scoutingDataSetter
                                 .addTeleopPathPoint(TeleopPathPoint.l1Reef);
                           },
-                          child: TeleopWidgetText('L1'),
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Spacer(),
+                              Expanded(
+                                child: Center(
+                                  child: Text(context.select((ScoutingData scoutingData) => scoutingData.teleopData.pathCount[TeleopPathPoint.l1Reef] ?? 0).toString(),
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(child: Center(child: TeleopWidgetText(' L1'))),
+                              Spacer(),
+                            ],
+                          ),
                         )),
                   ])),
               Spacer(),
@@ -462,7 +508,7 @@ class _TeleopPageState extends State<TeleopPage> {
                                 ),
                                 onPressed: () {
                                   logger.d("Undo");
-                                  scoutingDataSetter.teleopData.undoPathPoint();
+                                  scoutingDataSetter.undoTeleopPathPoint();
                                 },
                                 child: Text("Undo",
                                     style: TextStyle(fontSize: 30))),
