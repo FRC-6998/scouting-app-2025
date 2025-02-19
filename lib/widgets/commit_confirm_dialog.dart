@@ -49,7 +49,7 @@ Future<bool?> showCommitConfirmDialog(context) {
     confirmText: 'Commit data',
     cancelText: 'Cancel',
     onConfirm: () {
-      Navigator.pushNamed(context, '/result');
+      Navigator.pushNamedAndRemoveUntil(context, '/result', (route) => false);
     },
     onCancel: () {
       Navigator.of(context).pop();
