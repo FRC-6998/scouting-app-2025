@@ -499,13 +499,22 @@ class _TeleopPageState extends State<TeleopPage> {
                           Expanded(
                             flex: 6,
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Color(0xFFFFFFFF),
-                                  backgroundColor: Color(0xFFEF7373),
-                                  shape: RoundedRectangleBorder(
+                              style: ButtonStyle(
+                                foregroundColor: WidgetStateProperty.all<Color>(Color(0xFFFFFFFF)),
+                                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                                      (states) {
+                                    if (states.contains(WidgetState.pressed)) {
+                                      return Color(0xFFFF7A28);
+                                    }
+                                    return Color(0xFFEF7373);
+                                  },
+                                ),
+                                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                 ),
+                              ),
                                 onPressed: () {
                                   logger.d("Undo");
                                   scoutingDataSetter.undoTeleopPathPoint();
