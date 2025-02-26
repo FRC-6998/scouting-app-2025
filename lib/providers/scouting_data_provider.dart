@@ -20,6 +20,15 @@ class AutoData {
     // this.path,
   });
 
+  void reset() {
+    preload = Preload.unset;
+    startPosition = AutoStartPosition.unset;
+    leave = false;
+    path = [];
+    pathPointIsSuccess = true;
+    selectedReefSide = 0;
+  }
+
   bool allFieldsFilled () {
     return preload != Preload.unset && startPosition != AutoStartPosition.unset && path.isNotEmpty;
   }
@@ -68,6 +77,15 @@ class TeleopData {
     this.bargeResult = BargeAction.unset,
     this.bargePosition = BargePosition.none,
   });
+
+  void reset() {
+    hangTime = 0;
+    bargeTried = BargeAction.unset;
+    bargeResult = BargeAction.unset;
+    bargePosition = BargePosition.none;
+    path = [];
+    pathCount = {};
+  }
 
   bool allFieldsFilled() {
     return bargeResult != BargeAction.unset && path.isNotEmpty;
@@ -143,17 +161,8 @@ class ScoutingData extends ChangeNotifier {
     _bypass = false;
     _disabled = false;
     _comment = '';
-    _autoData.preload = Preload.unset;
-    _autoData.startPosition = AutoStartPosition.unset;
-    _autoData.leave = false;
-    _autoData.path = [];
-    _autoData.pathPointIsSuccess = true;
-    _autoData.selectedReefSide = 0;
-    _teleopData.hangTime = 0;
-    _teleopData.bargeTried = BargeAction.unset;
-    _teleopData.bargeResult = BargeAction.unset;
-    _teleopData.bargePosition = BargePosition.none;
-    _teleopData.path = [];
+    _autoData.reset();
+    _teleopData.reset();
     notifyListeners();
   }
 
