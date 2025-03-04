@@ -891,8 +891,8 @@ class AutoPage extends StatelessWidget {
                                           ),
                                           onPressed: () {
                                             logger.d("Undo");
-                                            scoutingDataSetter.autoData
-                                                .undoPathPoint();
+                                            scoutingDataSetter
+                                                .undoAutoPathPoint();
                                           },
                                           child: Text("Undo",
                                               style: TextStyle(

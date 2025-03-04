@@ -3,12 +3,11 @@ import 'package:ulid/ulid.dart';
 import '../utils/logger.dart' show logger;
 import '../model.dart';
 
-
 class AutoData {
   Preload preload;
   AutoStartPosition startPosition;
   bool leave;
-  List<Map<String,Object>> path = [];
+  List<Map<String, Object>> path = [];
   DateTime _pathStartTime = DateTime.now();
   bool pathPointIsSuccess = true;
   int selectedReefSide = 0;
@@ -29,8 +28,10 @@ class AutoData {
     selectedReefSide = 0;
   }
 
-  bool allFieldsFilled () {
-    return preload != Preload.unset && startPosition != AutoStartPosition.unset && path.isNotEmpty;
+  bool allFieldsFilled() {
+    return preload != Preload.unset &&
+        startPosition != AutoStartPosition.unset &&
+        path.isNotEmpty;
   }
 
   void addPathPoint(AutoPathPoint point) {
@@ -51,7 +52,7 @@ class AutoData {
     }
   }
 
-  Map<String, dynamic>toJSON() {
+  Map<String, dynamic> toJSON() {
     return {
       'preload': preload.name,
       'start_position': startPosition.name,
@@ -67,7 +68,7 @@ class TeleopData {
   BargeAction bargeResult;
   BargePosition bargePosition;
 
-  List<Map<String,Object>> path = [];
+  List<Map<String, Object>> path = [];
   Map<TeleopPathPoint, int> pathCount = {};
   DateTime _pathStartTime = DateTime.now();
 
@@ -96,17 +97,24 @@ class TeleopData {
       _pathStartTime = DateTime.now();
     }
     pathCount[point] = (pathCount[point] ?? 0) + 1;
-    path.add({"point": point.name, "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds});
+    path.add({
+      "point": point.name,
+      "timestamp": DateTime.now().difference(_pathStartTime).inMilliseconds
+    });
   }
 
   void undoPathPoint() {
     if (path.isNotEmpty) {
-      pathCount[TeleopPathPoint.values.byName(path.last['point'] as String)] = (pathCount[TeleopPathPoint.values.byName(path.last['point'] as String)] ?? 0) - 1;
+      pathCount[TeleopPathPoint.values.byName(path.last['point'] as String)] =
+          (pathCount[TeleopPathPoint.values
+                      .byName(path.last['point'] as String)] ??
+                  0) -
+              1;
       path.removeLast();
     }
   }
 
-  Map<String, dynamic>toJSON() {
+  Map<String, dynamic> toJSON() {
     return {
       'path': path,
       'hang_time': hangTime,
@@ -116,7 +124,6 @@ class TeleopData {
     };
   }
 }
-
 
 class ScoutingData extends ChangeNotifier {
   // This is the data that will be shared across the app
@@ -142,13 +149,12 @@ class ScoutingData extends ChangeNotifier {
   bool get disabled => _disabled;
   String get comment => _comment;
 
- final AutoData _autoData = AutoData();
- final TeleopData _teleopData = TeleopData();
+  final AutoData _autoData = AutoData();
+  final TeleopData _teleopData = TeleopData();
 
   AutoData get autoData => _autoData;
 
   TeleopData get teleopData => _teleopData;
-
 
   void reset() {
     _ulid = '';
@@ -167,7 +173,12 @@ class ScoutingData extends ChangeNotifier {
   }
 
   bool infoFieldsFilled() {
-    return _scout.isNotEmpty && _matchLevel != MatchLevel.unset && _matchNumber.isNotEmpty && _eventKey.isNotEmpty && _teamNumber.isNotEmpty && _alliance != Alliance.unset;
+    return _scout.isNotEmpty &&
+        _matchLevel != MatchLevel.unset &&
+        _matchNumber.isNotEmpty &&
+        _eventKey.isNotEmpty &&
+        _teamNumber.isNotEmpty &&
+        _alliance != Alliance.unset;
   }
 
   void updateInfoData({
@@ -197,9 +208,11 @@ class ScoutingData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateAutoData({Preload? preload,
-      AutoStartPosition? startPosition,
-      bool? leave,}) {
+  void updateAutoData({
+    Preload? preload,
+    AutoStartPosition? startPosition,
+    bool? leave,
+  }) {
     _autoData.preload = preload ?? _autoData.preload;
     _autoData.startPosition = startPosition ?? _autoData.startPosition;
     _autoData.leave = leave ?? _autoData.leave;
@@ -216,12 +229,16 @@ class ScoutingData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addAutoPathPoint(AutoPathPoint point )  {
+  void addAutoPathPoint(AutoPathPoint point) {
     logger.d('Adding auto point: $point');
     _autoData.addPathPoint(point);
     notifyListeners();
   }
 
+  void undoAutoPathPoint() {
+    _autoData.undoPathPoint();
+    notifyListeners();
+  }
 
   void updateTeleopData({
     num? hangTime,
@@ -236,7 +253,7 @@ class ScoutingData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTeleopPathPoint(TeleopPathPoint point )  {
+  void addTeleopPathPoint(TeleopPathPoint point) {
     logger.d('Adding teleop point: $point');
     _teleopData.addPathPoint(point);
     notifyListeners();
@@ -252,7 +269,7 @@ class ScoutingData extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String,dynamic> toJSON() {
+  Map<String, dynamic> toJSON() {
     if (_ulid.isEmpty) {
       _ulid = Ulid().toString();
     }
@@ -271,5 +288,4 @@ class ScoutingData extends ChangeNotifier {
       'comment': comment,
     };
   }
-
 }
