@@ -1,0 +1,197 @@
+openapi: "3.0.3"
+info:
+  title: scouting app api
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /scouting_data:
+    get:
+      parameters:
+        - in: query
+          name: event_key
+          schema:
+            type: string
+          required: false
+
+          # description: Unique identifier for the scouting data
+        - in: query
+          name: ulid
+          schema:
+            type: string
+          required: false
+
+        - in: query
+          name: team_number
+          schema:
+            type: integer
+          required: false
+
+        - in: query
+          name: match_level
+          schema:
+            type: string
+
+          required: false
+
+        - in: query
+          name: match_number
+          schema:
+            type: integer
+          required: false
+
+          # description: Unique identifier for the scouting data
+      responses:
+        "200":
+          description: OK
+
+    post:
+      # summary: List All Questions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                # information
+                ulid:
+                  type: string
+                  example: "01F9ZQZQZQZQZQZQZQZQZQZQZQ"
+                scout:
+                  type: string
+                  example: "test scout"
+                match_level:
+                  type: string
+                  enum:
+                    - "unset"
+                    - "practice"
+                    - "qualification"
+                    - "playoff"
+                match_number:
+                  type: string
+                event_key:
+                  type: string
+                  example: "2024cafr"
+                team_number:
+                  type: string
+                alliance:
+                  type: string
+                  enum:
+                    - "unset"
+                    - "red"
+                    - "blue"
+                # auto
+                auto:
+                  type: object
+                  properties:
+                    preload:
+                      type: string
+                      enum:
+                        - "unset"
+                        - "none"
+                        - "coral"
+                        - "algae"
+                    start_position:
+                      type: string
+                      enum:
+                        - "unset"
+                        - "left"
+                        - "center"
+                        - "right"
+                    leave:
+                      type: boolean
+                    path:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          timestamp:
+                            type: integer
+                          point:
+                            type: string
+                            enum:
+                              - "leftCoralStation"
+                              - "rightCoralStation"
+                              - "leftGroundCoral"
+                              - "centerGroundCoral"
+                              - "rightGroundCoral"
+                              - "leftGroundAlgae"
+                              - "centerGroundAlgae"
+                              - "rightGroundAlgae"
+                              - "reefAlgae"
+                              - "processor"
+                              - "net"
+                              - "l1ReefAB"
+                              - "l1ReefCD"
+                              - "l1ReefEF"
+                              - "l1ReefGH"
+                              - "l1ReefIJ"
+                              - "l1ReefKL"
+                              - "l2ReefAB"
+                              - "l2ReefCD"
+                              - "l2ReefEF"
+                              - "l2ReefGH"
+                              - "l2ReefIJ"
+                              - "l2ReefKL"
+                              - "l3ReefAB"
+                              - "l3ReefCD"
+                              - "l3ReefEF"
+                              - "l3ReefGH"
+                              - "l3ReefIJ"
+                              - "l3ReefKL"
+                              - "l4ReefAB"
+                              - "l4ReefCD"
+                              - "l4ReefEF"
+                              - "l4ReefGH"
+                              - "l4ReefIJ"
+                              - "l4ReefKL"
+                          success:
+                            type: boolean
+                # teleop
+                teleop:
+                  type: object
+                  properties:
+                    path:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          point:
+                            type: string
+                          timestamp:
+                            type: integer
+                    # endgame
+
+                    hang_time:
+                      type: integer
+
+                    barge_tried:
+                      type: string
+                      enum:
+                        - "unset"
+                        - "deep"
+                        - "shallow"
+
+                    barge_result:
+                      type: string
+                      enum:
+                        - "unset"
+                        - "none"
+                        - "park"
+                        - "deep"
+                        - "shallow"
+
+                    barge_position:
+                      type: string
+                      enum:
+                        - "unset"
+                        - "left"
+                        - "center"
+                        - "right"
+
+      responses:
+        "200":
+          description: OK
+# components:
+#   schemas:
+

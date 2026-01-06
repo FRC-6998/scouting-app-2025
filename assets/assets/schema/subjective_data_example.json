@@ -1,0 +1,31 @@
+{
+    "ulid": "01JKZB2C2MHKZ17N5YD6B9TTV3",
+    "scout": "example scout",
+    "match_level": "qualification",
+    "match_number": "42",
+    "event_key": "2024cafr",
+    "alliance": "red",
+    "team1": {
+        "team_number": "1234",
+        "driver_awareness": 1,
+        "mobility": 1,
+        "defense": 2,
+        "coral_station_human_player_awareness": 1
+    },
+    "team2": {
+        "team_number": "5678",
+        "driver_awareness": 3,
+        "mobility": 2,
+        "defense": 1,
+        "coral_station_human_player_awareness": 3
+    },
+    "team3": {
+        "team_number": "9101",
+        "driver_awareness": 2,
+        "mobility": 3,
+        "defense": 3,
+        "coral_station_human_player_awareness": 2
+    },
+    "net_successful": 15,
+    "net_failed": 3
+}

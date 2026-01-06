@@ -1,0 +1,81 @@
+info:
+  title: "subjective_data  QRcode schema"
+  version: "1.0.0"
+schema:
+  type: object
+  properties:
+    # information
+    # data_type:
+    #   type: string
+    #   enum:
+    #     - "objective_data"
+    #     - "subjective_data"
+    #     - "pit_collection_data"
+    ulid:
+      type: string
+      example: "01JKZB2C2MHKZ17N5YD6B9TTV3"
+    scout:
+      type: string
+      example: "example scout"
+    match_level:
+      type: string
+      enum:
+        - "unset"
+        - "practice"
+        - "qualification"
+        - "playoff"
+    match_number:
+      type: string
+    event_key:
+      type: string
+      example: "2024cafr"
+    alliance:
+      type: string
+      enum:
+        - "unset"
+        - "red"
+        - "blue"
+    team1:
+      type: object
+      properties:
+        team_number:
+          type: string
+        driver_awareness:
+          type: integer
+        mobility:
+          type: integer
+        defense:
+          type: integer
+        coral_station_human_player_awareness:
+          type: integer
+    team2:
+      type: object
+      properties:
+        team_number:
+          type: string
+        driver_awareness:
+          type: integer
+        mobility:
+          type: integer
+        defense:
+          type: integer
+        coral_station_human_player_awareness:
+          type: integer
+    team3:
+      type: object
+      properties:
+        team_number:
+          type: string
+        driver_awareness:
+          type: integer
+        mobility:
+          type: integer
+        defense:
+          type: integer
+        coral_station_human_player_awareness:
+          type: integer
+
+    net_successful:
+      type: integer
+    net_failed:
+      type: integer
