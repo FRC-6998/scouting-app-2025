@@ -18,11 +18,18 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
-        
+
+      # - name: Check out schema repository
+      # uses: actions/checkout@v4
+      # with:
+      #   repository: FRC6998-8th/2025_scouting_schema
+      #   path: assets/schema
+      #   token: ${{ secrets.SCHEMA_READ_TOKEN }}
+
       - name: Check out schema repository
         uses: actions/checkout@v4
         with:
-          repository: FRC6998-8th/2025_scouting_schema
+          repository: FRC-6998/scouting-data-schema-2025
           path: assets/schema
           token: ${{ secrets.SCHEMA_READ_TOKEN }}
 
