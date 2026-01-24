@@ -3,7 +3,7 @@
 A part of frc6998's 2025 scouting system. Users can use this app to record competition data and generate QR codes containing the data.
 
 ## Demo Page
-[Demo Page](https://eran0926.github.io/frc6998-scouting-app-2025/)
+[Demo Page](https://2025-scouting-app.frc6998.org/)
 
 ## Related Repositories
 
